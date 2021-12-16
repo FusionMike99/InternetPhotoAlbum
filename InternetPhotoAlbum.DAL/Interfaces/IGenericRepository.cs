@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace InternetPhotoAlbum.DAL.Interfaces
 {
-    public interface IGenericRepository<TEntity> where TEntity : class
+    public interface IGenericRepository<TEntity> : IDisposable where TEntity : class
     {
         TEntity Create(TEntity item);
         Task<TEntity> FindByIdAsync(int id);

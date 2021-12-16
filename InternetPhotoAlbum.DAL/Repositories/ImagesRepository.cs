@@ -23,6 +23,11 @@ namespace InternetPhotoAlbum.DAL.Repositories
             return result;
         }
 
+        public void Dispose()
+        {
+            context.Dispose();
+        }
+
         public async Task<Image> FindByIdAsync(int id)
         {
             var result = await context.Images.FindAsync(id);
