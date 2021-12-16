@@ -1,17 +1,12 @@
 ﻿using InternetPhotoAlbum.DAL.Entities;
 using Microsoft.AspNet.Identity.EntityFramework;
-using System;
-using System.Collections.Generic;
 using System.Data.Entity;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace InternetPhotoAlbum.DAL
 {
-    public class InternetPhotoAlbumDbContext : IdentityDbContext<ApplicationUser>
+    public class ApplicationContext : IdentityDbContext<ApplicationUser>
     {
-        public InternetPhotoAlbumDbContext(string conectionString) : base(conectionString) { }
+        public ApplicationContext(string conectionString) : base(conectionString) { }
 
         public DbSet<UserProfile> UserProfiles { get; set; }
         public DbSet<Album> Albums { get; set; }

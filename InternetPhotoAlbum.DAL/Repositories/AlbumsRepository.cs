@@ -10,9 +10,9 @@ namespace InternetPhotoAlbum.DAL.Repositories
 {
     public class AlbumsRepository : IAlbumsRepository
     {
-        private readonly InternetPhotoAlbumDbContext context;
+        private readonly ApplicationContext context;
 
-        public AlbumsRepository(InternetPhotoAlbumDbContext context)
+        public AlbumsRepository(ApplicationContext context)
         {
             this.context = context;
         }

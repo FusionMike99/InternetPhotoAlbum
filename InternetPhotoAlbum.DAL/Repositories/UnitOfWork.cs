@@ -3,16 +3,13 @@ using InternetPhotoAlbum.DAL.Identity;
 using InternetPhotoAlbum.DAL.Interfaces;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace InternetPhotoAlbum.DAL.Repositories
 {
     public class UnitOfWork : IUnitOfWork
     {
-        private readonly InternetPhotoAlbumDbContext context;
+        private readonly ApplicationContext context;
 
         private ApplicationUserManager userManager;
         private ApplicationRoleManager roleManager;
@@ -22,7 +19,7 @@ namespace InternetPhotoAlbum.DAL.Repositories
 
         public UnitOfWork(string connectionString)
         {
-            context = new InternetPhotoAlbumDbContext(connectionString);
+            context = new ApplicationContext(connectionString);
         }
 
         public ApplicationUserManager UserManager
