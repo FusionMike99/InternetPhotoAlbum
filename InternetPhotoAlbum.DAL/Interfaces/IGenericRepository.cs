@@ -8,11 +8,11 @@ namespace InternetPhotoAlbum.DAL.Interfaces
 {
     public interface IGenericRepository<TEntity> where TEntity : class
     {
-        Task<TEntity> CreateAsync(TEntity entity);
-        IEnumerable<TEntity> GetAll();
-        TEntity GetById(int id);
-        Task<TEntity> UpdateAsync(TEntity entity);
-        Task<bool> DeleteAsync(int id);
-
+        TEntity Create(TEntity item);
+        Task<TEntity> FindByIdAsync(int id);
+        IEnumerable<TEntity> Get();
+        IEnumerable<TEntity> Get(Func<TEntity, bool> predicate);
+        void Update(TEntity item);
+        void Remove(TEntity item);
     }
 }
