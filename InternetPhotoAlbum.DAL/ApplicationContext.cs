@@ -1,11 +1,15 @@
 ﻿using InternetPhotoAlbum.DAL.Entities;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System.Data.Entity;
+using System.Data.Entity.ModelConfiguration.Conventions;
 
 namespace InternetPhotoAlbum.DAL
 {
     public class ApplicationContext : IdentityDbContext<ApplicationUser>
-    {
+    {        
+        public ApplicationContext() : base("InternetPhotoAlbumDb")
+        { }
+
         public ApplicationContext(string conectionString) : base(conectionString) { }
 
         public DbSet<UserProfile> UserProfiles { get; set; }
@@ -16,6 +20,8 @@ namespace InternetPhotoAlbum.DAL
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
 
             modelBuilder.Entity<UserProfile>()
                 .HasRequired(x => x.ApplicationUser)
@@ -30,6 +36,9 @@ namespace InternetPhotoAlbum.DAL
                 .HasMany(x => x.Images)
                 .WithRequired(x => x.Album)
                 .HasForeignKey(x => x.AlbumId);
+
+            modelBuilder.Entity<Rating>()
+                .HasKey(r => new { r.ImageId, r.UserId });
 
             modelBuilder.Entity<Rating>()
                 .HasRequired(r => r.Image)
