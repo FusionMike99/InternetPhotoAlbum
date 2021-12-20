@@ -1,9 +1,12 @@
-﻿namespace InternetPhotoAlbum.DAL.Entities
+﻿using System.Collections.Generic;
+
+namespace InternetPhotoAlbum.DAL.Entities
 {
-    public enum Gender : byte
+    public class Gender
     {
-        NotSelected = 1,
-        Male = 2,
-        Female = 3
+        public int Id { get; set; }
+        public string Name { get; set; }
+
+        public virtual ICollection<UserProfile> Users { get; set; }
     }
 }

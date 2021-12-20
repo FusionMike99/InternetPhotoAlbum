@@ -1,23 +1,25 @@
 ﻿namespace InternetPhotoAlbum.DAL.Migrations
 {
-    using System;
-    using System.Data.Entity;
+    using InternetPhotoAlbum.DAL.Entities;
     using System.Data.Entity.Migrations;
-    using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<InternetPhotoAlbum.DAL.ApplicationContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<ApplicationContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
         }
 
-        protected override void Seed(InternetPhotoAlbum.DAL.ApplicationContext context)
+        protected override void Seed(ApplicationContext context)
         {
-            //  This method will be called after migrating to the latest version.
+            var gender1 = new Gender { Id = 1, Name = "Male" };
+            var gender2 = new Gender { Id = 2, Name = "Female" };
 
-            //  You can use the DbSet<T>.AddOrUpdate() helper extension method
-            //  to avoid creating duplicate seed data.
+            var likeType1 = new LikeType { Id = 1, Name = "Like" };
+            var likeType2 = new LikeType { Id = 2, Name = "Don't like" };
+
+            context.Genders.AddOrUpdate(x => x.Id, gender1, gender2);
+            context.LikeTypes.AddOrUpdate(x => x.Id, likeType1, likeType2);
         }
     }
 }

@@ -1,8 +1,12 @@
-﻿namespace InternetPhotoAlbum.DAL.Entities
+﻿using System.Collections.Generic;
+
+namespace InternetPhotoAlbum.DAL.Entities
 {
-    public enum LikeType : byte
+    public class LikeType
     {
-        Like = 1,
-        Dislike = 2
+        public int Id { get; set; }
+        public string Name { get; set; }
+
+        public virtual ICollection<Rating> Ratings { get; set; }
     }
 }

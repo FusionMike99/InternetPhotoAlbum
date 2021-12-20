@@ -16,8 +16,9 @@ namespace InternetPhotoAlbum.DAL.Entities
         public string Surname { get; set; }
         [DataType(DataType.Date)]
         public DateTime? DateOfBirth { get; set; }
-        public Gender Gender { get; set; } = Gender.NotSelected;
+        public int GenderId { get; set; }
 
+        public virtual Gender Gender { get; set; }
         public virtual ApplicationUser ApplicationUser { get; set; }
     }
 }

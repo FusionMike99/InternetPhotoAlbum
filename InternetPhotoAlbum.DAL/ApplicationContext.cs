@@ -13,9 +13,11 @@ namespace InternetPhotoAlbum.DAL
         public ApplicationContext(string conectionString) : base(conectionString) { }
 
         public DbSet<UserProfile> UserProfiles { get; set; }
+        public DbSet<Gender> Genders { get; set; }
         public DbSet<Album> Albums { get; set; }
         public DbSet<Image> Images { get; set; }
         public DbSet<Rating> Ratings { get; set; }
+        public DbSet<LikeType> LikeTypes { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -26,6 +28,11 @@ namespace InternetPhotoAlbum.DAL
             modelBuilder.Entity<UserProfile>()
                 .HasRequired(x => x.ApplicationUser)
                 .WithRequiredDependent(x => x.UserProfile);
+
+            modelBuilder.Entity<UserProfile>()
+                .HasRequired(x => x.Gender)
+                .WithMany(x => x.Users)
+                .HasForeignKey(x => x.GenderId);
 
             modelBuilder.Entity<Album>()
                 .HasRequired(x => x.User)
@@ -49,6 +56,11 @@ namespace InternetPhotoAlbum.DAL
                 .HasRequired(r => r.User)
                 .WithMany(u => u.Ratings)
                 .HasForeignKey(r => r.UserId);
+
+            modelBuilder.Entity<Rating>()
+                .HasRequired(r => r.LikeType)
+                .WithMany(lt => lt.Ratings)
+                .HasForeignKey(r => r.LikeTypeId);
         }
     }
 }
