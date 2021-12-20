@@ -7,7 +7,7 @@ using System.Data.Entity.ModelConfiguration.Conventions;
 namespace InternetPhotoAlbum.DAL
 {
     public class ApplicationContext : IdentityDbContext<ApplicationUser>
-    {        
+    {
         public ApplicationContext() : base("InternetPhotoAlbumDb")
         { }
 
