@@ -28,25 +28,16 @@ namespace InternetPhotoAlbum.DAL.Repositories
             context.Dispose();
         }
 
-        public async Task<Image> FindByIdAsync(int id)
+        public async Task<Image> GetByIdAsync(int id)
         {
             var result = await context.Images.FindAsync(id);
             return result;
         }
 
-        public IEnumerable<Image> Get()
+        public IEnumerable<Image> GetAll()
         {
             var result = context.Images
                 .AsNoTracking()
-                .AsEnumerable();
-            return result;
-        }
-
-        public IEnumerable<Image> Get(Func<Image, bool> predicate)
-        {
-            var result = context.Images
-                .AsNoTracking()
-                .Where(predicate)
                 .AsEnumerable();
             return result;
         }

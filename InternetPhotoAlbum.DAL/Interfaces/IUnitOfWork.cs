@@ -9,8 +9,11 @@ namespace InternetPhotoAlbum.DAL.Interfaces
         ApplicationUserManager UserManager { get; }
         ApplicationRoleManager RoleManager { get; }
         IAlbumsRepository AlbumsRepository { get; }
+        IGendersRepository GendersRepository { get; }
         IImagesRepository ImagesRepository { get; }
+        ILikeTypesRepository LikeTypesRepository { get; }
         IRatingsRepository RatingsRepository { get; }
+        IUserProfilesRepository UserProfilesRepository { get; }
         Task<int> SaveAsync();
     }
 }

@@ -1,6 +1,5 @@
 ﻿using InternetPhotoAlbum.DAL.Entities;
 using InternetPhotoAlbum.DAL.Interfaces;
-using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -28,25 +27,16 @@ namespace InternetPhotoAlbum.DAL.Repositories
             context.Dispose();
         }
 
-        public async Task<Album> FindByIdAsync(int id)
+        public async Task<Album> GetByIdAsync(int id)
         {
             var result = await context.Albums.FindAsync(id);
             return result;
         }
 
-        public IEnumerable<Album> Get()
+        public IEnumerable<Album> GetAll()
         {
             var result = context.Albums
                 .AsNoTracking()
-                .AsEnumerable();
-            return result;
-        }
-
-        public IEnumerable<Album> Get(Func<Album, bool> predicate)
-        {
-            var result = context.Albums
-                .AsNoTracking()
-                .Where(predicate)
                 .AsEnumerable();
             return result;
         }

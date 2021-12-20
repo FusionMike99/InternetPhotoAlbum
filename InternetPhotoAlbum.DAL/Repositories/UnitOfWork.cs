@@ -11,11 +11,14 @@ namespace InternetPhotoAlbum.DAL.Repositories
     {
         private readonly ApplicationContext context;
 
-        private ApplicationUserManager userManager;
-        private ApplicationRoleManager roleManager;
-        private AlbumsRepository albumsRepository;
-        private ImagesRepository imagesRepository;
-        private RatingsRepository ratingsRepository;
+        private ApplicationUserManager _userManager;
+        private ApplicationRoleManager _roleManager;
+        private AlbumsRepository _albumsRepository;
+        private GendersRepository _gendersRepository;
+        private ImagesRepository _imagesRepository;
+        private LikeTypesRepository _likeTypesRepository;
+        private RatingsRepository _ratingsRepository;
+        private UserProfilesRepository _userProfilesRepository;
 
         public UnitOfWork(string connectionString)
         {
@@ -26,9 +29,9 @@ namespace InternetPhotoAlbum.DAL.Repositories
         {
             get
             {
-                if (userManager == null)
-                    userManager = new ApplicationUserManager(new UserStore<ApplicationUser>(context));
-                return userManager;
+                if (_userManager == null)
+                    _userManager = new ApplicationUserManager(new UserStore<ApplicationUser>(context));
+                return _userManager;
             }
         }
 
@@ -36,9 +39,9 @@ namespace InternetPhotoAlbum.DAL.Repositories
         {
             get
             {
-                if (roleManager == null)
-                    roleManager = new ApplicationRoleManager(new RoleStore<ApplicationRole>(context));
-                return roleManager;
+                if (_roleManager == null)
+                    _roleManager = new ApplicationRoleManager(new RoleStore<ApplicationRole>(context));
+                return _roleManager;
             }
         }
 
@@ -46,9 +49,9 @@ namespace InternetPhotoAlbum.DAL.Repositories
         {
             get
             {
-                if (albumsRepository == null)
-                    albumsRepository = new AlbumsRepository(context);
-                return albumsRepository;
+                if (_albumsRepository == null)
+                    _albumsRepository = new AlbumsRepository(context);
+                return _albumsRepository;
             }
         }
 
@@ -56,9 +59,9 @@ namespace InternetPhotoAlbum.DAL.Repositories
         {
             get
             {
-                if (imagesRepository == null)
-                    imagesRepository = new ImagesRepository(context);
-                return imagesRepository;
+                if (_imagesRepository == null)
+                    _imagesRepository = new ImagesRepository(context);
+                return _imagesRepository;
             }
         }
 
@@ -66,9 +69,39 @@ namespace InternetPhotoAlbum.DAL.Repositories
         {
             get
             {
-                if (ratingsRepository == null)
-                    ratingsRepository = new RatingsRepository(context);
-                return ratingsRepository;
+                if (_ratingsRepository == null)
+                    _ratingsRepository = new RatingsRepository(context);
+                return _ratingsRepository;
+            }
+        }
+
+        public IGendersRepository GendersRepository
+        {
+            get
+            {
+                if (_gendersRepository == null)
+                    _gendersRepository = new GendersRepository(context);
+                return _gendersRepository;
+            }
+        }
+
+        public ILikeTypesRepository LikeTypesRepository
+        {
+            get
+            {
+                if (_likeTypesRepository == null)
+                    _likeTypesRepository = new LikeTypesRepository(context);
+                return _likeTypesRepository;
+            }
+        }
+
+        public IUserProfilesRepository UserProfilesRepository
+        {
+            get
+            {
+                if (_userProfilesRepository == null)
+                    _userProfilesRepository = new UserProfilesRepository(context);
+                return _userProfilesRepository;
             }
         }
 
@@ -86,11 +119,14 @@ namespace InternetPhotoAlbum.DAL.Repositories
             {
                 if (disposing)
                 {
-                    userManager.Dispose();
-                    roleManager.Dispose();
-                    albumsRepository.Dispose();
-                    imagesRepository.Dispose();
-                    ratingsRepository.Dispose();
+                    _userManager.Dispose();
+                    _roleManager.Dispose();
+                    _albumsRepository.Dispose();
+                    _gendersRepository.Dispose();
+                    _imagesRepository.Dispose();
+                    _likeTypesRepository.Dispose();
+                    _ratingsRepository.Dispose();
+                    _userProfilesRepository.Dispose();
                 }
                 disposed = true;
             }
