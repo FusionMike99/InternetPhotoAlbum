@@ -83,7 +83,21 @@
     <Compile Include="Migrations\202112201135479_Add Genders and LikeTypes tables.designer.cs">
       <DependentUpon>202112201135479_Add Genders and LikeTypes tables.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202112201536431_AddAlbumConfiguration.cs" />
+    <Compile Include="Migrations\202112201536431_AddAlbumConfiguration.designer.cs">
+      <DependentUpon>202112201536431_AddAlbumConfiguration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202112201601178_AddOtherConfigurations.cs" />
+    <Compile Include="Migrations\202112201601178_AddOtherConfigurations.designer.cs">
+      <DependentUpon>202112201601178_AddOtherConfigurations.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models_Configurations\AlbumConfiguration.cs" />
+    <Compile Include="Models_Configurations\GenderConfiguration.cs" />
+    <Compile Include="Models_Configurations\ImageConfiguration.cs" />
+    <Compile Include="Models_Configurations\LikeTypeConfiguration.cs" />
+    <Compile Include="Models_Configurations\RatingConfiguration.cs" />
+    <Compile Include="Models_Configurations\UserProfileConfiguration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\AlbumsRepository.cs" />
     <Compile Include="Repositories\GendersRepository.cs" />
@@ -99,6 +113,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202112201135479_Add Genders and LikeTypes tables.resx">
       <DependentUpon>202112201135479_Add Genders and LikeTypes tables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202112201536431_AddAlbumConfiguration.resx">
+      <DependentUpon>202112201536431_AddAlbumConfiguration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202112201601178_AddOtherConfigurations.resx">
+      <DependentUpon>202112201601178_AddOtherConfigurations.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

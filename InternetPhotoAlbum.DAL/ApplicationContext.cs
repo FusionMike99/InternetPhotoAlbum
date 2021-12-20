@@ -1,4 +1,5 @@
 ﻿using InternetPhotoAlbum.DAL.Entities;
+using InternetPhotoAlbum.DAL.Models_Configurations;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
@@ -25,42 +26,12 @@ namespace InternetPhotoAlbum.DAL
 
             modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
 
-            modelBuilder.Entity<UserProfile>()
-                .HasRequired(x => x.ApplicationUser)
-                .WithRequiredDependent(x => x.UserProfile);
-
-            modelBuilder.Entity<UserProfile>()
-                .HasRequired(x => x.Gender)
-                .WithMany(x => x.Users)
-                .HasForeignKey(x => x.GenderId);
-
-            modelBuilder.Entity<Album>()
-                .HasRequired(x => x.User)
-                .WithMany(x => x.Albums)
-                .HasForeignKey(x => x.UserId);
-
-            modelBuilder.Entity<Album>()
-                .HasMany(x => x.Images)
-                .WithRequired(x => x.Album)
-                .HasForeignKey(x => x.AlbumId);
-
-            modelBuilder.Entity<Rating>()
-                .HasKey(r => new { r.ImageId, r.UserId });
-
-            modelBuilder.Entity<Rating>()
-                .HasRequired(r => r.Image)
-                .WithMany(i => i.Ratings)
-                .HasForeignKey(r => r.ImageId);
-
-            modelBuilder.Entity<Rating>()
-                .HasRequired(r => r.User)
-                .WithMany(u => u.Ratings)
-                .HasForeignKey(r => r.UserId);
-
-            modelBuilder.Entity<Rating>()
-                .HasRequired(r => r.LikeType)
-                .WithMany(lt => lt.Ratings)
-                .HasForeignKey(r => r.LikeTypeId);
+            modelBuilder.Configurations.Add(new AlbumConfiguration());
+            modelBuilder.Configurations.Add(new GenderConfiguration());
+            modelBuilder.Configurations.Add(new ImageConfiguration());
+            modelBuilder.Configurations.Add(new LikeTypeConfiguration());
+            modelBuilder.Configurations.Add(new RatingConfiguration());
+            modelBuilder.Configurations.Add(new UserProfileConfiguration());
         }
     }
 }

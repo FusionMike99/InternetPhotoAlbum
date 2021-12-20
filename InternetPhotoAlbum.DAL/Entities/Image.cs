@@ -6,15 +6,10 @@ namespace InternetPhotoAlbum.DAL.Entities
 {
     public class Image
     {
-        [Key]
         public int Id { get; set; }
-        [Required, MaxLength(20)]
         public string Title { get; set; }
-        [DataType(DataType.MultilineText), MaxLength(200)]
         public string Description { get; set; }
-        [DataType(DataType.DateTime)]
         public DateTime AddedDate { get; set; }
-        [Required]
         public byte[] File { get; set; }
         public int AlbumId { get; set; }
 
