@@ -1,5 +1,6 @@
 ﻿using InternetPhotoAlbum.DAL.Entities;
 using InternetPhotoAlbum.DAL.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -49,6 +50,15 @@ namespace InternetPhotoAlbum.DAL.Repositories
         public void Update(Album item)
         {
             context.Entry(item).State = EntityState.Modified;
+        }
+
+        public IEnumerable<Album> Get(Func<Album, bool> predicate)
+        {
+            var result = context.Albums
+                .AsNoTracking()
+                .Where(predicate)
+                .AsEnumerable();
+            return result;
         }
     }
 }

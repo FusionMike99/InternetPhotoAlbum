@@ -8,7 +8,7 @@ namespace InternetPhotoAlbum.DAL.Interfaces
     public interface IUserProfilesRepository : IDisposable
     {
         UserProfile Create(UserProfile profile);
-        Task<UserProfile> GetByIdAsync(int id);
+        Task<UserProfile> GetByIdAsync(string id);
         IEnumerable<UserProfile> GetAll();
         void Update(UserProfile profile);
         void Remove(UserProfile profile);
