@@ -49,7 +49,7 @@ namespace InternetPhotoAlbum.BLL.Services
                 var context = new System.ComponentModel.DataAnnotations.ValidationContext(model);
                 if (!Validator.TryValidateObject(model, context, validationResults, true))
                 {
-                    throw new MyValidationException("Some properties don't valid", validationResults);
+                    throw new AggregateValidationException("Some properties don't valid", validationResults);
                 }
                 user = new ApplicationUser { Email = model.Email, UserName = model.Login };
                 var result = await _unitOfWork.UserManager.CreateAsync(user, model.Password);
@@ -60,7 +60,7 @@ namespace InternetPhotoAlbum.BLL.Services
                     {
                         validationResults.Add(new ValidationResult(error));
                     }
-                    throw new MyValidationException("Error with registration", validationResults);
+                    throw new AggregateValidationException("Error with registration", validationResults);
                 }
                 await _unitOfWork.UserManager.AddToRoleAsync(user.Id, model.Role);
                 var userProfile = _mapper.Map<UserDTO, UserProfile>(model);
@@ -132,7 +132,7 @@ namespace InternetPhotoAlbum.BLL.Services
                 var context = new System.ComponentModel.DataAnnotations.ValidationContext(model);
                 if (!Validator.TryValidateObject(model, context, validationResults, true))
                 {
-                    throw new MyValidationException("Some properties don't valid", validationResults);
+                    throw new AggregateValidationException("Some properties don't valid", validationResults);
                 }
                 var entity = _mapper.Map<EditUserProfileModel, UserProfile>(model);
                 _unitOfWork.UserProfilesRepository.Update(entity);

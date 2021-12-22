@@ -18,6 +18,12 @@ namespace InternetPhotoAlbum.BLL.Infrastructure
 
             CreateMap<Album, AlbumDTO>()
                 .ReverseMap();
+
+            CreateMap<Gender, GenderDTO>()
+                .ReverseMap();
+
+            CreateMap<LikeType, LikeTypeDTO>()
+                .ReverseMap();
         }
     }
 }

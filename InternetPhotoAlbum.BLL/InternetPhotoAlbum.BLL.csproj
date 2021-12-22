@@ -61,15 +61,21 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Infrastructure\ModelEntityProfile.cs" />
-    <Compile Include="Infrastructure\MyValidationException.cs" />
+    <Compile Include="Infrastructure\AggregateValidationException.cs" />
     <Compile Include="Interfaces\IAlbumService.cs" />
+    <Compile Include="Interfaces\IGenderService.cs" />
+    <Compile Include="Interfaces\ILikeTypeService.cs" />
     <Compile Include="Interfaces\IUserService.cs" />
     <Compile Include="Models\AlbumDTO.cs" />
     <Compile Include="Models\EditUserProfileModel.cs" />
+    <Compile Include="Models\GenderDTO.cs" />
+    <Compile Include="Models\LikeTypeDTO.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\UserDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\AlbumService.cs" />
+    <Compile Include="Services\GenderService.cs" />
+    <Compile Include="Services\LikeTypeService.cs" />
     <Compile Include="Services\UserService.cs" />
   </ItemGroup>
   <ItemGroup>

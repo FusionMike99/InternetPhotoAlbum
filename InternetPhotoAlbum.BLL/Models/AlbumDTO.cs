@@ -14,7 +14,6 @@ namespace InternetPhotoAlbum.BLL.Models
         public DateTime PeriodStart { get; set; }
         [DataType(DataType.Date)]
         public DateTime PeriodEnd { get; set; }
-        public byte[] FaceImage { get; set; }
         public string UserId { get; set; }
     }
 }

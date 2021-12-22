@@ -11,18 +11,18 @@ using System.Threading.Tasks;
 
 namespace InternetPhotoAlbum.BLL.Services
 {
-    public class AlbumService : IAlbumService
+    public class LikeTypeService : ILikeTypeService
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
 
-        public AlbumService(IUnitOfWork unitOfWork, IMapper mapper)
+        public LikeTypeService(IUnitOfWork unitOfWork, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
 
-        public async Task<AlbumDTO> CreateAsync(AlbumDTO model)
+        public async Task<LikeTypeDTO> CreateAsync(LikeTypeDTO model)
         {
             if (model != null)
             {
@@ -33,10 +33,10 @@ namespace InternetPhotoAlbum.BLL.Services
                     throw new AggregateValidationException("Some properties don't valid");
                 }
 
-                var entity = _mapper.Map<AlbumDTO, Album>(model);
-                entity = _unitOfWork.AlbumsRepository.Create(entity);
+                var entity = _mapper.Map<LikeTypeDTO, LikeType>(model);
+                entity = _unitOfWork.LikeTypesRepository.Create(entity);
                 await _unitOfWork.SaveAsync();
-                model = _mapper.Map<Album, AlbumDTO>(entity);
+                model = _mapper.Map<LikeType, LikeTypeDTO>(entity);
                 return model;
             }
             else
@@ -47,12 +47,12 @@ namespace InternetPhotoAlbum.BLL.Services
 
         public async Task<bool> DeleteAsync(int id)
         {
-            var entity = await _unitOfWork.AlbumsRepository.GetByIdAsync(id);
+            var entity = await _unitOfWork.LikeTypesRepository.GetByIdAsync(id);
             if (entity == null)
             {
                 throw new InvalidOperationException("Album doesn't exist");
             }
-            _unitOfWork.AlbumsRepository.Remove(entity);
+            _unitOfWork.LikeTypesRepository.Remove(entity);
             return await _unitOfWork.SaveAsync() != 0;
         }
 
@@ -61,32 +61,25 @@ namespace InternetPhotoAlbum.BLL.Services
             _unitOfWork.Dispose();
         }
 
-        public IEnumerable<AlbumDTO> FindAll()
+        public IEnumerable<LikeTypeDTO> FindAll()
         {
-            var enities = _unitOfWork.AlbumsRepository.GetAll();
-            var models = _mapper.Map<IEnumerable<AlbumDTO>>(enities);
+            var enities = _unitOfWork.LikeTypesRepository.GetAll();
+            var models = _mapper.Map<IEnumerable<LikeTypeDTO>>(enities);
             return models;
         }
 
-        public async Task<AlbumDTO> FindByIdAsync(int id)
+        public async Task<LikeTypeDTO> FindByIdAsync(int id)
         {
-            var entity = await _unitOfWork.AlbumsRepository.GetByIdAsync(id);
+            var entity = await _unitOfWork.LikeTypesRepository.GetByIdAsync(id);
             if (entity == null)
             {
                 throw new InvalidOperationException("Album doesn't exist");
             }
-            var model = _mapper.Map<AlbumDTO>(entity);
+            var model = _mapper.Map<LikeTypeDTO>(entity);
             return model;
         }
 
-        public IEnumerable<AlbumDTO> FindByUserId(string userId)
-        {
-            var enities = _unitOfWork.AlbumsRepository.Get(a => a.UserId == userId);
-            var models = _mapper.Map<IEnumerable<AlbumDTO>>(enities);
-            return models;
-        }
-
-        public async Task<bool> UpdateAsync(AlbumDTO model)
+        public async Task<bool> UpdateAsync(LikeTypeDTO model)
         {
             if (model != null)
             {
@@ -97,8 +90,8 @@ namespace InternetPhotoAlbum.BLL.Services
                     throw new AggregateValidationException("Some properties don't valid");
                 }
 
-                var entity = _mapper.Map<AlbumDTO, Album>(model);
-                _unitOfWork.AlbumsRepository.Update(entity);
+                var entity = _mapper.Map<LikeTypeDTO, LikeType>(model);
+                _unitOfWork.LikeTypesRepository.Update(entity);
                 return await _unitOfWork.SaveAsync() != 0;
             }
             else
