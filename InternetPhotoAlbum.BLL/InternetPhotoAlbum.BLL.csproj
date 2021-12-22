@@ -71,11 +71,14 @@
     <Compile Include="Models\GenderDTO.cs" />
     <Compile Include="Models\LikeTypeDTO.cs" />
     <Compile Include="Models\LoginModel.cs" />
+    <Compile Include="Models\RatingDTO.cs" />
     <Compile Include="Models\UserDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\AlbumService.cs" />
     <Compile Include="Services\GenderService.cs" />
+    <Compile Include="Interfaces\IRatingService.cs" />
     <Compile Include="Services\LikeTypeService.cs" />
+    <Compile Include="Services\RatingService.cs" />
     <Compile Include="Services\UserService.cs" />
   </ItemGroup>
   <ItemGroup>
