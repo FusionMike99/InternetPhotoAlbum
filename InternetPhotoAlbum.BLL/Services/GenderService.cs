@@ -50,7 +50,7 @@ namespace InternetPhotoAlbum.BLL.Services
             var entity = await _unitOfWork.GendersRepository.GetByIdAsync(id);
             if (entity == null)
             {
-                throw new InvalidOperationException("Album doesn't exist");
+                throw new InvalidOperationException("Gender doesn't exist");
             }
             _unitOfWork.GendersRepository.Remove(entity);
             return await _unitOfWork.SaveAsync() != 0;
@@ -73,7 +73,7 @@ namespace InternetPhotoAlbum.BLL.Services
             var entity = await _unitOfWork.GendersRepository.GetByIdAsync(id);
             if (entity == null)
             {
-                throw new InvalidOperationException("Album doesn't exist");
+                throw new InvalidOperationException("Gender doesn't exist");
             }
             var model = _mapper.Map<GenderDTO>(entity);
             return model;

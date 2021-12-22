@@ -50,7 +50,7 @@ namespace InternetPhotoAlbum.BLL.Services
             var entity = await _unitOfWork.LikeTypesRepository.GetByIdAsync(id);
             if (entity == null)
             {
-                throw new InvalidOperationException("Album doesn't exist");
+                throw new InvalidOperationException("Type of like doesn't exist");
             }
             _unitOfWork.LikeTypesRepository.Remove(entity);
             return await _unitOfWork.SaveAsync() != 0;
@@ -73,7 +73,7 @@ namespace InternetPhotoAlbum.BLL.Services
             var entity = await _unitOfWork.LikeTypesRepository.GetByIdAsync(id);
             if (entity == null)
             {
-                throw new InvalidOperationException("Album doesn't exist");
+                throw new InvalidOperationException("Type of like doesn't exist");
             }
             var model = _mapper.Map<LikeTypeDTO>(entity);
             return model;

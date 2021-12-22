@@ -10,6 +10,7 @@ namespace InternetPhotoAlbum.DAL.Interfaces
         Image Create(Image image);
         Task<Image> GetByIdAsync(int id);
         IEnumerable<Image> GetAll();
+        IEnumerable<Image> Get(Func<Image, bool> predicate);
         void Update(Image image);
         void Remove(Image image);
     }

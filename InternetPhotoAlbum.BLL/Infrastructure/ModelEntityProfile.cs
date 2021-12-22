@@ -24,6 +24,12 @@ namespace InternetPhotoAlbum.BLL.Infrastructure
 
             CreateMap<LikeType, LikeTypeDTO>()
                 .ReverseMap();
+
+            CreateMap<Rating, RatingDTO>()
+                .ReverseMap();
+
+            CreateMap<Image, ImageDTO>()
+                .ReverseMap();
         }
     }
 }

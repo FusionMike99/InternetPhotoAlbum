@@ -11,18 +11,18 @@ using System.Threading.Tasks;
 
 namespace InternetPhotoAlbum.BLL.Services
 {
-    public class RatingService : IRatingService
+    public class ImageService : IImageService
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
 
-        public RatingService(IUnitOfWork unitOfWork, IMapper mapper)
+        public ImageService(IUnitOfWork unitOfWork, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
 
-        public async Task<RatingDTO> CreateAsync(RatingDTO model)
+        public async Task<ImageDTO> CreateAsync(ImageDTO model)
         {
             if (model != null)
             {
@@ -33,10 +33,11 @@ namespace InternetPhotoAlbum.BLL.Services
                     throw new AggregateValidationException("Some properties don't valid");
                 }
 
-                var entity = _mapper.Map<Rating>(model);
-                entity = _unitOfWork.RatingsRepository.Create(entity);
+                var entity = _mapper.Map<Image>(model);
+                entity.AddedDate = DateTime.Now;
+                entity = _unitOfWork.ImagesRepository.Create(entity);
                 await _unitOfWork.SaveAsync();
-                model = _mapper.Map<RatingDTO>(entity);
+                model = _mapper.Map<ImageDTO>(entity);
                 return model;
             }
             else
@@ -45,14 +46,14 @@ namespace InternetPhotoAlbum.BLL.Services
             }
         }
 
-        public async Task<bool> DeleteAsync(int imageId, string userId)
+        public async Task<bool> DeleteAsync(int id)
         {
-            var entity = await _unitOfWork.RatingsRepository.GetByIdAsync(imageId, userId);
+            var entity = await _unitOfWork.ImagesRepository.GetByIdAsync(id);
             if (entity == null)
             {
-                throw new InvalidOperationException("Rating doesn't exist");
+                throw new InvalidOperationException("Image doesn't exist");
             }
-            _unitOfWork.RatingsRepository.Remove(entity);
+            _unitOfWork.ImagesRepository.Remove(entity);
             return await _unitOfWork.SaveAsync() != 0;
         }
 
@@ -61,25 +62,32 @@ namespace InternetPhotoAlbum.BLL.Services
             _unitOfWork.Dispose();
         }
 
-        public IEnumerable<RatingDTO> FindAll()
+        public IEnumerable<ImageDTO> FindAll()
         {
-            var enities = _unitOfWork.RatingsRepository.GetAll();
-            var models = _mapper.Map<IEnumerable<RatingDTO>>(enities);
+            var enities = _unitOfWork.ImagesRepository.GetAll();
+            var models = _mapper.Map<IEnumerable<ImageDTO>>(enities);
             return models;
         }
 
-        public async Task<RatingDTO> FindByIdAsync(int imageId, string userId)
+        public IEnumerable<ImageDTO> FindByAlbumId(int albumId)
         {
-            var entity = await _unitOfWork.RatingsRepository.GetByIdAsync(imageId, userId);
+            var enities = _unitOfWork.ImagesRepository.Get(a => a.AlbumId == albumId);
+            var models = _mapper.Map<IEnumerable<ImageDTO>>(enities);
+            return models;
+        }
+
+        public async Task<ImageDTO> FindByIdAsync(int id)
+        {
+            var entity = await _unitOfWork.ImagesRepository.GetByIdAsync(id);
             if (entity == null)
             {
-                throw new InvalidOperationException("Rating doesn't exist");
+                throw new InvalidOperationException("Image doesn't exist");
             }
-            var model = _mapper.Map<RatingDTO>(entity);
+            var model = _mapper.Map<ImageDTO>(entity);
             return model;
         }
 
-        public async Task<bool> UpdateAsync(RatingDTO model)
+        public async Task<bool> UpdateAsync(ImageDTO model)
         {
             if (model != null)
             {
@@ -90,8 +98,8 @@ namespace InternetPhotoAlbum.BLL.Services
                     throw new AggregateValidationException("Some properties don't valid");
                 }
 
-                var entity = _mapper.Map<Rating>(model);
-                _unitOfWork.RatingsRepository.Update(entity);
+                var entity = _mapper.Map<Image>(model);
+                _unitOfWork.ImagesRepository.Update(entity);
                 return await _unitOfWork.SaveAsync() != 0;
             }
             else
