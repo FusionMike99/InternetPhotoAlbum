@@ -1,5 +1,6 @@
 ﻿using InternetPhotoAlbum.BLL.Infrastructure;
 using InternetPhotoAlbum.BLL.Interfaces;
+using InternetPhotoAlbum.MVC.Infrastructure;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
@@ -35,7 +36,9 @@ namespace InternetPhotoAlbum.MVC.App_Start
             {
                 string connectionString = ConfigurationManager.ConnectionStrings["InternetPhotoAlbumDb"].ConnectionString;
                 DataAccessBinding dataAccessBinding = new DataAccessBinding(connectionString);
-                kernel.Load(dataAccessBinding);
+                BusinessLogicBinding businessLogicBinding = new BusinessLogicBinding();
+                AutoMapperModule autoMapperModule = new AutoMapperModule();
+                kernel.Load(dataAccessBinding, businessLogicBinding, autoMapperModule);
                 return kernel;
             }
             catch

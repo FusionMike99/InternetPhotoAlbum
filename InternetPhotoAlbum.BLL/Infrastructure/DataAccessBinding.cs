@@ -22,7 +22,7 @@ namespace InternetPhotoAlbum.BLL.Infrastructure
             Bind<IRatingsRepository>().To<RatingsRepository>();
             Bind<IUserProfilesRepository>().To<UserProfilesRepository>();
             Bind<IUnitOfWork>().To<UnitOfWork>()
-                .WithConstructorArgument("conectionString", connectionString);
+                .WithConstructorArgument("connectionString", connectionString);
         }
     }
 }

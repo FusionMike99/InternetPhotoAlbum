@@ -11,7 +11,7 @@ namespace InternetPhotoAlbum.DAL
         public ApplicationContext() : base("InternetPhotoAlbumDb")
         { }
 
-        public ApplicationContext(string conectionString) : base(conectionString) { }
+        public ApplicationContext(string connectionString) : base(connectionString) { }
 
         public DbSet<UserProfile> UserProfiles { get; set; }
         public DbSet<Gender> Genders { get; set; }

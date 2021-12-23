@@ -1,4 +1,4 @@
-[assembly: WebActivatorEx.PreApplicationStartMethod(typeof(InternetPhotoAlbum.MVC.App_Start.NinjectWebCommon), "Start")]
+/*[assembly: WebActivatorEx.PreApplicationStartMethod(typeof(InternetPhotoAlbum.MVC.App_Start.NinjectWebCommon), "Start")]
 [assembly: WebActivatorEx.ApplicationShutdownMethodAttribute(typeof(InternetPhotoAlbum.MVC.App_Start.NinjectWebCommon), "Stop")]
 
 namespace InternetPhotoAlbum.MVC.App_Start
@@ -62,4 +62,4 @@ namespace InternetPhotoAlbum.MVC.App_Start
 
         }
     }
-}
+}*/

@@ -119,14 +119,14 @@ namespace InternetPhotoAlbum.DAL.Repositories
             {
                 if (disposing)
                 {
-                    _userManager.Dispose();
-                    _roleManager.Dispose();
-                    _albumsRepository.Dispose();
-                    _gendersRepository.Dispose();
-                    _imagesRepository.Dispose();
-                    _likeTypesRepository.Dispose();
-                    _ratingsRepository.Dispose();
-                    _userProfilesRepository.Dispose();
+                    _userManager?.Dispose();
+                    _roleManager?.Dispose();
+                    _albumsRepository?.Dispose();
+                    _gendersRepository?.Dispose();
+                    _imagesRepository?.Dispose();
+                    _likeTypesRepository?.Dispose();
+                    _ratingsRepository?.Dispose();
+                    _userProfilesRepository?.Dispose();
                 }
                 disposed = true;
             }

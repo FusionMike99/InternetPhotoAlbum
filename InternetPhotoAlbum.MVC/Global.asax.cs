@@ -1,10 +1,11 @@
 using InternetPhotoAlbum.BLL.Infrastructure;
+using InternetPhotoAlbum.MVC.App_Start;
 using Ninject;
 using Ninject.Web.Mvc;
+using System.Configuration;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
-using System.Configuration;
 
 namespace InternetPhotoAlbum.MVC
 {
@@ -16,6 +17,11 @@ namespace InternetPhotoAlbum.MVC
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            /*string connectionString = ConfigurationManager.ConnectionStrings["InternetPhotoAlbumDb"].ConnectionString;
+            DataAccessBinding dataAccessBinding = new DataAccessBinding(connectionString);
+            var kernel = new StandardKernel(dataAccessBinding);
+            DependencyResolver.SetResolver(new NinjectDependencyResolver(kernel));*/
         }
     }
 }
