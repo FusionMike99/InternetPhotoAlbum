@@ -1,11 +1,18 @@
-﻿using Ninject.Modules;
-using InternetPhotoAlbum.DAL.Interfaces;
+﻿using InternetPhotoAlbum.DAL.Interfaces;
 using InternetPhotoAlbum.DAL.Repositories;
+using Ninject.Modules;
 
 namespace InternetPhotoAlbum.BLL.Infrastructure
 {
     public class DataAccessBinding : NinjectModule
     {
+        private readonly string connectionString;
+
+        public DataAccessBinding(string connectionString)
+        {
+            this.connectionString = connectionString;
+        }
+
         public override void Load()
         {
             Bind<IAlbumsRepository>().To<AlbumsRepository>();
@@ -14,7 +21,8 @@ namespace InternetPhotoAlbum.BLL.Infrastructure
             Bind<ILikeTypesRepository>().To<LikeTypesRepository>();
             Bind<IRatingsRepository>().To<RatingsRepository>();
             Bind<IUserProfilesRepository>().To<UserProfilesRepository>();
-            Bind<IUnitOfWork>().To<UnitOfWork>();
+            Bind<IUnitOfWork>().To<UnitOfWork>()
+                .WithConstructorArgument("conectionString", connectionString);
         }
     }
 }
