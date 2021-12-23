@@ -55,7 +55,7 @@ namespace InternetPhotoAlbum.MVC.Controllers
                     ClaimsIdentity claim = await UserService.AuthenticateAsync(model);
                     if (claim == null)
                     {
-                        ModelState.AddModelError("", "Неверный логин или пароль.");
+                        ModelState.AddModelError("Password", "Invalid password");
                     }
                     else
                     {
