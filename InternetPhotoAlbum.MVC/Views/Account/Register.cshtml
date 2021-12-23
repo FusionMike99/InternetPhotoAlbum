@@ -1,0 +1,88 @@
+﻿@model InternetPhotoAlbum.MVC.Models.RegisterModel
+
+@{
+    ViewBag.Title = "Register user";
+}
+
+<h2>Register user</h2>
+
+<hr />
+@using (Html.BeginForm("Register", "Account", new { area = "" },  FormMethod.Post, new { @class = "col-8 mx-auto" }))
+{
+    @Html.AntiForgeryToken()
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="row">
+        <div class="form-floating col mb-3 mt-3">
+            @Html.EditorFor(model => model.Login, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.LabelFor(model => model.Login, htmlAttributes: new { @class = "ms-2" })
+            @Html.ValidationMessageFor(model => model.Login, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-floating col mb-3 mt-3">
+            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "ms-2" })
+            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="form-floating col mb-3 mt-3">
+            @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "ms-2" })
+            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-floating col mb-3 mt-3">
+            @Html.EditorFor(model => model.ConfirmPassword, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.LabelFor(model => model.ConfirmPassword, htmlAttributes: new { @class = "ms-2" })
+            @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="form-floating col mb-3 mt-3">
+            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "ms-2" })
+            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-floating col mb-3 mt-3">
+            @Html.EditorFor(model => model.Surname, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.LabelFor(model => model.Surname, htmlAttributes: new { @class = "ms-2" })
+            @Html.ValidationMessageFor(model => model.Surname, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="form-floating col mb-3 mt-3">
+            @Html.EditorFor(model => model.DateOfBirth, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.LabelFor(model => model.DateOfBirth, htmlAttributes: new { @class = "ms-2" })
+            @Html.ValidationMessageFor(model => model.DateOfBirth, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-floating col mb-3 mt-3">
+            <select data-val="true"
+                    data-val-number="Значением поля Gender должно быть число."
+                    data-val-required="Требуется поле Gender."
+                    class="form-select"
+                    id="GenderId" name="GenderId">
+                <option selected disabled value="0">Choose...</option>
+                @foreach (var option in ViewData["Genders"] as SelectList)
+                {
+                    <option value="@option.Value">@option.Text</option>
+                }
+            </select>
+            @Html.LabelFor(m => m.GenderId, htmlAttributes: new { @class = "ms-2" })
+        </div>
+    </div>
+
+    <div class="col-3 mx-auto">
+        <input type="submit" value="Register" class="btn btn-info text-light" />
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index", new { area = "" }, htmlAttributes: new { @class = "btn btn-primary" })
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

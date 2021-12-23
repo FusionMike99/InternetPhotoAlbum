@@ -63,6 +63,7 @@ namespace InternetPhotoAlbum.BLL.Services
                     throw new AggregateValidationException("Error with registration", validationResults);
                 }
                 await _unitOfWork.UserManager.AddToRoleAsync(user.Id, model.Role);
+                model.Id = user.Id;
                 var userProfile = _mapper.Map<UserDTO, UserProfile>(model);
                 userProfile = _unitOfWork.UserProfilesRepository.Create(userProfile);
                 await _unitOfWork.SaveAsync();
