@@ -11,6 +11,8 @@ namespace InternetPhotoAlbum.MVC.App_Start
     using Ninject;
     using Ninject.Web.Common;
     using Ninject.Web.Common.WebHost;
+    using System.Configuration;
+    using InternetPhotoAlbum.BLL.Infrastructure;
 
     public static class NinjectWebCommon 
     {
@@ -61,6 +63,9 @@ namespace InternetPhotoAlbum.MVC.App_Start
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
+            string connectionString = ConfigurationManager.ConnectionStrings["InternetPhotoAlbumDb"].ConnectionString;
+            DataAccessBinding dataAccessBinding = new DataAccessBinding(connectionString);
+            kernel.Load(dataAccessBinding);
         }
     }
 }
