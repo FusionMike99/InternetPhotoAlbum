@@ -1,8 +1,13 @@
-﻿namespace InternetPhotoAlbum.DAL.Migrations
-{
-    using InternetPhotoAlbum.DAL.Entities;
-    using System.Data.Entity.Migrations;
+﻿using System;
+using InternetPhotoAlbum.DAL.Entities;
+using InternetPhotoAlbum.DAL.Identity;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using System.Collections.Generic;
+using System.Data.Entity.Migrations;
 
+namespace InternetPhotoAlbum.DAL.Migrations
+{
     internal sealed class Configuration : DbMigrationsConfiguration<ApplicationContext>
     {
         public Configuration()
@@ -20,6 +25,48 @@
 
             context.Genders.AddOrUpdate(x => x.Id, gender1, gender2);
             context.LikeTypes.AddOrUpdate(x => x.Id, likeType1, likeType2);
+
+            context.SaveChanges();
+
+            var userManager = new ApplicationUserManager(new UserStore<ApplicationUser>(context));
+            var roleManager = new ApplicationRoleManager(new RoleStore<ApplicationRole>(context));
+
+            List<string> roles = new List<string> { "user", "admin" };
+            foreach (string roleName in roles)
+            {
+                var role = roleManager.FindByName(roleName);
+                if (role == null)
+                {
+                    role = new ApplicationRole { Name = roleName };
+                    roleManager.Create(role);
+                }
+            }
+
+            string password = "pa$$w0rd";
+
+            List<ApplicationUser> users = new List<ApplicationUser>
+            {
+                new ApplicationUser { UserName = "testUser", Email = "testUser@application.com" },
+                new ApplicationUser { UserName = "admin", Email = "admin@application.com" }
+            };
+
+            for (int i = 0; i < users.Count; i++)
+            {
+                userManager.Create(users[i], password);
+                userManager.AddToRole(users[i].Id, roles[i]);
+            }
+
+            List<UserProfile> userProfiles = new List<UserProfile>
+            {
+                new UserProfile { UserId = users[0].Id, Name = "Test", Surname = "Testov", 
+                    GenderId = 1, DateOfBirth = DateTime.Today.AddYears(-24) },
+                new UserProfile { UserId = users[1].Id, Name = "Admin", Surname = "Adminov", 
+                    GenderId = 1, DateOfBirth = DateTime.Today.AddYears(-18) }
+            };
+
+            context.UserProfiles.AddRange(userProfiles);
+
+            context.SaveChanges();
         }
     }
 }
