@@ -19,7 +19,6 @@ namespace InternetPhotoAlbum.DAL.Repositories
 
         public Album Create(Album item)
         {
-            item.User = null;
             var result = context.Albums.Add(item);
             return result;
         }

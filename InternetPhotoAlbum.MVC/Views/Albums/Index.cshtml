@@ -11,8 +11,8 @@
         @Html.ActionLink("Create New", "Create", new { area = "" }, new { id = "createDialLink" })
     </p>
 
-    <div id="modCreateDialog" class="modal fade">
-        <div id="createDialogContent" class="modal-dialog"></div>
+    <div id="modDialog" class="modal fade">
+        <div id="dialogContent" class="modal-dialog"></div>
     </div>
 }
 
@@ -60,9 +60,9 @@
             @if ((bool)ViewData["IsHavePermission"])
              {
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "editDialLink" }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "deleteDialLink" }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.Id })
                 </td>
              }
         </tr>
@@ -80,8 +80,26 @@
 
                 e.preventDefault();
                 $.get(this.href, function (data) {
-                    $('#createDialogContent').html(data);
-                    $('#modCreateDialog').modal('show');
+                    $('#dialogContent').html(data);
+                    $('#modDialog').modal('show');
+                });
+            });
+
+            $(".editDialLink").click(function (e) {
+
+                e.preventDefault();
+                $.get(this.href, function (data) {
+                    $('#dialogContent').html(data);
+                    $('#modDialog').modal('show');
+                });
+            });
+
+            $(".deleteDialLink").click(function (e) {
+
+                e.preventDefault();
+                $.get(this.href, function (data) {
+                    $('#dialogContent').html(data);
+                    $('#modDialog').modal('show');
                 });
             });
         });

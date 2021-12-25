@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Net;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web.Mvc;
@@ -39,6 +40,11 @@ namespace InternetPhotoAlbum.MVC.Controllers
         [Route("{userId}")]
         public ActionResult UserAlbums(string userId)
         {
+            if(string.IsNullOrEmpty(userId))
+            {
+                userId = User.Identity.GetUserId();
+            }
+
             var albums = _albumService.FindByUserId(userId);
 
             bool isHavePermission = false;
@@ -70,6 +76,7 @@ namespace InternetPhotoAlbum.MVC.Controllers
 
         [HttpPost]
         [Authorize]
+        [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create(AlbumViewModel model)
         {
             if (ModelState.IsValid)
@@ -100,6 +107,94 @@ namespace InternetPhotoAlbum.MVC.Controllers
             }
 
             return PartialView(model);
+        }
+
+        [HttpGet]
+        [Authorize]
+        public async Task<ActionResult> Edit(int id)
+        {
+            try
+            {
+                var album = await _albumService.FindByIdAsync(id);
+                return PartialView(album);
+            }
+            catch(InvalidOperationException ex)
+            {
+                return HttpNotFound(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest, ex.Message);
+            }
+        }
+
+        [HttpPost]
+        [Authorize]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Edit(AlbumDTO model)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    var result = await _albumService.UpdateAsync(model);
+                    return RedirectToAction("UserAlbums");
+                }
+                catch (AggregateValidationException ex)
+                {
+                    List<ValidationResult> validationResults = ex.ValidationResults;
+                    foreach (var validationResult in validationResults)
+                    {
+                        ModelState.AddModelError("", validationResult.ErrorMessage);
+                    }
+                }
+                catch (ArgumentNullException ex)
+                {
+                    ModelState.AddModelError("", ex.Message);
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError("", ex.Message);
+                }
+            }
+
+            return PartialView(model);
+        }
+
+        [HttpGet]
+        [Authorize]
+        public async Task<ActionResult> Delete(int id)
+        {
+            try
+            {
+                var album = await _albumService.FindByIdAsync(id);
+                return PartialView(album);
+            }
+            catch (InvalidOperationException ex)
+            {
+                return HttpNotFound(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest, ex.Message);
+            }
+        }
+
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> DeleteConfirmed(int id)
+        {
+            await _albumService.DeleteAsync(id);
+            return RedirectToAction("Index");
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                _albumService.Dispose();
+            }
+            base.Dispose(disposing);
         }
     }
 }

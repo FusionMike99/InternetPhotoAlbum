@@ -36,6 +36,7 @@ namespace InternetPhotoAlbum.BLL.Services
                 }
 
                 var entity = _mapper.Map<AlbumDTO, Album>(model);
+                entity.User = null;
                 entity = _unitOfWork.AlbumsRepository.Create(entity);
                 await _unitOfWork.SaveAsync();
                 model = _mapper.Map<Album, AlbumDTO>(entity);
@@ -100,6 +101,7 @@ namespace InternetPhotoAlbum.BLL.Services
                 }
 
                 var entity = _mapper.Map<AlbumDTO, Album>(model);
+                entity.User = null;
                 _unitOfWork.AlbumsRepository.Update(entity);
                 return await _unitOfWork.SaveAsync() != 0;
             }

@@ -142,5 +142,15 @@ namespace InternetPhotoAlbum.MVC.Controllers
 
             return View(model);
         }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                UserService.Dispose();
+                _genderService.Dispose();
+            }
+            base.Dispose(disposing);
+        }
     }
 }
