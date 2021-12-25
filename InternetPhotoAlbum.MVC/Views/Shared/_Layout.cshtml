@@ -1,7 +1,9 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNet.Identity;
+
+<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Internet Photo Album</title>
@@ -18,7 +20,7 @@
             <div class="collapse navbar-collapse" id="collapsibleNavbar">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        @Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link" })
+                        @Html.ActionLink("Home", "Index", "Albums", new { area = "" }, new { @class = "nav-link" })
                     </li>
                     @if (!User.Identity.IsAuthenticated)
                     {
@@ -31,6 +33,10 @@
                     }
                     else
                     {
+                        <li class="nav-item">
+                            @Html.ActionLink("My Albums", "UserAlbums", "Albums", new { area = "", userId = User.Identity.GetUserId() }
+                                , new { @class = "nav-link" })
+                        </li>
                         <li class="nav-item">
                             @Html.ActionLink("Log out", "Logout", "Account", new { area = "" }, new { @class = "nav-link" })
                         </li>

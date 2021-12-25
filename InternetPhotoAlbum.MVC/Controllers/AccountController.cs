@@ -39,6 +39,7 @@ namespace InternetPhotoAlbum.MVC.Controllers
             }
         }
 
+        [HttpGet]
         public ActionResult Login()
         {
             return View();
@@ -64,7 +65,7 @@ namespace InternetPhotoAlbum.MVC.Controllers
                         {
                             IsPersistent = true
                         }, claim);
-                        return RedirectToAction("Index", "Home");
+                        return RedirectToAction("UserAlbums", "Albums");
                     }
                 }
                 catch (InvalidOperationException ex)
@@ -79,12 +80,14 @@ namespace InternetPhotoAlbum.MVC.Controllers
             return View(model);
         }
 
+        [HttpGet]
         public ActionResult Logout()
         {
             AuthenticationManager.SignOut();
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Albums");
         }
 
+        [HttpGet]
         public ActionResult Register()
         {
             var genders = new SelectList(_genderService.FindAll(), "Id", "Name");
@@ -114,7 +117,7 @@ namespace InternetPhotoAlbum.MVC.Controllers
                 try
                 {
                     var result = await UserService.CreateAsync(userDto);
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Login");
                 }
                 catch (AggregateValidationException ex)
                 {

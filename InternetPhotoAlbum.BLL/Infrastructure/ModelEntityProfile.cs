@@ -17,6 +17,7 @@ namespace InternetPhotoAlbum.BLL.Infrastructure
                 .ReverseMap();
 
             CreateMap<Album, AlbumDTO>()
+                .ForMember(a => a.UserName, x => x.MapFrom(a => a.User.UserName))
                 .ReverseMap();
 
             CreateMap<Gender, GenderDTO>()

@@ -20,7 +20,7 @@ namespace InternetPhotoAlbum.MVC.Infrastructure
         {
             var config = new MapperConfiguration(cfg =>
             {
-                cfg.AddMaps(typeof(ModelEntityProfile));
+                cfg.AddMaps(typeof(ModelEntityProfile), typeof(ViewModelModelProfile));
             });
 
             return config;

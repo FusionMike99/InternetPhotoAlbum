@@ -30,7 +30,7 @@ namespace InternetPhotoAlbum.BLL.Services
                 var validationContext = new System.ComponentModel.DataAnnotations.ValidationContext(model);
                 if (!Validator.TryValidateObject(model, validationContext, validationResults, true))
                 {
-                    throw new AggregateValidationException("Some properties don't valid");
+                    throw new AggregateValidationException("Some properties don't valid", validationResults);
                 }
 
                 var entity = _mapper.Map<Image>(model);
@@ -95,7 +95,7 @@ namespace InternetPhotoAlbum.BLL.Services
                 var validationContext = new System.ComponentModel.DataAnnotations.ValidationContext(model);
                 if (!Validator.TryValidateObject(model, validationContext, validationResults, true))
                 {
-                    throw new AggregateValidationException("Some properties don't valid");
+                    throw new AggregateValidationException("Some properties don't valid", validationResults);
                 }
 
                 var entity = _mapper.Map<Image>(model);

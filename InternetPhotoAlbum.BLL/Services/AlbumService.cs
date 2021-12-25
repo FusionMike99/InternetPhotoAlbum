@@ -26,11 +26,13 @@ namespace InternetPhotoAlbum.BLL.Services
         {
             if (model != null)
             {
+                model.PeriodStart = model.PeriodEnd = DateTime.Now;
+
                 var validationResults = new List<ValidationResult>();
                 var validationContext = new System.ComponentModel.DataAnnotations.ValidationContext(model);
                 if (!Validator.TryValidateObject(model, validationContext, validationResults, true))
                 {
-                    throw new AggregateValidationException("Some properties don't valid");
+                    throw new AggregateValidationException("Some properties don't valid", validationResults);
                 }
 
                 var entity = _mapper.Map<AlbumDTO, Album>(model);
@@ -82,7 +84,7 @@ namespace InternetPhotoAlbum.BLL.Services
         public IEnumerable<AlbumDTO> FindByUserId(string userId)
         {
             var enities = _unitOfWork.AlbumsRepository.Get(a => a.UserId == userId);
-            var models = _mapper.Map<IEnumerable<AlbumDTO>>(enities);
+            var models = _mapper.Map<IEnumerable<Album>, IEnumerable<AlbumDTO>>(enities);
             return models;
         }
 
@@ -94,7 +96,7 @@ namespace InternetPhotoAlbum.BLL.Services
                 var validationContext = new System.ComponentModel.DataAnnotations.ValidationContext(model);
                 if (!Validator.TryValidateObject(model, validationContext, validationResults, true))
                 {
-                    throw new AggregateValidationException("Some properties don't valid");
+                    throw new AggregateValidationException("Some properties don't valid", validationResults);
                 }
 
                 var entity = _mapper.Map<AlbumDTO, Album>(model);

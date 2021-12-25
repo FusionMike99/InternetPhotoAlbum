@@ -10,11 +10,13 @@ namespace InternetPhotoAlbum.BLL.Models
         public string Title { get; set; }
         [DataType(DataType.MultilineText), StringLength(200, MinimumLength = 3)]
         public string Description { get; set; }
-        [DataType(DataType.Date)]
+        [DataType(DataType.Date), Display(Name = "Period start")]
         public DateTime PeriodStart { get; set; }
-        [DataType(DataType.Date)]
+        [DataType(DataType.Date), Display(Name = "Period end")]
         public DateTime PeriodEnd { get; set; }
         [Required]
         public string UserId { get; set; }
+        [Display(Name = "User name")]
+        public string UserName { get; set; }
     }
 }
