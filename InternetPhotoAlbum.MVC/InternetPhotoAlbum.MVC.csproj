@@ -181,6 +181,7 @@
     <Compile Include="Infrastructure\ViewModelModelProfile.cs" />
     <Compile Include="Models\AlbumViewModel.cs" />
     <Compile Include="Models\CreateImageViewModel.cs" />
+    <Compile Include="Models\EditImageViewModel.cs" />
     <Compile Include="Models\IndexImageViewModel.cs" />
     <Compile Include="Models\RegisterModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -245,6 +246,9 @@
     <Content Include="Views\Albums\Delete.cshtml" />
     <Content Include="Views\Images\Index.cshtml" />
     <Content Include="Views\Images\Create.cshtml" />
+    <Content Include="Views\Images\Details.cshtml" />
+    <Content Include="Views\Images\Edit.cshtml" />
+    <Content Include="Views\Images\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

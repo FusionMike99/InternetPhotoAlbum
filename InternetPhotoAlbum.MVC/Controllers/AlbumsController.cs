@@ -111,20 +111,27 @@ namespace InternetPhotoAlbum.MVC.Controllers
 
         [HttpGet]
         [Authorize]
-        public async Task<ActionResult> Edit(int id)
+        public async Task<ActionResult> Edit(int? id)
         {
-            try
+            if (id != null)
             {
-                var album = await _albumService.FindByIdAsync(id);
-                return PartialView(album);
+                try
+                {
+                    var album = await _albumService.FindByIdAsync(id.Value);
+                    return PartialView(album);
+                }
+                catch (InvalidOperationException ex)
+                {
+                    return HttpNotFound(ex.Message);
+                }
+                catch (Exception ex)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest, ex.Message);
+                }
             }
-            catch (InvalidOperationException ex)
+            else
             {
-                return HttpNotFound(ex.Message);
-            }
-            catch (Exception ex)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest, ex.Message);
+                return HttpNotFound();
             }
         }
 
@@ -163,20 +170,27 @@ namespace InternetPhotoAlbum.MVC.Controllers
 
         [HttpGet]
         [Authorize]
-        public async Task<ActionResult> Delete(int id)
+        public async Task<ActionResult> Delete(int? id)
         {
-            try
+            if (id != null)
             {
-                var album = await _albumService.FindByIdAsync(id);
-                return PartialView(album);
+                try
+                {
+                    var album = await _albumService.FindByIdAsync(id.Value);
+                    return PartialView(album);
+                }
+                catch (InvalidOperationException ex)
+                {
+                    return HttpNotFound(ex.Message);
+                }
+                catch (Exception ex)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest, ex.Message);
+                }
             }
-            catch (InvalidOperationException ex)
+            else
             {
-                return HttpNotFound(ex.Message);
-            }
-            catch (Exception ex)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest, ex.Message);
+                return HttpNotFound();
             }
         }
 
