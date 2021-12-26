@@ -43,7 +43,7 @@
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Title)
+                @Html.ActionLink(item.Title, "Index", new { controller = "Images", area = "", albumId = item.Id })
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Description)
@@ -61,8 +61,7 @@
              {
                 <td>
                     @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "editDialLink" }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "deleteDialLink" }) |
-                    @Html.ActionLink("Details", "Index", new { controller = "Images", area ="", albumId = item.Id })
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "deleteDialLink" })
                 </td>
              }
         </tr>

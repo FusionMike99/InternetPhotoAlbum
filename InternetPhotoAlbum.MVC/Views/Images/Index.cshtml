@@ -14,16 +14,20 @@
     <div id="dialogContent" class="modal-dialog"></div>
 </div>
 
-@foreach (var item in Model)
-{
-    <div class="card" style="width:25vmin">
-        <img class="card-img-top" src="data:image/jpeg;base64,@item.File" alt="@item.Title" style="width:100%">
-        <div class="card-body">
-            <h4 class="card-title">@item.Title</h4>
-            <p class="card-text">@item.Description</p>
-        </div>
+<div class="container">
+    <div class="row row-cols-4">
+        @foreach (var item in Model)
+        {
+            <div class="card col my-2">
+                <img class="card-img-top col-12" src="data:image/jpeg;base64,@item.File" alt="@item.Title">
+                <div class="card-body">
+                    <h4 class="card-title text-center">@item.Title</h4>
+                    <p class="card-text">@item.Description</p>
+                </div>
+            </div>
+        }
     </div>
-}
+</div>
 
 @section scripts
 {
