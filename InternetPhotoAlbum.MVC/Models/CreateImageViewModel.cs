@@ -1,8 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Web;
+using System.Web.Mvc;
 
-namespace InternetPhotoAlbum.BLL.Models
+namespace InternetPhotoAlbum.MVC.Models
 {
-    public class ImageDTO
+    public class CreateImageViewModel
     {
         public int Id { get; set; }
         [Required, StringLength(20, MinimumLength = 3)]
@@ -10,8 +12,8 @@ namespace InternetPhotoAlbum.BLL.Models
         [StringLength(200, MinimumLength = 3)]
         public string Description { get; set; }
         [Required]
-        public byte[] File { get; set; }
-        [Required]
+        public HttpPostedFileBase File { get; set; }
+        [Required, HiddenInput]
         public int AlbumId { get; set; }
     }
 }

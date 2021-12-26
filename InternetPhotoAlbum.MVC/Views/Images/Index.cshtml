@@ -1,0 +1,45 @@
+﻿@model IEnumerable<InternetPhotoAlbum.MVC.Models.IndexImageViewModel>
+
+@{
+    ViewBag.Title = "Images";
+}
+
+<h2>Images</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create", new { area = "", albumId = (int)ViewData["AlbumId"] }, new { id = "createDialLink" })
+</p>
+
+<div id="modDialog" class="modal fade">
+    <div id="dialogContent" class="modal-dialog"></div>
+</div>
+
+@foreach (var item in Model)
+{
+    <div class="card" style="width:25vmin">
+        <img class="card-img-top" src="data:image/jpeg;base64,@item.File" alt="@item.Title" style="width:100%">
+        <div class="card-body">
+            <h4 class="card-title">@item.Title</h4>
+            <p class="card-text">@item.Description</p>
+        </div>
+    </div>
+}
+
+@section scripts
+{
+    <script type="text/javascript">
+
+        $(function () {
+            $.ajaxSetup({ cache: false });
+            $("#createDialLink").click(function (e) {
+
+                e.preventDefault();
+                $.get(this.href, function (data) {
+                    $('#dialogContent').html(data);
+                    $('#modDialog').modal('show');
+                });
+            });
+        });
+
+    </script>
+}

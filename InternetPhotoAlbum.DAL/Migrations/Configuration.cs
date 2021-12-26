@@ -1,8 +1,8 @@
-﻿using System;
-using InternetPhotoAlbum.DAL.Entities;
+﻿using InternetPhotoAlbum.DAL.Entities;
 using InternetPhotoAlbum.DAL.Identity;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity.Migrations;
 
@@ -58,9 +58,9 @@ namespace InternetPhotoAlbum.DAL.Migrations
 
             List<UserProfile> userProfiles = new List<UserProfile>
             {
-                new UserProfile { UserId = users[0].Id, Name = "Test", Surname = "Testov", 
+                new UserProfile { UserId = users[0].Id, Name = "Test", Surname = "Testov",
                     GenderId = 1, DateOfBirth = DateTime.Today.AddYears(-24) },
-                new UserProfile { UserId = users[1].Id, Name = "Admin", Surname = "Adminov", 
+                new UserProfile { UserId = users[1].Id, Name = "Admin", Surname = "Adminov",
                     GenderId = 1, DateOfBirth = DateTime.Today.AddYears(-18) }
             };
 

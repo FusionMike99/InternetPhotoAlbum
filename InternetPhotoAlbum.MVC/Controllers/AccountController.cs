@@ -91,7 +91,7 @@ namespace InternetPhotoAlbum.MVC.Controllers
         public ActionResult Register()
         {
             var genders = new SelectList(_genderService.FindAll(), "Id", "Name");
-            
+
             ViewData["Genders"] = genders;
             return View();
         }

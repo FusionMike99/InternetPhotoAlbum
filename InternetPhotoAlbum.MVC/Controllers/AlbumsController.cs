@@ -40,7 +40,7 @@ namespace InternetPhotoAlbum.MVC.Controllers
         [Route("{userId}")]
         public ActionResult UserAlbums(string userId)
         {
-            if(string.IsNullOrEmpty(userId))
+            if (string.IsNullOrEmpty(userId))
             {
                 userId = User.Identity.GetUserId();
             }
@@ -118,7 +118,7 @@ namespace InternetPhotoAlbum.MVC.Controllers
                 var album = await _albumService.FindByIdAsync(id);
                 return PartialView(album);
             }
-            catch(InvalidOperationException ex)
+            catch (InvalidOperationException ex)
             {
                 return HttpNotFound(ex.Message);
             }
