@@ -23,6 +23,7 @@ namespace InternetPhotoAlbum.MVC
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
+                      "~/lib/bootstrap-icons/font/bootstrap-icons.css",
                       "~/Content/site.css"));
         }
     }
