@@ -87,6 +87,14 @@ namespace InternetPhotoAlbum.BLL.Services
             return model;
         }
 
+        public IEnumerable<ImageDTO> FindByTitle(string title)
+        {
+            title = title.ToLower();
+            var enities = _unitOfWork.ImagesRepository.Get(a => a.Title.ToLower().Contains(title));
+            var models = _mapper.Map<IEnumerable<ImageDTO>>(enities);
+            return models;
+        }
+
         public async Task<bool> UpdateAsync(ImageDTO model)
         {
             if (model != null)

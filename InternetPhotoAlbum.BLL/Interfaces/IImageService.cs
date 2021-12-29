@@ -11,6 +11,7 @@ namespace InternetPhotoAlbum.BLL.Interfaces
         IEnumerable<ImageDTO> FindAll();
         Task<ImageDTO> FindByIdAsync(int id);
         IEnumerable<ImageDTO> FindByAlbumId(int albumId);
+        IEnumerable<ImageDTO> FindByTitle(string title);
         Task<bool> UpdateAsync(ImageDTO model);
         Task<bool> DeleteAsync(int id);
     }

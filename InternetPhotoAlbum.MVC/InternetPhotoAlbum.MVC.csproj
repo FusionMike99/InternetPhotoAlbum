@@ -249,6 +249,7 @@
     <Content Include="Views\Images\Details.cshtml" />
     <Content Include="Views\Images\Edit.cshtml" />
     <Content Include="Views\Images\Delete.cshtml" />
+    <Content Include="Views\Images\IndexByTitle.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

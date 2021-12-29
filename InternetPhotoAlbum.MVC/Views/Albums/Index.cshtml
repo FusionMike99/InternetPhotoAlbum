@@ -16,6 +16,16 @@
     </div>
 }
 
+@using (Html.BeginForm("SearchByTitle", "Images", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="input-group mb-3">
+        <input name="title" type="text" class="form-control" placeholder="Search">
+        <button class="btn btn-success" type="submit">Go</button>
+    </div>
+}
+
 <table class="table">
     <tr>
         <th>
@@ -58,12 +68,12 @@
                 @Html.ActionLink(item.UserName, "UserAlbums", new { userId = item.UserId })
             </td>
             @if ((bool)ViewData["IsHavePermission"])
-             {
+            {
                 <td>
                     @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "editDialLink" }) |
                     @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "deleteDialLink" })
                 </td>
-             }
+            }
         </tr>
     }
 

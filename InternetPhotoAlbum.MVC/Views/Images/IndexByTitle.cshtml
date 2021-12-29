@@ -1,0 +1,22 @@
+﻿@model IEnumerable<InternetPhotoAlbum.MVC.Models.IndexImageViewModel>
+
+@{
+    ViewBag.Title = "Images";
+}
+
+<h2>Images</h2>
+
+<div class="container">
+    <div class="row row-cols-4">
+        @foreach (var item in Model)
+        {
+            <div class="card col my-2">
+                <img class="card-img-top col-12" src="data:image/jpeg;base64,@item.File" alt="@item.Title">
+                <div class="card-body">
+                    <h4 class="card-title text-center">@Html.ActionLink(item.Title, "Details", new { id = item.Id })</h4>
+                    <p class="card-text">@item.Description</p>
+                </div>
+            </div>
+        }
+    </div>
+</div>

@@ -22,9 +22,6 @@ namespace InternetPhotoAlbum.MVC.Infrastructure
 
             CreateMap<ImageDTO, CreateImageViewModel>()
                 .ForMember(i => i.File, x => x.Ignore());
-
-            CreateMap<EditImageViewModel, CreateImageViewModel>()
-                .ForMember(i => i.File, x => x.Ignore());
         }
 
         private class ImageUploadFormatter : IValueConverter<HttpPostedFileBase, byte[]>

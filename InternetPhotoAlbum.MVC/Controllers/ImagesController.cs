@@ -69,6 +69,23 @@ namespace InternetPhotoAlbum.MVC.Controllers
             }
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult SearchByTitle([Required] string title)
+        {
+            if (!string.IsNullOrEmpty(title))
+            {
+                var image = _imageService.FindByTitle(title);
+                var model = _mapper.Map<IEnumerable<IndexImageViewModel>>(image);
+
+                return View("IndexByTitle", model);
+            }
+            else
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+        }
+
         [HttpGet]
         [Authorize]
         public ActionResult Create(int? albumId)
@@ -155,9 +172,7 @@ namespace InternetPhotoAlbum.MVC.Controllers
             {
                 try
                 {
-                    var createModel = _mapper.Map<CreateImageViewModel>(model);
-                    //createModel.File = file;
-                    var dtoModel = _mapper.Map<ImageDTO>(createModel);
+                    var dtoModel = _mapper.Map<ImageDTO>(model);
                     var result = await _imageService.CreateAsync(dtoModel);
                     return RedirectToAction("Index", new { albumId = model.AlbumId });
                 }
