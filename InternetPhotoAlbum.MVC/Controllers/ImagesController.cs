@@ -55,12 +55,16 @@ namespace InternetPhotoAlbum.MVC.Controllers
                     var image = await _imageService.FindByIdAsync(id.Value);
                     var model = _mapper.Map<IndexImageViewModel>(image);
 
-                    var rating = _ratingService.FindByIdAsync(id.Value, userId);
                     int likeId = 0;
+                    RatingDTO ratingDTO = null;
 
-                    if(rating != null)
+                    try
                     {
-                        likeId = rating.Id;
+                        ratingDTO = await _ratingService.FindByIdAsync(id.Value, userId);
+                        likeId = ratingDTO.LikeTypeId;
+                    }
+                    catch (InvalidOperationException ex) when (ex.Message == "Rating doesn't exist")
+                    {
                     }
 
                     ViewData["AlbumId"] = image.AlbumId;

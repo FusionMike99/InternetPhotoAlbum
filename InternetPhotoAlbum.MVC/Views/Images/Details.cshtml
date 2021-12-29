@@ -49,6 +49,17 @@
                     $('#modDialog').modal('show');
                 });
             });
+
+            if(@((int)ViewData["LikeId"]) > 0)
+            {
+                const likeId = "#likeId" + @ViewData["LikeId"];
+                $(likeId).prop('checked', true);
+            }
+
+            $("input[name=likeId]").click(function()
+            {
+                $(this).parents("form").submit();
+            });
         });
 
     </script>

@@ -29,7 +29,9 @@ namespace InternetPhotoAlbum.DAL.Repositories
 
         public async Task<Rating> GetByIdAsync(int imageId, string userId)
         {
-            var result = await context.Ratings.FindAsync(imageId, userId);
+            var result = await context.Ratings
+                .AsNoTracking()
+                .SingleOrDefaultAsync(r =>  r.ImageId == imageId && r.UserId == userId);
             return result;
         }
 
@@ -43,7 +45,7 @@ namespace InternetPhotoAlbum.DAL.Repositories
 
         public void Remove(Rating item)
         {
-            context.Ratings.Remove(item);
+            context.Entry(item).State = EntityState.Deleted;
         }
 
         public void Update(Rating item)

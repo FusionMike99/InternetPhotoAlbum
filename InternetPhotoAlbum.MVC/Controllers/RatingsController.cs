@@ -19,69 +19,6 @@ namespace InternetPhotoAlbum.MVC.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public async Task<ActionResult> Create(int? imageId, int? likeId)
-        {
-            if (!(imageId == null || likeId == null))
-            {
-                var userId = User.Identity.GetUserId();
-                var model = new RatingDTO
-                {
-                    ImageId = imageId.Value,
-                    UserId = userId,
-                    LikeTypeId = likeId.Value,
-                };
-                await _ratingService.CreateAsync(model);
-                return RedirectToAction("Details", "Images", new { id = imageId });
-            }
-            else
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        [Authorize]
-        public async Task<ActionResult> Edit(int? imageId, int? likeId)
-        {
-            if (!(imageId == null || likeId == null))
-            {
-                var userId = User.Identity.GetUserId();
-                var model = new RatingDTO
-                {
-                    ImageId = imageId.Value,
-                    UserId = userId,
-                    LikeTypeId = likeId.Value,
-                };
-                await _ratingService.UpdateAsync(model);
-                return RedirectToAction("Details", "Images", new { id = imageId });
-            }
-            else
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        [Authorize]
-        public async Task<ActionResult> Delete(int? imageId)
-        {
-            if (imageId != null)
-            {
-                var userId = User.Identity.GetUserId();
-                await _ratingService.DeleteAsync(imageId.Value, userId);
-                return RedirectToAction("Details", "Images", new { id = imageId });
-            }
-            else
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        [Authorize]
         public async Task<ActionResult> RateImage(int? imageId, int? likeId)
         {
             if (!(imageId == null || likeId == null))

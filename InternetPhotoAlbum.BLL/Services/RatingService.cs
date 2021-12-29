@@ -81,7 +81,7 @@ namespace InternetPhotoAlbum.BLL.Services
 
         public async Task RateImage(RatingDTO model)
         {
-            var rating = await FindByIdAsync(model.ImageId, model.UserId);
+            var rating = await _unitOfWork.RatingsRepository.GetByIdAsync(model.ImageId, model.UserId);
             if (rating == null)
             {
                 await CreateAsync(model);
