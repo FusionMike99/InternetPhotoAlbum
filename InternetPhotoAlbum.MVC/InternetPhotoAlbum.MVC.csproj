@@ -173,6 +173,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AlbumsController.cs" />
     <Compile Include="Controllers\ImagesController.cs" />
+    <Compile Include="Controllers\RatingsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -1779,6 +1780,7 @@
     <Content Include="Views\Images\Edit.cshtml" />
     <Content Include="Views\Images\Delete.cshtml" />
     <Content Include="Views\Images\IndexByTitle.cshtml" />
+    <Content Include="Views\Ratings\ImageRating.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

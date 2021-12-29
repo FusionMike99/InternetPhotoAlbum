@@ -12,5 +12,6 @@ namespace InternetPhotoAlbum.BLL.Interfaces
         Task<RatingDTO> FindByIdAsync(int imageId, string userId);
         Task<bool> UpdateAsync(RatingDTO model);
         Task<bool> DeleteAsync(int imageId, string userId);
+        Task RateImage(RatingDTO model);
     }
 }

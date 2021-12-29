@@ -18,6 +18,8 @@
 
         @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "editDialLink btn btn-warning" })
         @Html.ActionLink("Delete", "Delete", new { id = Model.Id }, new { @class = "deleteDialLink btn btn-danger" })
+
+        @Html.Partial("~/Views/Ratings/ImageRating.cshtml", (Model.Id, (int)ViewData["LikeId"]))
     </div>
 </div>
 <p>

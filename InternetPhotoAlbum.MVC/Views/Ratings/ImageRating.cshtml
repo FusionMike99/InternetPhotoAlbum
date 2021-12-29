@@ -1,0 +1,31 @@
+﻿@model (int imageId, int likeId)
+
+@using(Html.BeginForm("RateImage", "Ratings", FormMethod.Post))
+{
+    <input type="hidden" id="imageId" name="imageId" value="@Model.imageId"/>
+    <div class="btn-group">
+        <input type="radio" class="btn-check" name="likeId" id="likeId1" autocomplete="off" value="1" />
+        <label class="btn btn-outline-primary" for="likeId1"><span class="bi bi-hand-thumbs-up"></span> Like</label>
+
+        <input type="radio" class="btn-check" name="likeId" id="likeId2" autocomplete="off" value="2" />
+        <label class="btn btn-outline-primary" for="likeId2"><span class="bi bi-hand-thumbs-down"></span> Unlike</label>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    $(document).ready(function()
+    {
+        if(@Model.likeId > 0)
+        {
+            const likeId = "likeId" + str(@Model.likeId);
+            $(likeId).prop('checked', true);
+        }
+        
+        $("input[name="likeId"]").change(function()
+        {
+            $(this).parents("form").submit();
+        }); 
+    });
+}

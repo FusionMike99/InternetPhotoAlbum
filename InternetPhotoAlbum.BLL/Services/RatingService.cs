@@ -79,6 +79,23 @@ namespace InternetPhotoAlbum.BLL.Services
             return model;
         }
 
+        public async Task RateImage(RatingDTO model)
+        {
+            var rating = await FindByIdAsync(model.ImageId, model.UserId);
+            if (rating == null)
+            {
+                await CreateAsync(model);
+            }
+            else if (rating.LikeTypeId != model.LikeTypeId)
+            {
+                await UpdateAsync(model);
+            }
+            else if(rating.LikeTypeId == model.LikeTypeId)
+            {
+                await DeleteAsync(model.ImageId, model.UserId);
+            }
+        }
+
         public async Task<bool> UpdateAsync(RatingDTO model)
         {
             if (model != null)

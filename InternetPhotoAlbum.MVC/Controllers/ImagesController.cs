@@ -3,6 +3,7 @@ using InternetPhotoAlbum.BLL.Infrastructure;
 using InternetPhotoAlbum.BLL.Interfaces;
 using InternetPhotoAlbum.BLL.Models;
 using InternetPhotoAlbum.MVC.Models;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -16,11 +17,13 @@ namespace InternetPhotoAlbum.MVC.Controllers
     public class ImagesController : Controller
     {
         private readonly IImageService _imageService;
+        private readonly IRatingService _ratingService;
         private readonly IMapper _mapper;
 
-        public ImagesController(IImageService imageService, IMapper mapper)
+        public ImagesController(IImageService imageService, IRatingService ratingService, IMapper mapper)
         {
             _imageService = imageService;
+            _ratingService = ratingService;
             _mapper = mapper;
         }
 
@@ -47,10 +50,21 @@ namespace InternetPhotoAlbum.MVC.Controllers
             {
                 try
                 {
+                    var userId = User.Identity.GetUserId();
+
                     var image = await _imageService.FindByIdAsync(id.Value);
                     var model = _mapper.Map<IndexImageViewModel>(image);
 
+                    var rating = _ratingService.FindByIdAsync(id.Value, userId);
+                    int likeId = 0;
+
+                    if(rating != null)
+                    {
+                        likeId = rating.Id;
+                    }
+
                     ViewData["AlbumId"] = image.AlbumId;
+                    ViewData["LikeId"] = likeId;
 
                     return View(model);
                 }
