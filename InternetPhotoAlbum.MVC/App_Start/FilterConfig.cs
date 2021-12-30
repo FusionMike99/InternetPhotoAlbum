@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using InternetPhotoAlbum.MVC.Infrastructure;
+using System.Web.Mvc;
 
 namespace InternetPhotoAlbum.MVC
 {
@@ -7,6 +8,7 @@ namespace InternetPhotoAlbum.MVC
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
             filters.Add(new HandleErrorAttribute());
+            filters.Add(new LoggerFilter());
         }
     }
 }
