@@ -21,7 +21,7 @@ namespace InternetPhotoAlbum.DAL.Migrations
             var gender2 = new Gender { Id = 2, Name = "Female" };
 
             var likeType1 = new LikeType { Id = 1, Name = "Like" };
-            var likeType2 = new LikeType { Id = 2, Name = "Don't like" };
+            var likeType2 = new LikeType { Id = 2, Name = "Unlike" };
 
             context.Genders.AddOrUpdate(x => x.Id, gender1, gender2);
             context.LikeTypes.AddOrUpdate(x => x.Id, likeType1, likeType2);
@@ -34,10 +34,9 @@ namespace InternetPhotoAlbum.DAL.Migrations
             List<string> roles = new List<string> { "user", "admin" };
             foreach (string roleName in roles)
             {
-                var role = roleManager.FindByName(roleName);
-                if (role == null)
+                if (roleManager.FindByName(roleName) == null)
                 {
-                    role = new ApplicationRole { Name = roleName };
+                    var role = new ApplicationRole { Name = roleName };
                     roleManager.Create(role);
                 }
             }
@@ -46,14 +45,19 @@ namespace InternetPhotoAlbum.DAL.Migrations
 
             List<ApplicationUser> users = new List<ApplicationUser>
             {
-                new ApplicationUser { UserName = "testUser", Email = "testUser@application.com" },
-                new ApplicationUser { UserName = "admin", Email = "admin@application.com" }
+                new ApplicationUser { Id = "75b8e424-b022-47f4-9c40-f827766ec610",
+                    UserName = "testUser", Email = "testUser@application.com" },
+                new ApplicationUser { Id = "eebbebf7-90d1-4329-9feb-71f537bae1f0",
+                    UserName = "admin", Email = "admin@application.com" }
             };
 
             for (int i = 0; i < users.Count; i++)
             {
-                userManager.Create(users[i], password);
-                userManager.AddToRole(users[i].Id, roles[i]);
+                if (userManager.FindByName(users[i].UserName) == null)
+                {
+                    userManager.Create(users[i], password);
+                    userManager.AddToRole(users[i].Id, roles[i]);
+                }
             }
 
             List<UserProfile> userProfiles = new List<UserProfile>
@@ -64,7 +68,10 @@ namespace InternetPhotoAlbum.DAL.Migrations
                     GenderId = 1, DateOfBirth = DateTime.Today.AddYears(-18) }
             };
 
-            context.UserProfiles.AddRange(userProfiles);
+            foreach (var userProfile in userProfiles)
+            {
+                context.UserProfiles.AddOrUpdate(u => u.UserId, userProfile);
+            }
 
             context.SaveChanges();
         }

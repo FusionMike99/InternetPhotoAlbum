@@ -11,15 +11,18 @@ namespace InternetPhotoAlbum.DAL.Models_Configurations
 
             HasRequired(r => r.Image)
                 .WithMany(i => i.Ratings)
-                .HasForeignKey(r => r.ImageId);
+                .HasForeignKey(r => r.ImageId)
+                .WillCascadeOnDelete(false);
 
             HasRequired(r => r.User)
                 .WithMany(u => u.Ratings)
-                .HasForeignKey(r => r.UserId);
+                .HasForeignKey(r => r.UserId)
+                .WillCascadeOnDelete(false);
 
             HasRequired(r => r.LikeType)
                 .WithMany(lt => lt.Ratings)
-                .HasForeignKey(r => r.LikeTypeId);
+                .HasForeignKey(r => r.LikeTypeId)
+                .WillCascadeOnDelete(false);
         }
     }
 }

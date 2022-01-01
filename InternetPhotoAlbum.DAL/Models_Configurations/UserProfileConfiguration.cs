@@ -26,7 +26,8 @@ namespace InternetPhotoAlbum.DAL.Models_Configurations
 
             HasRequired(x => x.Gender)
                 .WithMany(x => x.Users)
-                .HasForeignKey(x => x.GenderId);
+                .HasForeignKey(x => x.GenderId)
+                .WillCascadeOnDelete(false);
         }
     }
 }

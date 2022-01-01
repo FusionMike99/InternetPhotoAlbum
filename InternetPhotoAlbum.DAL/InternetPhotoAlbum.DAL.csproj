@@ -91,6 +91,10 @@
     <Compile Include="Migrations\202112201601178_AddOtherConfigurations.designer.cs">
       <DependentUpon>202112201601178_AddOtherConfigurations.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202201011919419_CascadeOnDelete.cs" />
+    <Compile Include="Migrations\202201011919419_CascadeOnDelete.designer.cs">
+      <DependentUpon>202201011919419_CascadeOnDelete.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models_Configurations\AlbumConfiguration.cs" />
     <Compile Include="Models_Configurations\GenderConfiguration.cs" />
@@ -119,6 +123,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202112201601178_AddOtherConfigurations.resx">
       <DependentUpon>202112201601178_AddOtherConfigurations.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202201011919419_CascadeOnDelete.resx">
+      <DependentUpon>202201011919419_CascadeOnDelete.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

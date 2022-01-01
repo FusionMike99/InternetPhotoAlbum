@@ -24,8 +24,6 @@ namespace InternetPhotoAlbum.DAL
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
-
             modelBuilder.Configurations.Add(new AlbumConfiguration());
             modelBuilder.Configurations.Add(new GenderConfiguration());
             modelBuilder.Configurations.Add(new ImageConfiguration());
