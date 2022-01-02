@@ -34,9 +34,19 @@
                     else
                     {
                         <li class="nav-item">
+                            @Html.ActionLink("My Profile", "Details", "Account", new { area = "", id = User.Identity.GetUserId() }
+                                , new { @class = "nav-link" })
+                        </li>
+                        <li class="nav-item">
                             @Html.ActionLink("My Albums", "UserAlbums", "Albums", new { area = "", userId = User.Identity.GetUserId() }
                                 , new { @class = "nav-link" })
                         </li>
+                        if(User.IsInRole("admin"))
+                        {
+                            <li class="nav-item">
+                                @Html.ActionLink("User Management", "Index", "Account", new { area = "" }, new { @class = "nav-link" })
+                            </li>
+                        }
                         <li class="nav-item">
                             @Html.ActionLink("Log out", "Logout", "Account", new { area = "" }, new { @class = "nav-link" })
                         </li>

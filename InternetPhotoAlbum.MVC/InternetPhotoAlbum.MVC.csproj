@@ -192,9 +192,11 @@
     <Compile Include="Infrastructure\LoggerFilter.cs" />
     <Compile Include="Infrastructure\ViewModelModelProfile.cs" />
     <Compile Include="Models\AlbumViewModel.cs" />
+    <Compile Include="Models\ChangePasswordViewModel.cs" />
     <Compile Include="Models\CreateImageViewModel.cs" />
     <Compile Include="Models\EditImageViewModel.cs" />
     <Compile Include="Models\IndexImageViewModel.cs" />
+    <Compile Include="Models\IndexUserViewModel.cs" />
     <Compile Include="Models\RegisterModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -1798,6 +1800,10 @@
     <Content Include="Views\Images\Delete.cshtml" />
     <Content Include="Views\Images\IndexByTitle.cshtml" />
     <Content Include="Views\Ratings\ImageRating.cshtml" />
+    <Content Include="Views\Account\Index.cshtml" />
+    <Content Include="Views\Account\Details.cshtml" />
+    <Content Include="Views\Account\Edit.cshtml" />
+    <Content Include="Views\Account\ChangePassword.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

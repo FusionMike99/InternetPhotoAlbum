@@ -38,5 +38,14 @@ namespace InternetPhotoAlbum.MVC.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
         }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                _ratingService.Dispose();
+            }
+            base.Dispose(disposing);
+        }
     }
 }

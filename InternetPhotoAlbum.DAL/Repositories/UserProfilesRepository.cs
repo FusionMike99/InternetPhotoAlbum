@@ -37,7 +37,9 @@ namespace InternetPhotoAlbum.DAL.Repositories
 
         public async Task<UserProfile> GetByIdAsync(string id)
         {
-            var result = await context.UserProfiles.FindAsync(id);
+            var result = await context.UserProfiles
+                .Include(up => up.Gender)
+                .SingleOrDefaultAsync(up => up.UserId == id);
             return result;
         }
 

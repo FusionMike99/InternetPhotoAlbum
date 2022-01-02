@@ -22,6 +22,9 @@ namespace InternetPhotoAlbum.MVC.Infrastructure
 
             CreateMap<ImageDTO, CreateImageViewModel>()
                 .ForMember(i => i.File, x => x.Ignore());
+
+            CreateMap<UserDTO, IndexUserViewModel>()
+                .ForMember(g => g.Gender, x => x.MapFrom(g => g.GenderName));
         }
 
         private class ImageUploadFormatter : IValueConverter<HttpPostedFileBase, byte[]>

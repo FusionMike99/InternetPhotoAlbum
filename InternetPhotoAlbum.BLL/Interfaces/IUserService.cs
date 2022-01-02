@@ -13,6 +13,7 @@ namespace InternetPhotoAlbum.BLL.Interfaces
         IEnumerable<UserDTO> FindAll();
         Task<UserDTO> FindByIdAsync(string id);
         Task<bool> UpdateAsync(EditUserProfileModel model);
+        Task<bool> ChangePassword(string userId, string oldPassword, string newPassword);
         Task<bool> DeleteAsync(string id);
     }
 }

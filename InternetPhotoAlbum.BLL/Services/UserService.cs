@@ -40,6 +40,14 @@ namespace InternetPhotoAlbum.BLL.Services
             }
         }
 
+        public async Task<bool> ChangePassword(string userId, string oldPassword, string newPassword)
+        {
+            var result = await _unitOfWork.UserManager
+                .ChangePasswordAsync(userId, oldPassword, newPassword);
+
+            return result.Succeeded;
+        }
+
         public async Task<UserDTO> CreateAsync(UserDTO model)
         {
             var user = await _unitOfWork.UserManager.FindByNameAsync(model.Login);
@@ -104,8 +112,8 @@ namespace InternetPhotoAlbum.BLL.Services
 
         public IEnumerable<UserDTO> FindAll()
         {
-            var users = _unitOfWork.UserManager.Users;
-            var result = _mapper.Map<IQueryable<ApplicationUser>, IEnumerable<UserDTO>>(users);
+            var users = _unitOfWork.UserManager.Users.ToList();
+            var result = _mapper.Map<IEnumerable<UserDTO>>(users);
             return result;
         }
 

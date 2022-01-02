@@ -9,7 +9,6 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Net;
 using System.Threading.Tasks;
-using System.Web;
 using System.Web.Mvc;
 
 namespace InternetPhotoAlbum.MVC.Controllers
@@ -191,7 +190,7 @@ namespace InternetPhotoAlbum.MVC.Controllers
                 try
                 {
                     var dtoModel = _mapper.Map<ImageDTO>(model);
-                    var result = await _imageService.CreateAsync(dtoModel);
+                    var result = await _imageService.UpdateAsync(dtoModel);
                     return RedirectToAction("Index", new { albumId = model.AlbumId });
                 }
                 catch (AggregateValidationException ex)
@@ -247,7 +246,17 @@ namespace InternetPhotoAlbum.MVC.Controllers
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
             await _imageService.DeleteAsync(id);
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Albums");
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                _imageService.Dispose();
+                _ratingService.Dispose();
+            }
+            base.Dispose(disposing);
         }
     }
 }

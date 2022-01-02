@@ -1,17 +1,15 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace InternetPhotoAlbum.BLL.Models
+namespace InternetPhotoAlbum.MVC.Models
 {
-    public class UserDTO
+    public class IndexUserViewModel
     {
         public string Id { get; set; }
         [Required]
         public string Login { get; set; }
         [Required]
         public string Email { get; set; }
-        [Required]
-        public string Password { get; set; }
         [Required, StringLength(20, MinimumLength = 3)]
         public string Name { get; set; }
         [Required, StringLength(20, MinimumLength = 3)]
@@ -19,9 +17,6 @@ namespace InternetPhotoAlbum.BLL.Models
         [DataType(DataType.Date)]
         public DateTime? DateOfBirth { get; set; }
         [Required]
-        public int GenderId { get; set; }
-        public string GenderName { get; set; }
-        [Required]
-        public string Role { get; set; }
+        public string Gender { get; set; }
     }
 }
