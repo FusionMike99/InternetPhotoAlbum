@@ -303,7 +303,9 @@ namespace InternetPhotoAlbum.MVC.Controllers
                 try
                 {
                     var user = await UserService.FindByIdAsync(id);
-                    return PartialView(user);
+                    var model = _mapper.Map<IndexUserViewModel>(user);
+
+                    return PartialView(model);
                 }
                 catch (InvalidOperationException ex)
                 {

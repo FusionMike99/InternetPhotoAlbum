@@ -10,8 +10,10 @@ namespace InternetPhotoAlbum.BLL.Infrastructure
         {
             CreateMap<UserProfile, UserDTO>()
                 .ForMember(u => u.Id, x => x.MapFrom(up => up.UserId))
-                .ForMember(u => u.GenderName, x => x.MapFrom(up => up.Gender.Name))
-                .ReverseMap();
+                .ForMember(u => u.GenderName, x => x.MapFrom(up => up.Gender.Name));
+
+            CreateMap<UserDTO, UserProfile>()
+                .ForMember(u => u.UserId, x => x.MapFrom(up => up.Id));
 
             CreateMap<ApplicationUser, UserDTO>()
                 .ForMember(u => u.Name, x => x.MapFrom(up => up.UserProfile.Name))

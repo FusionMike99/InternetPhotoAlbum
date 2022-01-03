@@ -35,7 +35,7 @@
                   AS 
                   BEGIN
                      SET NOCOUNT ON;
-                     DELETE FROM dbo.[Rating] WHERE ImageId IN (SELECT Id FROM DELETED)
+                     DELETE FROM dbo.[Ratings] WHERE ImageId IN (SELECT Id FROM DELETED)
                      DELETE FROM dbo.[Images] WHERE Id IN (SELECT Id FROM DELETED)
                   END");
         }

@@ -89,15 +89,17 @@ namespace InternetPhotoAlbum.BLL.Services
             var user = await _unitOfWork.UserManager.FindByIdAsync(id);
             if (user != null)
             {
-                var userProfile = await _unitOfWork.UserProfilesRepository.GetByIdAsync(id);
-                _unitOfWork.UserProfilesRepository.Remove(userProfile);
-                var result = await _unitOfWork.SaveAsync() != 0;
                 var identityResult = await _unitOfWork.UserManager.DeleteAsync(user);
-                if (!identityResult.Succeeded)
+                if (identityResult.Errors.Count() > 0)
                 {
-                    result = false;
+                    var validationResults = new List<ValidationResult>();
+                    foreach (var error in identityResult.Errors)
+                    {
+                        validationResults.Add(new ValidationResult(error));
+                    }
+                    throw new AggregateValidationException("Error with deleting user", validationResults);
                 }
-                return result;
+                return identityResult.Succeeded;
             }
             else
             {
