@@ -30,7 +30,9 @@ namespace InternetPhotoAlbum.DAL.Repositories
 
         public async Task<Image> GetByIdAsync(int id)
         {
-            var result = await context.Images.FindAsync(id);
+            var result = await context.Images
+                .Where(i => !i.IsLocked)
+                .SingleOrDefaultAsync(i => i.Id == id);
             return result;
         }
 
@@ -38,6 +40,7 @@ namespace InternetPhotoAlbum.DAL.Repositories
         {
             var result = context.Images
                 .AsNoTracking()
+                .Where(i => !i.IsLocked)
                 .AsEnumerable();
             return result;
         }
@@ -56,6 +59,7 @@ namespace InternetPhotoAlbum.DAL.Repositories
         {
             var result = context.Images
                 .AsNoTracking()
+                .Where(i => !i.IsLocked)
                 .Where(predicate)
                 .AsEnumerable();
             return result;

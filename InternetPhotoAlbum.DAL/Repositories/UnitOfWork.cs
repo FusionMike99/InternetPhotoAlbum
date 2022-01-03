@@ -18,6 +18,7 @@ namespace InternetPhotoAlbum.DAL.Repositories
         private ImagesRepository _imagesRepository;
         private LikeTypesRepository _likeTypesRepository;
         private RatingsRepository _ratingsRepository;
+        private ProceduresRepository _proceduresRepository;
         private UserProfilesRepository _userProfilesRepository;
 
         public UnitOfWork(string connectionString)
@@ -105,6 +106,16 @@ namespace InternetPhotoAlbum.DAL.Repositories
             }
         }
 
+        public IProceduresRepository ProceduresRepository
+        {
+            get
+            {
+                if (_proceduresRepository == null)
+                    _proceduresRepository = new ProceduresRepository(context);
+                return _proceduresRepository;
+            }
+        }
+
         public void Dispose()
         {
             Dispose(true);
@@ -126,6 +137,7 @@ namespace InternetPhotoAlbum.DAL.Repositories
                     _imagesRepository?.Dispose();
                     _likeTypesRepository?.Dispose();
                     _ratingsRepository?.Dispose();
+                    _proceduresRepository?.Dispose();
                     _userProfilesRepository?.Dispose();
                 }
                 disposed = true;

@@ -30,7 +30,9 @@ namespace InternetPhotoAlbum.DAL.Repositories
 
         public async Task<Album> GetByIdAsync(int id)
         {
-            var result = await context.Albums.FindAsync(id);
+            var result = await context.Albums
+                .Where(i => !i.IsLocked)
+                .SingleOrDefaultAsync(i => i.Id == id);
             return result;
         }
 
@@ -38,6 +40,7 @@ namespace InternetPhotoAlbum.DAL.Repositories
         {
             var result = context.Albums
                 .AsNoTracking()
+                .Where(i => !i.IsLocked)
                 .Include(a => a.User)
                 .ToList();
             return result;
@@ -57,6 +60,7 @@ namespace InternetPhotoAlbum.DAL.Repositories
         {
             var result = context.Albums
                 .AsNoTracking()
+                .Where(i => !i.IsLocked)
                 .Where(predicate)
                 .ToList();
             return result;

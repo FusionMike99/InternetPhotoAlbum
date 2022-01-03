@@ -32,6 +32,8 @@
             </td>
             <td>
                 @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "deleteDialLink btn btn-danger" })
+                @Html.ActionLink((item.IsLocked ? "Unlock" : "Lock") + " user", "LockUser",
+                    new { id = item.Id }, new { @class = "lockUserDialLink btn btn-warning" })
             </td>
         </tr>
     }
@@ -45,6 +47,15 @@
                 $.ajaxSetup({ cache: false });
 
                 $(".deleteDialLink").click(function (e) {
+
+                    e.preventDefault();
+                    $.get(this.href, function (data) {
+                        $('#dialogContent').html(data);
+                        $('#modDialog').modal('show');
+                    });
+                });
+
+                $(".lockUserDialLink").click(function (e) {
 
                     e.preventDefault();
                     $.get(this.href, function (data) {

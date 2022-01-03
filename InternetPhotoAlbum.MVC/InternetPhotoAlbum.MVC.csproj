@@ -1805,6 +1805,7 @@
     <Content Include="Views\Account\Edit.cshtml" />
     <Content Include="Views\Account\ChangePassword.cshtml" />
     <Content Include="Views\Account\Delete.cshtml" />
+    <Content Include="Views\Account\LockUser.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

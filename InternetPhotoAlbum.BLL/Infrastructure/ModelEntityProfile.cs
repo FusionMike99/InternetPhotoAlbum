@@ -20,6 +20,7 @@ namespace InternetPhotoAlbum.BLL.Infrastructure
                 .ForMember(u => u.Login, x => x.MapFrom(up => up.UserName))
                 .ForMember(u => u.Surname, x => x.MapFrom(up => up.UserProfile.Surname))
                 .ForMember(u => u.DateOfBirth, x => x.MapFrom(up => up.UserProfile.DateOfBirth))
+                .ForMember(u => u.IsLocked, x => x.MapFrom(up => up.LockoutEnabled))
                 .ForMember(u => u.GenderId, x => x.MapFrom(up => up.UserProfile.GenderId))
                 .ForMember(u => u.GenderName, x => x.MapFrom(up => up.UserProfile.Gender.Name));
 

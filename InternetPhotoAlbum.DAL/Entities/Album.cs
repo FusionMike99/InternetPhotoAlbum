@@ -10,6 +10,7 @@ namespace InternetPhotoAlbum.DAL.Entities
         public string Description { get; set; }
         public DateTime PeriodStart { get; set; }
         public DateTime PeriodEnd { get; set; }
+        public bool IsLocked { get; set; }
         public string UserId { get; set; }
 
         public virtual ApplicationUser User { get; set; }

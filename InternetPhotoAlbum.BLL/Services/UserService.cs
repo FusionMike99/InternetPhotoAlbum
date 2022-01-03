@@ -135,6 +135,22 @@ namespace InternetPhotoAlbum.BLL.Services
             }
         }
 
+        public async Task LockUser(string userId, bool isLocked)
+        {
+            var identityResult = await _unitOfWork.UserManager.SetLockoutEnabledAsync(userId, isLocked);
+            if (identityResult.Errors.Count() > 0)
+            {
+                var validationResults = new List<ValidationResult>();
+                foreach (var error in identityResult.Errors)
+                {
+                    validationResults.Add(new ValidationResult(error));
+                }
+                throw new AggregateValidationException("Error with locking user", validationResults);
+            }
+            _unitOfWork.ProceduresRepository.LockUser(userId, isLocked);
+            await _unitOfWork.SaveAsync();
+        }
+
         public async Task<bool> UpdateAsync(EditUserProfileModel model)
         {
             if (model != null)

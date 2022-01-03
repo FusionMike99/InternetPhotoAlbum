@@ -16,6 +16,7 @@ namespace InternetPhotoAlbum.MVC.Models
         public string Surname { get; set; }
         [DataType(DataType.Date)]
         public DateTime? DateOfBirth { get; set; }
+        public bool IsLocked { get; set; }
         [Required]
         public string Gender { get; set; }
     }

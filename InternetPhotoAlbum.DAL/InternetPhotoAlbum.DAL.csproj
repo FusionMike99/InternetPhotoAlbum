@@ -71,6 +71,7 @@
     <Compile Include="Interfaces\IGendersRepository.cs" />
     <Compile Include="Interfaces\IImagesRepository.cs" />
     <Compile Include="Interfaces\ILikeTypesRepository.cs" />
+    <Compile Include="Interfaces\IProceduresRepository.cs" />
     <Compile Include="Interfaces\IRatingsRepository.cs" />
     <Compile Include="Interfaces\IUnitOfWork.cs" />
     <Compile Include="ApplicationContext.cs" />
@@ -99,6 +100,14 @@
     <Compile Include="Migrations\202201031051393_TriggersDelete.designer.cs">
       <DependentUpon>202201031051393_TriggersDelete.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202201031614540_AddIsLockedAttributes.cs" />
+    <Compile Include="Migrations\202201031614540_AddIsLockedAttributes.designer.cs">
+      <DependentUpon>202201031614540_AddIsLockedAttributes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202201031629494_AddLockProcedure.cs" />
+    <Compile Include="Migrations\202201031629494_AddLockProcedure.designer.cs">
+      <DependentUpon>202201031629494_AddLockProcedure.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models_Configurations\AlbumConfiguration.cs" />
     <Compile Include="Models_Configurations\GenderConfiguration.cs" />
@@ -111,6 +120,7 @@
     <Compile Include="Repositories\GendersRepository.cs" />
     <Compile Include="Repositories\ImagesRepository.cs" />
     <Compile Include="Repositories\LikeTypesRepository.cs" />
+    <Compile Include="Repositories\ProceduresRepository.cs" />
     <Compile Include="Repositories\RatingsRepository.cs" />
     <Compile Include="Repositories\UnitOfWork.cs" />
     <Compile Include="Repositories\UserProfilesRepository.cs" />
@@ -133,6 +143,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202201031051393_TriggersDelete.resx">
       <DependentUpon>202201031051393_TriggersDelete.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202201031614540_AddIsLockedAttributes.resx">
+      <DependentUpon>202201031614540_AddIsLockedAttributes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202201031629494_AddLockProcedure.resx">
+      <DependentUpon>202201031629494_AddLockProcedure.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

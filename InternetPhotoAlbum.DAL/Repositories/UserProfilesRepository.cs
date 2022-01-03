@@ -31,6 +31,7 @@ namespace InternetPhotoAlbum.DAL.Repositories
         {
             var result = context.UserProfiles
                 .AsNoTracking()
+                .Where(i => !i.IsLocked)
                 .AsEnumerable();
             return result;
         }
@@ -38,6 +39,7 @@ namespace InternetPhotoAlbum.DAL.Repositories
         public async Task<UserProfile> GetByIdAsync(string id)
         {
             var result = await context.UserProfiles
+                .Where(i => !i.IsLocked)
                 .Include(up => up.Gender)
                 .SingleOrDefaultAsync(up => up.UserId == id);
             return result;

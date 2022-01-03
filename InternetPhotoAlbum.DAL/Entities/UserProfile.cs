@@ -8,6 +8,7 @@ namespace InternetPhotoAlbum.DAL.Entities
         public string Name { get; set; }
         public string Surname { get; set; }
         public DateTime? DateOfBirth { get; set; }
+        public bool IsLocked { get; set; }
         public int GenderId { get; set; }
 
         public virtual Gender Gender { get; set; }

@@ -295,7 +295,7 @@ namespace InternetPhotoAlbum.MVC.Controllers
         }
 
         [HttpGet]
-        [Authorize]
+        [Authorize(Roles = "admin")]
         public async Task<ActionResult> Delete(string id)
         {
             if (id != null)
@@ -323,10 +323,48 @@ namespace InternetPhotoAlbum.MVC.Controllers
         }
 
         [HttpPost, ActionName("Delete")]
+        [Authorize(Roles = "admin")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(string id)
         {
             await UserService.DeleteAsync(id);
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "admin")]
+        public async Task<ActionResult> LockUser(string id)
+        {
+            if (id != null)
+            {
+                try
+                {
+                    var user = await UserService.FindByIdAsync(id);
+                    var model = _mapper.Map<IndexUserViewModel>(user);
+
+                    return PartialView(model);
+                }
+                catch (InvalidOperationException ex)
+                {
+                    return HttpNotFound(ex.Message);
+                }
+                catch (Exception ex)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest, ex.Message);
+                }
+            }
+            else
+            {
+                return HttpNotFound();
+            }
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "admin")]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> LockUser(string id, bool isLocked)
+        {
+            await UserService.LockUser(id, !isLocked);
             return RedirectToAction("Index");
         }
 

@@ -21,6 +21,7 @@ namespace InternetPhotoAlbum.BLL.Models
         [Required]
         public int GenderId { get; set; }
         public string GenderName { get; set; }
+        public bool IsLocked { get; set; }
         [Required]
         public string Role { get; set; }
     }

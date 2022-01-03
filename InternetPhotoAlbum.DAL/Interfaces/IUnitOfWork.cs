@@ -13,6 +13,7 @@ namespace InternetPhotoAlbum.DAL.Interfaces
         IImagesRepository ImagesRepository { get; }
         ILikeTypesRepository LikeTypesRepository { get; }
         IRatingsRepository RatingsRepository { get; }
+        IProceduresRepository ProceduresRepository { get; }
         IUserProfilesRepository UserProfilesRepository { get; }
         Task<int> SaveAsync();
     }
