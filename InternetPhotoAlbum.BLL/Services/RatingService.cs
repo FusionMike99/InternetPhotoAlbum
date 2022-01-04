@@ -7,6 +7,7 @@ using InternetPhotoAlbum.DAL.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace InternetPhotoAlbum.BLL.Services
@@ -20,6 +21,17 @@ namespace InternetPhotoAlbum.BLL.Services
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
+        }
+
+        public int CalculateFinalRating(int imageId)
+        {
+            var ratings = _unitOfWork.RatingsRepository.Get(r => r.ImageId == imageId);
+            var result = ratings
+                .GroupBy(g => g.ImageId)
+                .Select(g => g.Count(r => r.LikeTypeId == 1) - g.Count(r => r.LikeTypeId == 2))
+                .SingleOrDefault();
+
+            return result;
         }
 
         public async Task<RatingDTO> CreateAsync(RatingDTO model)

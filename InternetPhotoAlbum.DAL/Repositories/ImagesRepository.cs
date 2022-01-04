@@ -41,7 +41,7 @@ namespace InternetPhotoAlbum.DAL.Repositories
             var result = context.Images
                 .AsNoTracking()
                 .Where(i => !i.IsLocked)
-                .AsEnumerable();
+                .ToList();
             return result;
         }
 
@@ -61,7 +61,7 @@ namespace InternetPhotoAlbum.DAL.Repositories
                 .AsNoTracking()
                 .Where(i => !i.IsLocked)
                 .Where(predicate)
-                .AsEnumerable();
+                .ToList();
             return result;
         }
     }

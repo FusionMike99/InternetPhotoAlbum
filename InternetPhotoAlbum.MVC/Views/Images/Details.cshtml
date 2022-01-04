@@ -13,7 +13,10 @@
 <div class="card col-4 my-2 mx-auto">
     <img class="card-img-top col-12" src="data:image/jpeg;base64,@Model.File" alt="@Model.Title">
     <div class="card-body">
-        <h4 class="card-title text-center">@Model.Title</h4>
+        <h4 class="card-title text-center">
+            @Model.Title 
+            <span class="badge rounded-pill bg-info"><span class="bi bi-heart-fill"></span> @Model.FinalRating</span>
+        </h4>
         <p class="card-text">@Model.Description</p>
 
         @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "editDialLink btn btn-warning" })

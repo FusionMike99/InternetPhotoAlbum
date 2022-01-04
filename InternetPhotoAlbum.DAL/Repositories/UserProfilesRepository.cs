@@ -32,7 +32,7 @@ namespace InternetPhotoAlbum.DAL.Repositories
             var result = context.UserProfiles
                 .AsNoTracking()
                 .Where(i => !i.IsLocked)
-                .AsEnumerable();
+                .ToList();
             return result;
         }
 

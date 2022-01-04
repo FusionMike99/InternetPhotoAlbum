@@ -31,7 +31,7 @@ namespace InternetPhotoAlbum.DAL.Repositories
         {
             var result = context.Genders
                 .AsNoTracking()
-                .AsEnumerable();
+                .ToList();
             return result;
         }
 

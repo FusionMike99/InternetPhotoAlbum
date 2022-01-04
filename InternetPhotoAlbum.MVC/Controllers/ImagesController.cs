@@ -54,6 +54,8 @@ namespace InternetPhotoAlbum.MVC.Controllers
                     var image = await _imageService.FindByIdAsync(id.Value);
                     var model = _mapper.Map<IndexImageViewModel>(image);
 
+                    model.FinalRating = _ratingService.CalculateFinalRating(model.Id);
+
                     int likeId = 0;
                     RatingDTO ratingDTO = null;
 

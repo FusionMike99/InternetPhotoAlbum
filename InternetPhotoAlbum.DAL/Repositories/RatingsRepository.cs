@@ -1,5 +1,6 @@
 ﻿using InternetPhotoAlbum.DAL.Entities;
 using InternetPhotoAlbum.DAL.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -39,7 +40,7 @@ namespace InternetPhotoAlbum.DAL.Repositories
         {
             var result = context.Ratings
                 .AsNoTracking()
-                .AsEnumerable();
+                .ToList();
             return result;
         }
 
@@ -51,6 +52,15 @@ namespace InternetPhotoAlbum.DAL.Repositories
         public void Update(Rating item)
         {
             context.Entry(item).State = EntityState.Modified;
+        }
+
+        public IEnumerable<Rating> Get(Func<Rating, bool> predicate)
+        {
+            var result = context.Ratings
+                .AsNoTracking()
+                .Where(predicate)
+                .ToList();
+            return result;
         }
     }
 }

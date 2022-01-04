@@ -6,5 +6,6 @@
         public string Title { get; set; }
         public string Description { get; set; }
         public string File { get; set; }
+        public int FinalRating { get; set; }
     }
 }

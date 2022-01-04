@@ -10,6 +10,7 @@ namespace InternetPhotoAlbum.DAL.Interfaces
         Rating Create(Rating item);
         Task<Rating> GetByIdAsync(int imageId, string userId);
         IEnumerable<Rating> GetAll();
+        IEnumerable<Rating> Get(Func<Rating, bool> predicate);
         void Update(Rating item);
         void Remove(Rating item);
     }
