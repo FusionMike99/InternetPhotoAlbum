@@ -1,15 +1,14 @@
 ﻿@model InternetPhotoAlbum.BLL.Models.AlbumDTO
 
+@using (Ajax.BeginForm("Edit", "Albums", new AjaxOptions() { HttpMethod = "POST", UpdateTargetId = "modalChangePart", OnSuccess = "OnSuccess" }))
+{
+    <div class="modal-content" id="modalChangePart">
 
-<div class="modal-content">
+        <div class="modal-header">
+            <h4 class="modal-title">Edit album @Model.Title</h4>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
 
-    <div class="modal-header">
-        <h4 class="modal-title">Edit album @Model.Title</h4>
-        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-    </div>
-
-    @using (Html.BeginForm("Edit", "Albums", new { area = "" }, FormMethod.Post))
-    {
         <div class="modal-body">
             @Html.AntiForgeryToken()
 
@@ -30,7 +29,7 @@
                 </div>
             </div>
 
-            
+
             @Html.HiddenFor(model => model.PeriodStart)
             @Html.HiddenFor(model => model.PeriodEnd)
             @Html.HiddenFor(model => model.UserId)
@@ -41,10 +40,5 @@
         <div class="modal-footer col-3 mx-auto">
             <input type="submit" value="Save" class="btn btn-info text-light" />
         </div>
-    }
-
-</div>
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
+    </div>
 }

@@ -41,29 +41,38 @@
 
 @section scripts
 {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jquery-ajax")
+
     <script type="text/javascript">
 
-            $(function () {
-                $.ajaxSetup({ cache: false });
+        $(function () {
+            $.ajaxSetup({ cache: false });
 
-                $(".deleteDialLink").click(function (e) {
+            $(".deleteDialLink").click(function (e) {
 
-                    e.preventDefault();
-                    $.get(this.href, function (data) {
-                        $('#dialogContent').html(data);
-                        $('#modDialog').modal('show');
-                    });
-                });
-
-                $(".lockUserDialLink").click(function (e) {
-
-                    e.preventDefault();
-                    $.get(this.href, function (data) {
-                        $('#dialogContent').html(data);
-                        $('#modDialog').modal('show');
-                    });
+                e.preventDefault();
+                $.get(this.href, function (data) {
+                    $('#dialogContent').html(data);
+                    $('#modDialog').modal('show');
                 });
             });
+
+            $(".lockUserDialLink").click(function (e) {
+
+                e.preventDefault();
+                $.get(this.href, function (data) {
+                    $('#dialogContent').html(data);
+                    $('#modDialog').modal('show');
+                });
+            });
+        });
+
+        function OnSuccess(result) {
+            if (result.url) {
+                window.location.href = result.url;
+            }
+        }
 
     </script>
 }

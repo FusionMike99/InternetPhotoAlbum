@@ -1,14 +1,15 @@
 ﻿@model InternetPhotoAlbum.MVC.Models.CreateImageViewModel
 
-<div class="modal-content">
+@using (Ajax.BeginForm("Edit", "Images", new AjaxOptions() { HttpMethod = "POST",
+    UpdateTargetId = "modalChangePart", OnSuccess = "OnSuccess" }, new { enctype = "multipart/form-data" }))
+{
+    <div class="modal-content" id="modalChangePart">
 
-    <div class="modal-header">
-        <h4 class="modal-title">Edit image</h4>
-        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-    </div>
+        <div class="modal-header">
+            <h4 class="modal-title">Edit image</h4>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
 
-    @using (Html.BeginForm("Edit", "Images", new { area = "" }, FormMethod.Post, new { enctype = "multipart/form-data" }))
-    {
         <div class="modal-body">
             @Html.AntiForgeryToken()
 
@@ -35,16 +36,14 @@
                 </div>
             </div>
 
-            <input type="hidden" id="AlbumId" name="AlbumId" value="@((int)ViewData["AlbumId"])" />
+            @Html.HiddenFor(model => model.AddedDate)
+
+            @Html.HiddenFor(model => model.AlbumId)
         </div>
 
         <div class="modal-footer col-3 mx-auto">
             <input type="submit" value="Edit image" class="btn btn-info text-light" />
         </div>
-    }
 
-</div>
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
+    </div>
 }

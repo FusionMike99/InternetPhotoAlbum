@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace InternetPhotoAlbum.BLL.Models
 {
@@ -9,6 +10,7 @@ namespace InternetPhotoAlbum.BLL.Models
         public string Title { get; set; }
         [StringLength(200, MinimumLength = 3)]
         public string Description { get; set; }
+        public DateTime AddedDate { get; set; }
         [Required]
         public byte[] File { get; set; }
         [Required]

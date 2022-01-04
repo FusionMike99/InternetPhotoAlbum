@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.Web;
 using System.Web.Mvc;
 
@@ -11,6 +12,7 @@ namespace InternetPhotoAlbum.MVC.Models
         public string Title { get; set; }
         [StringLength(200, MinimumLength = 3)]
         public string Description { get; set; }
+        public DateTime AddedDate { get; set; }
         [Required]
         public HttpPostedFileBase File { get; set; }
         [Required, HiddenInput]

@@ -132,7 +132,7 @@ namespace InternetPhotoAlbum.MVC.Controllers
                 {
                     var dtoModel = _mapper.Map<ImageDTO>(model);
                     var result = await _imageService.CreateAsync(dtoModel);
-                    return RedirectToAction("Index", new { albumId = model.AlbumId });
+                    return Json(new { url = Url.Action("Index", new { albumId = model.AlbumId }) });
                 }
                 catch (AggregateValidationException ex)
                 {
@@ -167,7 +167,6 @@ namespace InternetPhotoAlbum.MVC.Controllers
                     var image = await _imageService.FindByIdAsync(id.Value);
                     var model = _mapper.Map<CreateImageViewModel>(image);
 
-                    ViewData["AlbumId"] = image.AlbumId;
                     return PartialView(model);
                 }
                 catch (InvalidOperationException ex)
@@ -196,7 +195,7 @@ namespace InternetPhotoAlbum.MVC.Controllers
                 {
                     var dtoModel = _mapper.Map<ImageDTO>(model);
                     var result = await _imageService.UpdateAsync(dtoModel);
-                    return RedirectToAction("Index", new { albumId = model.AlbumId });
+                    return Json(new { url = Url.Action("Index", new { albumId = model.AlbumId }) });
                 }
                 catch (AggregateValidationException ex)
                 {

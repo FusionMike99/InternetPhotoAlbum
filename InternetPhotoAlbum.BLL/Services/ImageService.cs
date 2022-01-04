@@ -26,6 +26,7 @@ namespace InternetPhotoAlbum.BLL.Services
         {
             if (model != null)
             {
+                model.AddedDate = DateTime.Now;
                 var validationResults = new List<ValidationResult>();
                 var validationContext = new System.ComponentModel.DataAnnotations.ValidationContext(model);
                 if (!Validator.TryValidateObject(model, validationContext, validationResults, true))
@@ -34,7 +35,6 @@ namespace InternetPhotoAlbum.BLL.Services
                 }
 
                 var entity = _mapper.Map<Image>(model);
-                entity.AddedDate = DateTime.Now;
                 entity = _unitOfWork.ImagesRepository.Create(entity);
                 await _unitOfWork.SaveAsync();
                 model = _mapper.Map<ImageDTO>(entity);

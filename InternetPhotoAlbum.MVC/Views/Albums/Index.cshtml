@@ -81,6 +81,9 @@
 
 @section scripts
 {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jquery-ajax")
+
     <script type="text/javascript">
 
         $(function () {
@@ -112,6 +115,12 @@
                 });
             });
         });
+
+        function OnSuccess(result) {
+            if (result.url) {
+                window.location.href = result.url;
+            }
+        }
 
     </script>
 }

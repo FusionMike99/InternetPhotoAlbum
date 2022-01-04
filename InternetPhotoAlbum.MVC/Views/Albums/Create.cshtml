@@ -1,14 +1,14 @@
 ﻿@model InternetPhotoAlbum.MVC.Models.AlbumViewModel
 
-<div class="modal-content">
+@using (Ajax.BeginForm("Create", "Albums", new AjaxOptions() { HttpMethod = "POST", UpdateTargetId = "modalChangePart", OnSuccess = "OnSuccess" }))
+{
+    <div class="modal-content" id="modalChangePart">
 
-    <div class="modal-header">
-        <h4 class="modal-title">Create album</h4>
-        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-    </div>
+        <div class="modal-header">
+            <h4 class="modal-title">Create album</h4>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
 
-    @using (Html.BeginForm("Create", "Albums", new { area = "" }, FormMethod.Post))
-     {
         <div class="modal-body">
             @Html.AntiForgeryToken()
 
@@ -32,10 +32,5 @@
         <div class="modal-footer col-3 mx-auto">
             <input type="submit" value="Create album" class="btn btn-info text-light" />
         </div>
-     }
-
-</div>
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
+    </div>
 }

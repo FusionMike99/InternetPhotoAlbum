@@ -227,7 +227,7 @@ namespace InternetPhotoAlbum.MVC.Controllers
                 try
                 {
                     var result = await UserService.UpdateAsync(model);
-                    return RedirectToAction("Details", new { id = model.Id });
+                    return Json(new { url = Url.Action("Details", new { id = model.Id }) });
                 }
                 catch (AggregateValidationException ex)
                 {
@@ -288,7 +288,7 @@ namespace InternetPhotoAlbum.MVC.Controllers
                     ModelState.AddModelError("", "Failed to change password");
                 }
 
-                return RedirectToAction("Details", new { id = model.Id });
+                return Json(new { url = Url.Action("Details", new { id = model.Id }) });
             }
 
             return PartialView(model);

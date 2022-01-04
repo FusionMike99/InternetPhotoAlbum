@@ -85,7 +85,7 @@ namespace InternetPhotoAlbum.MVC.Controllers
                     var dtoModel = _mapper.Map<AlbumDTO>(model);
                     dtoModel.UserId = User.Identity.GetUserId();
                     var result = await _albumService.CreateAsync(dtoModel);
-                    return RedirectToAction("UserAlbums");
+                    return Json(new { url = Url.Action("UserAlbums") });
                 }
                 catch (AggregateValidationException ex)
                 {
@@ -144,7 +144,7 @@ namespace InternetPhotoAlbum.MVC.Controllers
                 try
                 {
                     var result = await _albumService.UpdateAsync(model);
-                    return RedirectToAction("UserAlbums");
+                    return Json(new { url = Url.Action("UserAlbums") });
                 }
                 catch (AggregateValidationException ex)
                 {
