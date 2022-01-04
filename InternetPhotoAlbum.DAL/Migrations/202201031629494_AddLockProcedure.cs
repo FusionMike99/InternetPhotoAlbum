@@ -1,8 +1,7 @@
 ﻿namespace InternetPhotoAlbum.DAL.Migrations
 {
-    using System;
     using System.Data.Entity.Migrations;
-    
+
     public partial class AddLockProcedure : DbMigration
     {
         public override void Up()
@@ -19,7 +18,7 @@
                         (SELECT Id FROM dbo.[Albums] WHERE UserId = @userId);
                 END;");
         }
-        
+
         public override void Down()
         {
             Sql("DROP PROCEDURE LockUser");

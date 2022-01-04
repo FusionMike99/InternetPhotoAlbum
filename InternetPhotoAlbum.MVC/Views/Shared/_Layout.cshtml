@@ -38,7 +38,7 @@
                                 , new { @class = "nav-link" })
                         </li>
                         <li class="nav-item">
-                            @Html.ActionLink("My Albums", "UserAlbums", "Albums", new { area = "", userId = User.Identity.GetUserId() }
+                            @Html.ActionLink("My Albums", "UserAlbums", "Albums", new { area = "" }
                                 , new { @class = "nav-link" })
                         </li>
                         if(User.IsInRole("admin"))

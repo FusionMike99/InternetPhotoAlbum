@@ -102,7 +102,7 @@ namespace InternetPhotoAlbum.BLL.Services
             {
                 await UpdateAsync(model);
             }
-            else if(rating.LikeTypeId == model.LikeTypeId)
+            else if (rating.LikeTypeId == model.LikeTypeId)
             {
                 await DeleteAsync(model.ImageId, model.UserId);
             }

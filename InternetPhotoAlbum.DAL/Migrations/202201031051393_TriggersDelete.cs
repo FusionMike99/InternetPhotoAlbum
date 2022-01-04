@@ -1,8 +1,7 @@
 ﻿namespace InternetPhotoAlbum.DAL.Migrations
 {
-    using System;
     using System.Data.Entity.Migrations;
-    
+
     public partial class TriggersDelete : DbMigration
     {
         public override void Up()

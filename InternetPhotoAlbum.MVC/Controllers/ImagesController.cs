@@ -68,7 +68,10 @@ namespace InternetPhotoAlbum.MVC.Controllers
                     {
                     }
 
-                    ViewData["AlbumId"] = image.AlbumId;
+                    bool isHavePermission = userId == model.UserId;
+
+                    ViewData["IsHavePermission"] = isHavePermission;
+
                     ViewData["LikeId"] = likeId;
 
                     return View(model);

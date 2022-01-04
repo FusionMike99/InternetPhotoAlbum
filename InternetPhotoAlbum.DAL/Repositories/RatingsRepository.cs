@@ -32,7 +32,7 @@ namespace InternetPhotoAlbum.DAL.Repositories
         {
             var result = await context.Ratings
                 .AsNoTracking()
-                .SingleOrDefaultAsync(r =>  r.ImageId == imageId && r.UserId == userId);
+                .SingleOrDefaultAsync(r => r.ImageId == imageId && r.UserId == userId);
             return result;
         }
 

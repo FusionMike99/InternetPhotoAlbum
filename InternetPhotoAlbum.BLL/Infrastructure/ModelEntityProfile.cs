@@ -9,28 +9,28 @@ namespace InternetPhotoAlbum.BLL.Infrastructure
         public ModelEntityProfile()
         {
             CreateMap<UserProfile, UserDTO>()
-                .ForMember(u => u.Id, x => x.MapFrom(up => up.UserId))
-                .ForMember(u => u.GenderName, x => x.MapFrom(up => up.Gender.Name));
+                .ForMember(u => u.Id, opt => opt.MapFrom(up => up.UserId))
+                .ForMember(u => u.GenderName, opt => opt.MapFrom(up => up.Gender.Name));
 
             CreateMap<UserDTO, UserProfile>()
-                .ForMember(u => u.UserId, x => x.MapFrom(up => up.Id));
+                .ForMember(u => u.UserId, opt => opt.MapFrom(up => up.Id));
 
             CreateMap<ApplicationUser, UserDTO>()
-                .ForMember(u => u.Name, x => x.MapFrom(up => up.UserProfile.Name))
-                .ForMember(u => u.Login, x => x.MapFrom(up => up.UserName))
-                .ForMember(u => u.Surname, x => x.MapFrom(up => up.UserProfile.Surname))
-                .ForMember(u => u.DateOfBirth, x => x.MapFrom(up => up.UserProfile.DateOfBirth))
-                .ForMember(u => u.IsLocked, x => x.MapFrom(up => up.LockoutEnabled))
-                .ForMember(u => u.GenderId, x => x.MapFrom(up => up.UserProfile.GenderId))
-                .ForMember(u => u.GenderName, x => x.MapFrom(up => up.UserProfile.Gender.Name));
+                .ForMember(u => u.Name, opt => opt.MapFrom(up => up.UserProfile.Name))
+                .ForMember(u => u.Login, opt => opt.MapFrom(up => up.UserName))
+                .ForMember(u => u.Surname, opt => opt.MapFrom(up => up.UserProfile.Surname))
+                .ForMember(u => u.DateOfBirth, opt => opt.MapFrom(up => up.UserProfile.DateOfBirth))
+                .ForMember(u => u.IsLocked, opt => opt.MapFrom(up => up.LockoutEnabled))
+                .ForMember(u => u.GenderId, opt => opt.MapFrom(up => up.UserProfile.GenderId))
+                .ForMember(u => u.GenderName, opt => opt.MapFrom(up => up.UserProfile.Gender.Name));
 
             CreateMap<UserDTO, EditUserProfileModel>();
 
             CreateMap<EditUserProfileModel, UserProfile>()
-                .ForMember(u => u.UserId, x => x.MapFrom(u => u.Id));
+                .ForMember(u => u.UserId, opt => opt.MapFrom(u => u.Id));
 
             CreateMap<Album, AlbumDTO>()
-                .ForMember(a => a.UserName, x => x.MapFrom(a => a.User.UserName))
+                .ForMember(a => a.UserName, opt => opt.MapFrom(a => a.User.UserName))
                 .ReverseMap();
 
             CreateMap<Gender, GenderDTO>()
@@ -43,7 +43,10 @@ namespace InternetPhotoAlbum.BLL.Infrastructure
                 .ReverseMap();
 
             CreateMap<Image, ImageDTO>()
-                .ReverseMap();
+                .ForMember(i => i.UserId, opt => opt.MapFrom(i => i.Album.UserId));
+
+            CreateMap<ImageDTO, Image>()
+                .ForMember(i => i.Album, opt => opt.Ignore());
         }
     }
 }

@@ -13,5 +13,6 @@ namespace InternetPhotoAlbum.BLL.Models
         public byte[] File { get; set; }
         [Required]
         public int AlbumId { get; set; }
+        public string UserId { get; set; }
     }
 }

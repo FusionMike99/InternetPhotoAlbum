@@ -49,8 +49,7 @@ namespace InternetPhotoAlbum.MVC.Controllers
 
             bool isHavePermission = false;
 
-            var claimsIdentity = User.Identity as ClaimsIdentity;
-            if (claimsIdentity != null)
+            if (User.Identity is ClaimsIdentity claimsIdentity)
             {
                 var userIdClaim = claimsIdentity.Claims
                     .FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier);

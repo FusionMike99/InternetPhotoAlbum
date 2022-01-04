@@ -6,27 +6,37 @@
 
 <h2>Details</h2>
 
-<div id="modDialog" class="modal fade">
-    <div id="dialogContent" class="modal-dialog"></div>
-</div>
+@if((bool)ViewData["IsHavePermission"])
+{
+    <div id="modDialog" class="modal fade">
+        <div id="dialogContent" class="modal-dialog"></div>
+    </div>
+}
+
 
 <div class="card col-4 my-2 mx-auto">
     <img class="card-img-top col-12" src="data:image/jpeg;base64,@Model.File" alt="@Model.Title">
     <div class="card-body">
         <h4 class="card-title text-center">
-            @Model.Title 
+            @Model.Title
             <span class="badge rounded-pill bg-info"><span class="bi bi-heart-fill"></span> @Model.FinalRating</span>
         </h4>
         <p class="card-text">@Model.Description</p>
 
-        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "editDialLink btn btn-warning" })
-        @Html.ActionLink("Delete", "Delete", new { id = Model.Id }, new { @class = "deleteDialLink btn btn-danger" })
+        @if((bool)ViewData["IsHavePermission"])
+        {
+            @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "editDialLink btn btn-warning" })
+            @Html.ActionLink("Delete", "Delete", new { id = Model.Id }, new { @class = "deleteDialLink btn btn-danger" })
+        }
+        else
+        {
+            @Html.Partial("~/Views/Ratings/ImageRating.cshtml", (Model.Id, (int)ViewData["LikeId"]))
+        }
 
-        @Html.Partial("~/Views/Ratings/ImageRating.cshtml", (Model.Id, (int)ViewData["LikeId"]))
     </div>
 </div>
 <p>
-    @Html.ActionLink("Back to Album", "Index", new { albumId = (int)ViewData["AlbumId"] }, new { @class = "btn btn-info text-light" })
+    @Html.ActionLink("Back to Album", "Index", new { albumId = Model.AlbumId }, new { @class = "btn btn-info text-light" })
 </p>
 
 @section scripts
