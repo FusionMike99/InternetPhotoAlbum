@@ -2,6 +2,9 @@
 
 namespace InternetPhotoAlbum.DAL.Entities
 {
+    /// <summary>
+    /// Code First class for table UserProfiles
+    /// </summary>
     public class UserProfile
     {
         public string UserId { get; set; }

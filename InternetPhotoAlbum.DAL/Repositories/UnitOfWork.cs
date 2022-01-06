@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace InternetPhotoAlbum.DAL.Repositories
 {
+    /// <inheritdoc cref="IUnitOfWork"/>
     public class UnitOfWork : IUnitOfWork
     {
         private readonly ApplicationContext context;
@@ -21,6 +22,10 @@ namespace InternetPhotoAlbum.DAL.Repositories
         private ProceduresRepository _proceduresRepository;
         private UserProfilesRepository _userProfilesRepository;
 
+        /// <summary>
+        /// Inject connection string
+        /// </summary>
+        /// <param name="connectionString">Connection string</param>
         public UnitOfWork(string connectionString)
         {
             context = new ApplicationContext(connectionString);

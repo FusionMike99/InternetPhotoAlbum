@@ -3,6 +3,9 @@ using System.Collections.Generic;
 
 namespace InternetPhotoAlbum.DAL.Entities
 {
+    /// <summary>
+    /// Code First class for table Albums
+    /// </summary>
     public class Album
     {
         public int Id { get; set; }

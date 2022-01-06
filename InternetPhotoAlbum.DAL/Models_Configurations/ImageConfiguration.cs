@@ -3,8 +3,14 @@ using System.Data.Entity.ModelConfiguration;
 
 namespace InternetPhotoAlbum.DAL.Models_Configurations
 {
+    /// <summary>
+    /// Configuration for table Images
+    /// </summary>
     internal class ImageConfiguration : EntityTypeConfiguration<Image>
     {
+        /// <summary>
+        /// Set up configuration
+        /// </summary>
         public ImageConfiguration()
         {
             HasKey(x => x.Id);

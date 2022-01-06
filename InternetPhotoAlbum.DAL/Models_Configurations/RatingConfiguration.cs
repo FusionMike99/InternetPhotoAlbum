@@ -3,8 +3,14 @@ using System.Data.Entity.ModelConfiguration;
 
 namespace InternetPhotoAlbum.DAL.Models_Configurations
 {
+    /// <summary>
+    /// Configuration for table Ratings
+    /// </summary>
     internal class RatingConfiguration : EntityTypeConfiguration<Rating>
     {
+        /// <summary>
+        /// Set up configuration
+        /// </summary>
         public RatingConfiguration()
         {
             HasKey(r => new { r.ImageId, r.UserId });

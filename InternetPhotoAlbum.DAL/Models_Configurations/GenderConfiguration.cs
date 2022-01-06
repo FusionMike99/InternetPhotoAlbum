@@ -3,8 +3,14 @@ using System.Data.Entity.ModelConfiguration;
 
 namespace InternetPhotoAlbum.DAL.Models_Configurations
 {
+    /// <summary>
+    /// Configuration for table Genders
+    /// </summary>
     internal class GenderConfiguration : EntityTypeConfiguration<Gender>
     {
+        /// <summary>
+        /// Set up configuration
+        /// </summary>
         public GenderConfiguration()
         {
             HasKey(x => x.Id);

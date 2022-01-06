@@ -7,10 +7,15 @@ using System.Threading.Tasks;
 
 namespace InternetPhotoAlbum.DAL.Repositories
 {
+    /// <inheritdoc cref="ILikeTypesRepository"/>
     public class LikeTypesRepository : ILikeTypesRepository
     {
         private readonly ApplicationContext context;
 
+        /// <summary>
+        /// Inject context
+        /// </summary>
+        /// <param name="context">Database's context</param>
         public LikeTypesRepository(ApplicationContext context)
         {
             this.context = context;

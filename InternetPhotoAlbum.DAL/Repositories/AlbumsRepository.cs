@@ -8,10 +8,15 @@ using System.Threading.Tasks;
 
 namespace InternetPhotoAlbum.DAL.Repositories
 {
+    /// <inheritdoc cref="IAlbumsRepository"/>
     public class AlbumsRepository : IAlbumsRepository
     {
         private readonly ApplicationContext context;
 
+        /// <summary>
+        /// Inject context
+        /// </summary>
+        /// <param name="context">Database's context</param>
         public AlbumsRepository(ApplicationContext context)
         {
             this.context = context;

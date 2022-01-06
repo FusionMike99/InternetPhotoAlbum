@@ -3,6 +3,9 @@ using System.Collections.Generic;
 
 namespace InternetPhotoAlbum.DAL.Entities
 {
+    /// <summary>
+    /// Code First class for table AspNetUsers
+    /// </summary>
     public class ApplicationUser : IdentityUser
     {
         public virtual UserProfile UserProfile { get; set; }

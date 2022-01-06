@@ -1,5 +1,8 @@
 ﻿namespace InternetPhotoAlbum.DAL.Entities
 {
+    /// <summary>
+    /// Code First class for table Ratings
+    /// </summary>
     public class Rating
     {
         public int ImageId { get; set; }
