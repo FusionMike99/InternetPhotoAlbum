@@ -2,6 +2,9 @@
 
 namespace InternetPhotoAlbum.MVC.Models
 {
+    /// <summary>
+    /// Model for Changing Password View
+    /// </summary>
     public class ChangePasswordViewModel
     {
         [Required]

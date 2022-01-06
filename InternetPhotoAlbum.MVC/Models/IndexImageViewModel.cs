@@ -1,5 +1,8 @@
 ﻿namespace InternetPhotoAlbum.MVC.Models
 {
+    /// <summary>
+    /// Model for Index, Details, Delete Image Views
+    /// </summary>
     public class IndexImageViewModel
     {
         public int Id { get; set; }

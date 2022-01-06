@@ -3,6 +3,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace InternetPhotoAlbum.MVC.Models
 {
+    /// <summary>
+    /// Model for Index, Details, Delete, LockUser Image Views
+    /// </summary>
     public class IndexUserViewModel
     {
         public string Id { get; set; }

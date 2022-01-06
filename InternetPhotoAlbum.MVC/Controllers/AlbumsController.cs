@@ -15,17 +15,29 @@ using System.Web.Mvc;
 
 namespace InternetPhotoAlbum.MVC.Controllers
 {
+    /// <summary>
+    /// Controlling requests for albums
+    /// </summary>
     public class AlbumsController : Controller
     {
         private readonly IAlbumService _albumService;
         private readonly IMapper _mapper;
 
+        /// <summary>
+        /// Inject album service and mapper
+        /// </summary>
+        /// <param name="albumService">Album service</param>
+        /// <param name="mapper">Mapper</param>
         public AlbumsController(IAlbumService albumService, IMapper mapper)
         {
             _albumService = albumService;
             _mapper = mapper;
         }
 
+        /// <summary>
+        /// Process the GET request for index albums
+        /// </summary>
+        /// <returns>Result of action</returns>
         [HttpGet]
         public ActionResult Index()
         {
@@ -36,6 +48,11 @@ namespace InternetPhotoAlbum.MVC.Controllers
             return View(albums);
         }
 
+        /// <summary>
+        /// Process the GET request for user's albums
+        /// </summary>
+        /// <param name="userId">User's identifier</param>
+        /// <returns>Result of action</returns>
         [HttpGet]
         [Route("{userId}")]
         public ActionResult UserAlbums(string userId)
@@ -66,6 +83,10 @@ namespace InternetPhotoAlbum.MVC.Controllers
             return View("Index", albums);
         }
 
+        /// <summary>
+        /// Process the GET request for create album
+        /// </summary>
+        /// <returns>Result of action</returns>
         [HttpGet]
         [Authorize]
         public ActionResult Create()
@@ -73,6 +94,11 @@ namespace InternetPhotoAlbum.MVC.Controllers
             return PartialView();
         }
 
+        /// <summary>
+        /// Process the POST request for create album
+        /// </summary>
+        /// <param name="model">Album's model</param>
+        /// <returns>Result of action</returns>
         [HttpPost]
         [Authorize]
         [ValidateAntiForgeryToken]
@@ -108,6 +134,11 @@ namespace InternetPhotoAlbum.MVC.Controllers
             return PartialView(model);
         }
 
+        /// <summary>
+        /// Process the GET request for edit album
+        /// </summary>
+        /// <param name="id">Album's identifier</param>
+        /// <returns>Result of action</returns>
         [HttpGet]
         [Authorize]
         public async Task<ActionResult> Edit(int? id)
@@ -134,6 +165,11 @@ namespace InternetPhotoAlbum.MVC.Controllers
             }
         }
 
+        /// <summary>
+        /// Process the POST request for edit album
+        /// </summary>
+        /// <param name="model">Album's model</param>
+        /// <returns>Result of action</returns>
         [HttpPost]
         [Authorize]
         [ValidateAntiForgeryToken]
@@ -167,6 +203,11 @@ namespace InternetPhotoAlbum.MVC.Controllers
             return PartialView(model);
         }
 
+        /// <summary>
+        /// Process the GET request for delete album
+        /// </summary>
+        /// <param name="id">Album's identifier</param>
+        /// <returns>Result of action</returns>
         [HttpGet]
         [Authorize]
         public async Task<ActionResult> Delete(int? id)
@@ -193,6 +234,11 @@ namespace InternetPhotoAlbum.MVC.Controllers
             }
         }
 
+        /// <summary>
+        /// Process the POST request for delete album
+        /// </summary>
+        /// <param name="id">Album's identifier</param>
+        /// <returns>Result of action</returns>
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)

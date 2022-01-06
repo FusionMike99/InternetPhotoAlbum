@@ -5,6 +5,9 @@ using System.Web.Routing;
 
 namespace InternetPhotoAlbum.MVC.Infrastructure
 {
+    /// <summary>
+    /// Filter for logging action execution
+    /// </summary>
     public class LoggerFilter : IActionFilter
     {
         private static readonly Logger _logger = LogManager.GetCurrentClassLogger();

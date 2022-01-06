@@ -5,6 +5,9 @@ using System.Web.Mvc;
 
 namespace InternetPhotoAlbum.MVC.Models
 {
+    /// <summary>
+    /// Model for Creating and Editing Image Views
+    /// </summary>
     public class CreateImageViewModel
     {
         public int Id { get; set; }

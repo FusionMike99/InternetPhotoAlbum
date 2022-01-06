@@ -3,6 +3,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace InternetPhotoAlbum.MVC.Models
 {
+    /// <summary>
+    /// Model for Register User Views
+    /// </summary>
     public class RegisterModel
     {
         [Required]

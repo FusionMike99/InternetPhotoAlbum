@@ -7,15 +7,28 @@ using System.Web.Mvc;
 
 namespace InternetPhotoAlbum.MVC.Controllers
 {
+    /// <summary>
+    /// Controlling requests for ratings
+    /// </summary>
     public class RatingsController : Controller
     {
         private readonly IRatingService _ratingService;
 
+        /// <summary>
+        /// Inject rating service
+        /// </summary>
+        /// <param name="ratingService">Rating service</param>
         public RatingsController(IRatingService ratingService)
         {
             _ratingService = ratingService;
         }
 
+        /// <summary>
+        /// Process the POST request for rate image
+        /// </summary>
+        /// <param name="imageId">Image's identifier</param>
+        /// <param name="likeId">Type of like's identifier</param>
+        /// <returns>Result of action</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]

@@ -13,12 +13,21 @@ using System.Web.Mvc;
 
 namespace InternetPhotoAlbum.MVC.Controllers
 {
+    /// <summary>
+    /// Controlling requests for images
+    /// </summary>
     public class ImagesController : Controller
     {
         private readonly IImageService _imageService;
         private readonly IRatingService _ratingService;
         private readonly IMapper _mapper;
 
+        /// <summary>
+        /// Inject image, rating services and mapper
+        /// </summary>
+        /// <param name="imageService">Image service</param>
+        /// <param name="ratingService">Rating service</param>
+        /// <param name="mapper">Mapper</param>
         public ImagesController(IImageService imageService, IRatingService ratingService, IMapper mapper)
         {
             _imageService = imageService;
@@ -26,6 +35,11 @@ namespace InternetPhotoAlbum.MVC.Controllers
             _mapper = mapper;
         }
 
+        /// <summary>
+        /// Process the GET request for index images
+        /// </summary>
+        /// <param name="albumId">Album's identifier</param>
+        /// <returns>Result of action</returns>
         [HttpGet]
         public ActionResult Index(int? albumId)
         {
@@ -42,6 +56,11 @@ namespace InternetPhotoAlbum.MVC.Controllers
             return View(model);
         }
 
+        /// <summary>
+        /// Process the GET request for details image
+        /// </summary>
+        /// <param name="id">Image's identifier</param>
+        /// <returns>Result of action</returns>
         [HttpGet]
         public async Task<ActionResult> Details(int? id)
         {
@@ -91,6 +110,11 @@ namespace InternetPhotoAlbum.MVC.Controllers
             }
         }
 
+        /// <summary>
+        /// Process the POST request for search images by title
+        /// </summary>
+        /// <param name="title">Image's title</param>
+        /// <returns>Result of action</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult SearchByTitle([Required] string title)
@@ -108,6 +132,11 @@ namespace InternetPhotoAlbum.MVC.Controllers
             }
         }
 
+        /// <summary>
+        /// Process the GET request for create image
+        /// </summary>
+        /// <param name="albumId">Album's identifier</param>
+        /// <returns>Result of action</returns>
         [HttpGet]
         [Authorize]
         public ActionResult Create(int? albumId)
@@ -121,6 +150,11 @@ namespace InternetPhotoAlbum.MVC.Controllers
             return PartialView();
         }
 
+        /// <summary>
+        /// Process the POST request for create image
+        /// </summary>
+        /// <param name="model">Image's model</param>
+        /// <returns>Result of action</returns>
         [HttpPost]
         [Authorize]
         [ValidateAntiForgeryToken]
@@ -156,6 +190,11 @@ namespace InternetPhotoAlbum.MVC.Controllers
             return PartialView(model);
         }
 
+        /// <summary>
+        /// Process the GET request for edit image
+        /// </summary>
+        /// <param name="id">Image's identifier</param>
+        /// <returns>Result of action</returns>
         [HttpGet]
         [Authorize]
         public async Task<ActionResult> Edit(int? id)
@@ -184,6 +223,11 @@ namespace InternetPhotoAlbum.MVC.Controllers
             }
         }
 
+        /// <summary>
+        /// Process the POST request for edit image
+        /// </summary>
+        /// <param name="model">Image's model</param>
+        /// <returns>Result of action</returns>
         [HttpPost]
         [Authorize]
         [ValidateAntiForgeryToken]
@@ -218,6 +262,11 @@ namespace InternetPhotoAlbum.MVC.Controllers
             return PartialView(model);
         }
 
+        /// <summary>
+        /// Process the GET request for delete image
+        /// </summary>
+        /// <param name="id">Image's identifier</param>
+        /// <returns>Result of action</returns>
         [HttpGet]
         [Authorize]
         public async Task<ActionResult> Delete(int? id)
@@ -245,6 +294,11 @@ namespace InternetPhotoAlbum.MVC.Controllers
             }
         }
 
+        /// <summary>
+        /// Process the POST request for delete image
+        /// </summary>
+        /// <param name="id">Image's identifier</param>
+        /// <returns>Result of action</returns>
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)

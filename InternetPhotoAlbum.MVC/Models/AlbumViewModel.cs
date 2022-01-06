@@ -2,6 +2,9 @@
 
 namespace InternetPhotoAlbum.MVC.Models
 {
+    /// <summary>
+    /// Model for Creating Album View
+    /// </summary>
     public class AlbumViewModel
     {
         public int Id { get; set; }

@@ -4,6 +4,9 @@ using Ninject.Modules;
 
 namespace InternetPhotoAlbum.MVC.Infrastructure
 {
+    /// <summary>
+    /// Ninject module for business logic layer
+    /// </summary>
     public class BusinessLogicBinding : NinjectModule
     {
         public override void Load()

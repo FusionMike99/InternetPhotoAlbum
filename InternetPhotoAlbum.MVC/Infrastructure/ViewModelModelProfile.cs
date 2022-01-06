@@ -7,8 +7,14 @@ using System.Web;
 
 namespace InternetPhotoAlbum.MVC.Infrastructure
 {
+    /// <summary>
+    /// Mapper profile between models and view models
+    /// </summary>
     public class ViewModelModelProfile : Profile
     {
+        /// <summary>
+        /// Set up mapper profile
+        /// </summary>
         public ViewModelModelProfile()
         {
             CreateMap<AlbumDTO, AlbumViewModel>()

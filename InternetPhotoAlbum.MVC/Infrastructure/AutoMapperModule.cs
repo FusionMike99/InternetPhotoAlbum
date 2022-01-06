@@ -5,6 +5,9 @@ using Ninject.Modules;
 
 namespace InternetPhotoAlbum.MVC.Infrastructure
 {
+    /// <summary>
+    /// Ninject module for automapper
+    /// </summary>
     public class AutoMapperModule : NinjectModule
     {
         public override void Load()

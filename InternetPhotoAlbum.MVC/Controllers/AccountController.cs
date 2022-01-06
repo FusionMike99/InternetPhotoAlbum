@@ -16,11 +16,19 @@ using System.Web.Mvc;
 
 namespace InternetPhotoAlbum.MVC.Controllers
 {
+    /// <summary>
+    /// Controlling requests for account
+    /// </summary>
     public class AccountController : Controller
     {
         private readonly IGenderService _genderService;
         private readonly IMapper _mapper;
 
+        /// <summary>
+        /// Inject gender service and mapper
+        /// </summary>
+        /// <param name="genderService">Gender service</param>
+        /// <param name="mapper">Mapper</param>
         public AccountController(IGenderService genderService, IMapper mapper)
         {
             _genderService = genderService;
@@ -43,12 +51,21 @@ namespace InternetPhotoAlbum.MVC.Controllers
             }
         }
 
+        /// <summary>
+        /// Process the GET request for Log In user
+        /// </summary>
+        /// <returns>Result of action</returns>
         [HttpGet]
         public ActionResult Login()
         {
             return View();
         }
 
+        /// <summary>
+        /// Process the POST request for Log In user
+        /// </summary>
+        /// <param name="model">Data for Log In</param>
+        /// <returns>Result of action</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Login(LoginModel model)
@@ -84,6 +101,10 @@ namespace InternetPhotoAlbum.MVC.Controllers
             return View(model);
         }
 
+        /// <summary>
+        /// Process the GET request for Log Out user
+        /// </summary>
+        /// <returns>Result of action</returns>
         [HttpGet]
         public ActionResult Logout()
         {
@@ -91,6 +112,10 @@ namespace InternetPhotoAlbum.MVC.Controllers
             return RedirectToAction("Index", "Albums");
         }
 
+        /// <summary>
+        /// Process the GET request for Register user
+        /// </summary>
+        /// <returns>Result of action</returns>
         [HttpGet]
         public ActionResult Register()
         {
@@ -100,6 +125,11 @@ namespace InternetPhotoAlbum.MVC.Controllers
             return View();
         }
 
+        /// <summary>
+        /// Process the POST request for Register user
+        /// </summary>
+        /// <param name="model">Data for registration</param>
+        /// <returns>Result of action</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterModel model)
@@ -147,6 +177,10 @@ namespace InternetPhotoAlbum.MVC.Controllers
             return View(model);
         }
 
+        /// <summary>
+        /// Process the GET request for index users
+        /// </summary>
+        /// <returns>Result of action</returns>
         [HttpGet]
         [Authorize(Roles = "admin")]
         public ActionResult Index()
@@ -157,6 +191,11 @@ namespace InternetPhotoAlbum.MVC.Controllers
             return View(models);
         }
 
+        /// <summary>
+        /// Process the GET request for details user
+        /// </summary>
+        /// <param name="id">User's identifier</param>
+        /// <returns>Result of action</returns>
         [HttpGet]
         [Authorize]
         public async Task<ActionResult> Details(string id)
@@ -185,6 +224,11 @@ namespace InternetPhotoAlbum.MVC.Controllers
             }
         }
 
+        /// <summary>
+        /// Process the GET request for edit user
+        /// </summary>
+        /// <param name="id">User's identifier</param>
+        /// <returns>Result of action</returns>
         [HttpGet]
         [Authorize]
         public async Task<ActionResult> Edit(string id)
@@ -217,6 +261,11 @@ namespace InternetPhotoAlbum.MVC.Controllers
             }
         }
 
+        /// <summary>
+        /// Process the POST request for edit user
+        /// </summary>
+        /// <param name="model">User's model</param>
+        /// <returns>Result of action</returns>
         [HttpPost]
         [Authorize]
         [ValidateAntiForgeryToken]
@@ -253,6 +302,11 @@ namespace InternetPhotoAlbum.MVC.Controllers
             return PartialView(model);
         }
 
+        /// <summary>
+        /// Process the GET request for change user's password
+        /// </summary>
+        /// <param name="id">User's identifier</param>
+        /// <returns>Result of action</returns>
         [HttpGet]
         [Authorize]
         public ActionResult ChangePassword(string id)
@@ -274,6 +328,11 @@ namespace InternetPhotoAlbum.MVC.Controllers
             }
         }
 
+        /// <summary>
+        /// Process the POST request for change user's password
+        /// </summary>
+        /// <param name="model">Data for changing password</param>
+        /// <returns>Result of action</returns>
         [HttpPost]
         [Authorize]
         [ValidateAntiForgeryToken]
@@ -294,6 +353,11 @@ namespace InternetPhotoAlbum.MVC.Controllers
             return PartialView(model);
         }
 
+        /// <summary>
+        /// Process the GET request for delete user
+        /// </summary>
+        /// <param name="id">User's identifier</param>
+        /// <returns>Result of action</returns>
         [HttpGet]
         [Authorize(Roles = "admin")]
         public async Task<ActionResult> Delete(string id)
@@ -322,6 +386,11 @@ namespace InternetPhotoAlbum.MVC.Controllers
             }
         }
 
+        /// <summary>
+        /// Process the POST request for delete user
+        /// </summary>
+        /// <param name="id">User's identifier</param>
+        /// <returns>Result of action</returns>
         [HttpPost, ActionName("Delete")]
         [Authorize(Roles = "admin")]
         [ValidateAntiForgeryToken]
@@ -331,6 +400,11 @@ namespace InternetPhotoAlbum.MVC.Controllers
             return RedirectToAction("Index");
         }
 
+        /// <summary>
+        /// Process the GET request for lock user
+        /// </summary>
+        /// <param name="id">User's identifier</param>
+        /// <returns>Result of action</returns>
         [HttpGet]
         [Authorize(Roles = "admin")]
         public async Task<ActionResult> LockUser(string id)
@@ -359,6 +433,12 @@ namespace InternetPhotoAlbum.MVC.Controllers
             }
         }
 
+        /// <summary>
+        /// Process the POST request for lock user
+        /// </summary>
+        /// <param name="id">User's identifier</param>
+        /// <param name="isLocked">Unlock or lock user</param>
+        /// <returns>Result of action</returns>
         [HttpPost]
         [Authorize(Roles = "admin")]
         [ValidateAntiForgeryToken]
