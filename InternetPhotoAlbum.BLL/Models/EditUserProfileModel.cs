@@ -3,6 +3,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace InternetPhotoAlbum.BLL.Models
 {
+    /// <summary>
+    /// Model for editing user profile
+    /// </summary>
     public class EditUserProfileModel
     {
         public string Id { get; set; }

@@ -2,6 +2,9 @@
 
 namespace InternetPhotoAlbum.BLL.Models
 {
+    /// <summary>
+    /// Data transform object for Gender
+    /// </summary>
     public class GenderDTO
     {
         public int Id { get; set; }

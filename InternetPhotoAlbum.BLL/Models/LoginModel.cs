@@ -2,6 +2,9 @@
 
 namespace InternetPhotoAlbum.BLL.Models
 {
+    /// <summary>
+    /// Model for authenticating
+    /// </summary>
     public class LoginModel
     {
         [Required]

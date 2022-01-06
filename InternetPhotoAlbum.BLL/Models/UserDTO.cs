@@ -3,6 +3,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace InternetPhotoAlbum.BLL.Models
 {
+    /// <summary>
+    /// Data transform object for ApplicationUser and UserProfile
+    /// </summary>
     public class UserDTO
     {
         public string Id { get; set; }

@@ -11,11 +11,17 @@ using System.Threading.Tasks;
 
 namespace InternetPhotoAlbum.BLL.Services
 {
+    /// <inheritdoc cref="ILikeTypeService"/>
     public class LikeTypeService : ILikeTypeService
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
 
+        /// <summary>
+        /// Inject unit of work and mapper
+        /// </summary>
+        /// <param name="unitOfWork">Unit of work</param>
+        /// <param name="mapper">Mapper</param>
         public LikeTypeService(IUnitOfWork unitOfWork, IMapper mapper)
         {
             _unitOfWork = unitOfWork;

@@ -4,10 +4,17 @@ using Ninject.Modules;
 
 namespace InternetPhotoAlbum.BLL.Infrastructure
 {
+    /// <summary>
+    /// Ninject module for data access layer
+    /// </summary>
     public class DataAccessBinding : NinjectModule
     {
         private readonly string connectionString;
 
+        /// <summary>
+        /// Inject connection string to database
+        /// </summary>
+        /// <param name="connectionString">Connection string to database</param>
         public DataAccessBinding(string connectionString)
         {
             this.connectionString = connectionString;

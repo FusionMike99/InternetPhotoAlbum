@@ -3,6 +3,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace InternetPhotoAlbum.BLL.Models
 {
+    /// <summary>
+    /// Data transform object for Image
+    /// </summary>
     public class ImageDTO
     {
         public int Id { get; set; }

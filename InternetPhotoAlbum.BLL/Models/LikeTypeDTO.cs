@@ -2,6 +2,9 @@
 
 namespace InternetPhotoAlbum.BLL.Models
 {
+    /// <summary>
+    /// Data transform object for LikeType
+    /// </summary>
     public class LikeTypeDTO
     {
         public int Id { get; set; }

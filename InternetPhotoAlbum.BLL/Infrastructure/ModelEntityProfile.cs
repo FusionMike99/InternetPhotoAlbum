@@ -4,8 +4,14 @@ using InternetPhotoAlbum.DAL.Entities;
 
 namespace InternetPhotoAlbum.BLL.Infrastructure
 {
+    /// <summary>
+    /// Mapper profile between entities and models
+    /// </summary>
     public class ModelEntityProfile : Profile
     {
+        /// <summary>
+        /// Set up mapper profile
+        /// </summary>
         public ModelEntityProfile()
         {
             CreateMap<UserProfile, UserDTO>()
