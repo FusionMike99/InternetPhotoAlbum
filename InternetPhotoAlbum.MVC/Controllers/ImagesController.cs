@@ -7,6 +7,7 @@ using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using System.Web.Mvc;
@@ -48,8 +49,13 @@ namespace InternetPhotoAlbum.MVC.Controllers
                 return HttpNotFound();
             }
 
-            var images = _imageService.FindByAlbumId(albumId.Value);
+            var images = _imageService.FindByAlbumId(albumId.Value).ToList();
             var model = _mapper.Map<IEnumerable<IndexImageViewModel>>(images);
+
+            var userId = User.Identity.GetUserId();
+            bool isHavePermission = userId == images.ElementAtOrDefault(0)?.UserId;
+
+            ViewData["IsHavePermission"] = isHavePermission;
 
             ViewData["AlbumId"] = albumId;
 

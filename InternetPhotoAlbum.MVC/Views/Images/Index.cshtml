@@ -6,13 +6,16 @@
 
 <h2>Images</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create", new { area = "", albumId = (int)ViewData["AlbumId"] }, new { id = "createDialLink" })
-</p>
+@if ((bool)ViewData["IsHavePermission"])
+{
+    <p>
+        @Html.ActionLink("Add image", "Create", new { area = "", albumId = (int)ViewData["AlbumId"] }, new { id = "createDialLink" })
+    </p>
 
-<div id="modDialog" class="modal fade">
-    <div id="dialogContent" class="modal-dialog"></div>
-</div>
+    <div id="modDialog" class="modal fade">
+        <div id="dialogContent" class="modal-dialog"></div>
+    </div>
+}
 
 <div class="container">
     <div class="row row-cols-4">

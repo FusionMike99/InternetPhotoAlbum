@@ -1,14 +1,15 @@
 ﻿@model IEnumerable<InternetPhotoAlbum.BLL.Models.AlbumDTO>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Albums";
 }
 
-<h2>Index</h2>
+<h2>Albums</h2>
+
 @if ((bool)ViewData["IsHavePermission"])
 {
     <p>
-        @Html.ActionLink("Create New", "Create", new { area = "" }, new { id = "createDialLink" })
+        @Html.ActionLink("Create album", "Create", new { area = "" }, new { id = "createDialLink" })
     </p>
 
     <div id="modDialog" class="modal fade">
