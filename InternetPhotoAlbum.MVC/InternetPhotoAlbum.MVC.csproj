@@ -195,6 +195,7 @@
     <Compile Include="Models\AlbumViewModel.cs" />
     <Compile Include="Models\ChangePasswordViewModel.cs" />
     <Compile Include="Models\CreateImageViewModel.cs" />
+    <Compile Include="Models\EditImageViewModel.cs" />
     <Compile Include="Models\IndexImageViewModel.cs" />
     <Compile Include="Models\IndexUserViewModel.cs" />
     <Compile Include="Models\RegisterModel.cs" />

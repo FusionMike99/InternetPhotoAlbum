@@ -25,7 +25,7 @@ namespace InternetPhotoAlbum.DAL.Models_Configurations
 
             Property(x => x.PeriodStart)
                 .HasColumnType("Date")
-                .IsRequired();
+                .IsOptional();
 
             Property(x => x.PeriodEnd)
                 .HasColumnType("Date")

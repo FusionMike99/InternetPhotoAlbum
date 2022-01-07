@@ -14,7 +14,6 @@ namespace InternetPhotoAlbum.BLL.Models
         [StringLength(200, MinimumLength = 3)]
         public string Description { get; set; }
         public DateTime AddedDate { get; set; }
-        [Required]
         public byte[] File { get; set; }
         [Required]
         public int AlbumId { get; set; }

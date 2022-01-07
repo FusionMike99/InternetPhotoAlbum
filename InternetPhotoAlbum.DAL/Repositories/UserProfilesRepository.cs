@@ -58,6 +58,7 @@ namespace InternetPhotoAlbum.DAL.Repositories
         public void Update(UserProfile profile)
         {
             context.Entry(profile).State = EntityState.Modified;
+            context.Entry(profile).Property(up => up.IsLocked).IsModified = false;
         }
     }
 }

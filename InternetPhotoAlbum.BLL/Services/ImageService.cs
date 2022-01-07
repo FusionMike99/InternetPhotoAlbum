@@ -42,6 +42,7 @@ namespace InternetPhotoAlbum.BLL.Services
 
                 var entity = _mapper.Map<Image>(model);
                 entity = _unitOfWork.ImagesRepository.Create(entity);
+                _unitOfWork.ProceduresRepository.UpdateAlbumPeriods(entity.AlbumId);
                 await _unitOfWork.SaveAsync();
                 model = _mapper.Map<ImageDTO>(entity);
                 return model;
@@ -60,6 +61,7 @@ namespace InternetPhotoAlbum.BLL.Services
                 throw new InvalidOperationException("Image doesn't exist");
             }
             _unitOfWork.ImagesRepository.Remove(entity);
+            _unitOfWork.ProceduresRepository.UpdateAlbumPeriods(entity.AlbumId);
             return await _unitOfWork.SaveAsync() != 0;
         }
 

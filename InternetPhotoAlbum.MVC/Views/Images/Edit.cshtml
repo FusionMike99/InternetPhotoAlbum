@@ -1,4 +1,4 @@
-﻿@model InternetPhotoAlbum.MVC.Models.CreateImageViewModel
+﻿@model InternetPhotoAlbum.MVC.Models.EditImageViewModel
 
 @using (Ajax.BeginForm("Edit", "Images", new AjaxOptions() { HttpMethod = "POST",
     UpdateTargetId = "modalChangePart", OnSuccess = "OnSuccess" }, new { enctype = "multipart/form-data" }))
@@ -27,17 +27,15 @@
                 <div class="form-floating mb-3 mt-3">
                     @Html.EditorFor(model => model.Description,
                         new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter description", @style = "height: 25vmin" } })
-                    @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "ms-2"})
+                    @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "ms-2" })
                     @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
                 </div>
 
-                <div class="form-floating mb-3 mt-3">
+                <!--<div class="form-floating mb-3 mt-3">
                     <input type="file" id="File" name="File" class="form-control" />
                     <label for="File" class="ms-2">File</label>
-                </div>
+                </div>-->
             </div>
-
-            @Html.HiddenFor(model => model.AddedDate)
 
             @Html.HiddenFor(model => model.AlbumId)
         </div>

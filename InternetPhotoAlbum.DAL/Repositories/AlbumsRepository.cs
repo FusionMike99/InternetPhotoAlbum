@@ -59,6 +59,7 @@ namespace InternetPhotoAlbum.DAL.Repositories
         public void Update(Album item)
         {
             context.Entry(item).State = EntityState.Modified;
+            context.Entry(item).Property(a => a.IsLocked).IsModified = false;
         }
 
         public IEnumerable<Album> Get(Func<Album, bool> predicate)

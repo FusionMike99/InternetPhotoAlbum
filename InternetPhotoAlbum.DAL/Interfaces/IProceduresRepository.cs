@@ -13,5 +13,11 @@ namespace InternetPhotoAlbum.DAL.Interfaces
         /// <param name="userId">User's identifier</param>
         /// <param name="isLocked">Unlock or lock user</param>
         void LockUser(string userId, bool isLocked);
+
+        /// <summary>
+        /// Update album date periods
+        /// </summary>
+        /// <param name="albumId">Album's identifier</param>
+        void UpdateAlbumPeriods(int albumId);
     }
 }

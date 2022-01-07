@@ -11,8 +11,8 @@ namespace InternetPhotoAlbum.DAL.Entities
         public int Id { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
-        public DateTime PeriodStart { get; set; }
-        public DateTime PeriodEnd { get; set; }
+        public DateTime? PeriodStart { get; set; }
+        public DateTime? PeriodEnd { get; set; }
         public bool IsLocked { get; set; }
         public string UserId { get; set; }
 

@@ -204,7 +204,7 @@ namespace InternetPhotoAlbum.MVC.Controllers
                 try
                 {
                     var image = await _imageService.FindByIdAsync(id.Value);
-                    var model = _mapper.Map<CreateImageViewModel>(image);
+                    var model = _mapper.Map<EditImageViewModel>(image);
 
                     return PartialView(model);
                 }
@@ -231,7 +231,7 @@ namespace InternetPhotoAlbum.MVC.Controllers
         [HttpPost]
         [Authorize]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit(CreateImageViewModel model)
+        public async Task<ActionResult> Edit(EditImageViewModel model)
         {
             if (ModelState.IsValid)
             {

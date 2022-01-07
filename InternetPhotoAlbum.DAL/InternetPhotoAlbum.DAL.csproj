@@ -108,6 +108,14 @@
     <Compile Include="Migrations\202201031629494_AddLockProcedure.designer.cs">
       <DependentUpon>202201031629494_AddLockProcedure.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202201071355138_AddProcedureUpdateAlbumPeriods.cs" />
+    <Compile Include="Migrations\202201071355138_AddProcedureUpdateAlbumPeriods.designer.cs">
+      <DependentUpon>202201071355138_AddProcedureUpdateAlbumPeriods.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202201071405292_ChangeAlbumConfiguration.cs" />
+    <Compile Include="Migrations\202201071405292_ChangeAlbumConfiguration.designer.cs">
+      <DependentUpon>202201071405292_ChangeAlbumConfiguration.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models_Configurations\AlbumConfiguration.cs" />
     <Compile Include="Models_Configurations\GenderConfiguration.cs" />
@@ -149,6 +157,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202201031629494_AddLockProcedure.resx">
       <DependentUpon>202201031629494_AddLockProcedure.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202201071355138_AddProcedureUpdateAlbumPeriods.resx">
+      <DependentUpon>202201071355138_AddProcedureUpdateAlbumPeriods.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202201071405292_ChangeAlbumConfiguration.resx">
+      <DependentUpon>202201071405292_ChangeAlbumConfiguration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

@@ -22,6 +22,7 @@
             <span class="badge rounded-pill bg-info"><span class="bi bi-heart-fill"></span> @Model.FinalRating</span>
         </h4>
         <p class="card-text">@Model.Description</p>
+        <p class="card-text"><em>@Model.AddedDate.ToString("f")</em></p>
 
         @if ((bool)ViewData["IsHavePermission"])
          {
@@ -30,9 +31,9 @@
                 @Html.ActionLink("Delete", "Delete", new { id = Model.Id }, new { @class = "deleteDialLink btn btn-danger" })
             </div>
          }
-        else
+        else if(User.Identity.IsAuthenticated)
         {
-        @Html.Partial("~/Views/Ratings/ImageRating.cshtml", (Model.Id, (int)ViewData["LikeId"]))
+            @Html.Partial("~/Views/Ratings/ImageRating.cshtml", (Model.Id, (int)ViewData["LikeId"]))
         }
 
             </div>

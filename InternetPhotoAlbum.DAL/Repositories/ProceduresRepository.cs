@@ -28,5 +28,11 @@ namespace InternetPhotoAlbum.DAL.Repositories
             SqlParameter paramIsLocked = new SqlParameter("@isLocked", isLocked);
             context.Database.ExecuteSqlCommand("LockUser @userId, @isLocked", paramUserId, paramIsLocked);
         }
+
+        public void UpdateAlbumPeriods(int albumId)
+        {
+            SqlParameter paramAlbumId = new SqlParameter("@albumId", albumId);
+            context.Database.ExecuteSqlCommand("UpdateAlbumPeriods @albumId", paramAlbumId);
+        }
     }
 }

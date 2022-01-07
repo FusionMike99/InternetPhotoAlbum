@@ -58,6 +58,9 @@ namespace InternetPhotoAlbum.DAL.Repositories
         public void Update(Image item)
         {
             context.Entry(item).State = EntityState.Modified;
+            context.Entry(item).Property(i => i.AddedDate).IsModified = false;
+            context.Entry(item).Property(i => i.File).IsModified = false;
+            context.Entry(item).Property(i => i.IsLocked).IsModified = false;
         }
 
         public IEnumerable<Image> Get(Func<Image, bool> predicate)
