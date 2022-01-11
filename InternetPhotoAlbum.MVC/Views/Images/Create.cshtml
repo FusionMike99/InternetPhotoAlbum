@@ -31,7 +31,8 @@
 
                 <div class="form-floating mb-3 mt-3">
                     <input type="file" id="File" name="File" class="form-control" />
-                    <label for="File" class="ms-2">File</label>
+                    <label for="File" class="ms-2 py-2">@Html.DisplayNameFor(m => m.File)</label>
+                    @Html.ValidationMessageFor(model => model.File, "", new { @class = "text-danger" })
                 </div>
             </div>
 

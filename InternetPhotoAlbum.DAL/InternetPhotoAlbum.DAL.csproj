@@ -116,6 +116,10 @@
     <Compile Include="Migrations\202201071405292_ChangeAlbumConfiguration.designer.cs">
       <DependentUpon>202201071405292_ChangeAlbumConfiguration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202201111911553_AddToImageContentType.cs" />
+    <Compile Include="Migrations\202201111911553_AddToImageContentType.designer.cs">
+      <DependentUpon>202201111911553_AddToImageContentType.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models_Configurations\AlbumConfiguration.cs" />
     <Compile Include="Models_Configurations\GenderConfiguration.cs" />
@@ -163,6 +167,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202201071405292_ChangeAlbumConfiguration.resx">
       <DependentUpon>202201071405292_ChangeAlbumConfiguration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202201111911553_AddToImageContentType.resx">
+      <DependentUpon>202201111911553_AddToImageContentType.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

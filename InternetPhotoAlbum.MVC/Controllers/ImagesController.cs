@@ -19,22 +19,27 @@ namespace InternetPhotoAlbum.MVC.Controllers
     /// </summary>
     public class ImagesController : Controller
     {
+        private readonly IAlbumService _albumService;
         private readonly IImageService _imageService;
         private readonly IRatingService _ratingService;
         private readonly IMapper _mapper;
 
         /// <summary>
-        /// Inject image, rating services and mapper
+        /// Inject album, image, rating services and mapper
         /// </summary>
+        /// <param name="albumService">Album service</param>
         /// <param name="imageService">Image service</param>
         /// <param name="ratingService">Rating service</param>
         /// <param name="mapper">Mapper</param>
-        public ImagesController(IImageService imageService, IRatingService ratingService, IMapper mapper)
+        public ImagesController(IAlbumService albumService, IImageService imageService, IRatingService ratingService, IMapper mapper)
         {
+            _albumService = albumService;
             _imageService = imageService;
             _ratingService = ratingService;
             _mapper = mapper;
         }
+
+
 
         /// <summary>
         /// Process the GET request for index images
@@ -42,7 +47,7 @@ namespace InternetPhotoAlbum.MVC.Controllers
         /// <param name="albumId">Album's identifier</param>
         /// <returns>Result of action</returns>
         [HttpGet]
-        public ActionResult Index(int? albumId)
+        public async Task<ActionResult> Index(int? albumId)
         {
             if (albumId == null)
             {
@@ -53,9 +58,12 @@ namespace InternetPhotoAlbum.MVC.Controllers
             var model = _mapper.Map<IEnumerable<IndexImageViewModel>>(images);
 
             var userId = User.Identity.GetUserId();
-            bool isHavePermission = userId == images.ElementAtOrDefault(0)?.UserId;
+            var album = await _albumService.FindByIdAsync(albumId.Value);
+            bool isHavePermission = userId == album.UserId;
 
             ViewData["IsHavePermission"] = isHavePermission;
+
+            TempData["AlbumUserId"] = album.UserId;
 
             ViewData["AlbumId"] = albumId;
 
@@ -93,7 +101,7 @@ namespace InternetPhotoAlbum.MVC.Controllers
                     {
                     }
 
-                    bool isHavePermission = userId == model.UserId;
+                    bool isHavePermission = userId == (string)TempData.Peek("AlbumUserId");
 
                     ViewData["IsHavePermission"] = isHavePermission;
 

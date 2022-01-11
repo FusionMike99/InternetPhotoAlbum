@@ -30,6 +30,9 @@ namespace InternetPhotoAlbum.DAL.Models_Configurations
             Property(x => x.File)
                 .IsRequired();
 
+            Property(x => x.ContentType)
+                .IsRequired();
+
             HasRequired(i => i.Album)
                 .WithMany(a => a.Images)
                 .HasForeignKey(i => i.AlbumId)

@@ -14,9 +14,9 @@ namespace InternetPhotoAlbum.MVC.Models
         [Display(Name = "Added at")]
         public DateTime AddedDate { get; set; }
         public string File { get; set; }
+        public string ContentType { get; set; }
         public int FinalRating { get; set; }
 
         public int AlbumId { get; set; }
-        public string UserId { get; set; }
     }
 }

@@ -24,7 +24,8 @@ namespace InternetPhotoAlbum.MVC.Infrastructure
                 .ForMember(i => i.File, x => x.MapFrom(i => Convert.ToBase64String(i.File)));
 
             CreateMap<CreateImageViewModel, ImageDTO>()
-                .ForMember(i => i.File, x => x.ConvertUsing(new ImageUploadFormatter(), src => src.File));
+                .ForMember(i => i.File, x => x.ConvertUsing(new ImageUploadFormatter(), src => src.File))
+                .ForMember(i => i.ContentType, x => x.MapFrom(i => i.File.ContentType));
 
             CreateMap<ImageDTO, CreateImageViewModel>()
                 .ForMember(i => i.File, x => x.Ignore());

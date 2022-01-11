@@ -13,6 +13,7 @@ namespace InternetPhotoAlbum.DAL.Entities
         public string Description { get; set; }
         public DateTime AddedDate { get; set; }
         public byte[] File { get; set; }
+        public string ContentType { get; set; }
         public bool IsLocked { get; set; }
         public int AlbumId { get; set; }
 
