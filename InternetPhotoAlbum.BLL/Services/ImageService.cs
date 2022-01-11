@@ -33,12 +33,8 @@ namespace InternetPhotoAlbum.BLL.Services
             if (model != null)
             {
                 model.AddedDate = DateTime.Now;
-                var validationResults = new List<ValidationResult>();
-                var validationContext = new System.ComponentModel.DataAnnotations.ValidationContext(model);
-                if (!Validator.TryValidateObject(model, validationContext, validationResults, true))
-                {
-                    throw new AggregateValidationException("Some properties don't valid", validationResults);
-                }
+
+                ValidateModel(model);
 
                 var entity = _mapper.Map<Image>(model);
                 entity = _unitOfWork.ImagesRepository.Create(entity);
@@ -107,12 +103,7 @@ namespace InternetPhotoAlbum.BLL.Services
         {
             if (model != null)
             {
-                var validationResults = new List<ValidationResult>();
-                var validationContext = new System.ComponentModel.DataAnnotations.ValidationContext(model);
-                if (!Validator.TryValidateObject(model, validationContext, validationResults, true))
-                {
-                    throw new AggregateValidationException("Some properties don't valid", validationResults);
-                }
+                ValidateModel(model);
 
                 var entity = _mapper.Map<Image>(model);
                 _unitOfWork.ImagesRepository.Update(entity);
@@ -121,6 +112,16 @@ namespace InternetPhotoAlbum.BLL.Services
             else
             {
                 throw new ArgumentNullException("model");
+            }
+        }
+
+        private void ValidateModel(ImageDTO model)
+        {
+            var validationResults = new List<ValidationResult>();
+            var validationContext = new System.ComponentModel.DataAnnotations.ValidationContext(model);
+            if (!Validator.TryValidateObject(model, validationContext, validationResults, true))
+            {
+                throw new AggregateValidationException("Some properties don't valid", validationResults);
             }
         }
     }

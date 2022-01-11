@@ -32,12 +32,7 @@ namespace InternetPhotoAlbum.BLL.Services
         {
             if (model != null)
             {
-                var validationResults = new List<ValidationResult>();
-                var validationContext = new System.ComponentModel.DataAnnotations.ValidationContext(model);
-                if (!Validator.TryValidateObject(model, validationContext, validationResults, true))
-                {
-                    throw new AggregateValidationException("Some properties don't valid", validationResults);
-                }
+                ValidateModel(model);
 
                 var entity = _mapper.Map<Gender>(model);
                 entity = _unitOfWork.GendersRepository.Create(entity);
@@ -89,12 +84,7 @@ namespace InternetPhotoAlbum.BLL.Services
         {
             if (model != null)
             {
-                var validationResults = new List<ValidationResult>();
-                var validationContext = new System.ComponentModel.DataAnnotations.ValidationContext(model);
-                if (!Validator.TryValidateObject(model, validationContext, validationResults, true))
-                {
-                    throw new AggregateValidationException("Some properties don't valid", validationResults);
-                }
+                ValidateModel(model);
 
                 var entity = _mapper.Map<Gender>(model);
                 _unitOfWork.GendersRepository.Update(entity);
@@ -103,6 +93,16 @@ namespace InternetPhotoAlbum.BLL.Services
             else
             {
                 throw new ArgumentNullException("model");
+            }
+        }
+
+        private void ValidateModel(GenderDTO model)
+        {
+            var validationResults = new List<ValidationResult>();
+            var validationContext = new System.ComponentModel.DataAnnotations.ValidationContext(model);
+            if (!Validator.TryValidateObject(model, validationContext, validationResults, true))
+            {
+                throw new AggregateValidationException("Some properties don't valid", validationResults);
             }
         }
     }

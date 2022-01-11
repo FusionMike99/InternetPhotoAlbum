@@ -34,12 +34,7 @@ namespace InternetPhotoAlbum.BLL.Services
             {
                 model.PeriodStart = model.PeriodEnd = DateTime.Now;
 
-                var validationResults = new List<ValidationResult>();
-                var validationContext = new System.ComponentModel.DataAnnotations.ValidationContext(model);
-                if (!Validator.TryValidateObject(model, validationContext, validationResults, true))
-                {
-                    throw new AggregateValidationException("Some properties don't valid", validationResults);
-                }
+                ValidateModel(model);
 
                 var entity = _mapper.Map<AlbumDTO, Album>(model);
                 entity.User = null;
@@ -99,12 +94,7 @@ namespace InternetPhotoAlbum.BLL.Services
         {
             if (model != null)
             {
-                var validationResults = new List<ValidationResult>();
-                var validationContext = new System.ComponentModel.DataAnnotations.ValidationContext(model);
-                if (!Validator.TryValidateObject(model, validationContext, validationResults, true))
-                {
-                    throw new AggregateValidationException("Some properties don't valid", validationResults);
-                }
+                ValidateModel(model);
 
                 var entity = _mapper.Map<AlbumDTO, Album>(model);
                 entity.User = null;
@@ -114,6 +104,16 @@ namespace InternetPhotoAlbum.BLL.Services
             else
             {
                 throw new ArgumentNullException("model");
+            }
+        }
+
+        private void ValidateModel(AlbumDTO model)
+        {
+            var validationResults = new List<ValidationResult>();
+            var validationContext = new System.ComponentModel.DataAnnotations.ValidationContext(model);
+            if (!Validator.TryValidateObject(model, validationContext, validationResults, true))
+            {
+                throw new AggregateValidationException("Some properties don't valid", validationResults);
             }
         }
     }

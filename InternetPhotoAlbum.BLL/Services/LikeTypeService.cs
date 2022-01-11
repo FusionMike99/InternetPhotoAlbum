@@ -32,12 +32,7 @@ namespace InternetPhotoAlbum.BLL.Services
         {
             if (model != null)
             {
-                var validationResults = new List<ValidationResult>();
-                var validationContext = new System.ComponentModel.DataAnnotations.ValidationContext(model);
-                if (!Validator.TryValidateObject(model, validationContext, validationResults, true))
-                {
-                    throw new AggregateValidationException("Some properties don't valid", validationResults);
-                }
+                ValidateModel(model);
 
                 var entity = _mapper.Map<LikeTypeDTO, LikeType>(model);
                 entity = _unitOfWork.LikeTypesRepository.Create(entity);
@@ -89,12 +84,7 @@ namespace InternetPhotoAlbum.BLL.Services
         {
             if (model != null)
             {
-                var validationResults = new List<ValidationResult>();
-                var validationContext = new System.ComponentModel.DataAnnotations.ValidationContext(model);
-                if (!Validator.TryValidateObject(model, validationContext, validationResults, true))
-                {
-                    throw new AggregateValidationException("Some properties don't valid", validationResults);
-                }
+                ValidateModel(model);
 
                 var entity = _mapper.Map<LikeTypeDTO, LikeType>(model);
                 _unitOfWork.LikeTypesRepository.Update(entity);
@@ -103,6 +93,16 @@ namespace InternetPhotoAlbum.BLL.Services
             else
             {
                 throw new ArgumentNullException("model");
+            }
+        }
+
+        private void ValidateModel(LikeTypeDTO model)
+        {
+            var validationResults = new List<ValidationResult>();
+            var validationContext = new System.ComponentModel.DataAnnotations.ValidationContext(model);
+            if (!Validator.TryValidateObject(model, validationContext, validationResults, true))
+            {
+                throw new AggregateValidationException("Some properties don't valid", validationResults);
             }
         }
     }

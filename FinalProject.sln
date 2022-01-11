@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InternetPhotoAlbum.DAL", "I
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InternetPhotoAlbum.BLL", "InternetPhotoAlbum.BLL\InternetPhotoAlbum.BLL.csproj", "{FFFB83BC-7359-4D10-8DDD-E07682D65E53}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InternetPhotoAlbum.Tests", "InternetPhotoAlbum.Tests\InternetPhotoAlbum.Tests.csproj", "{E3771225-16DA-4A85-AF14-3125A196561E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{FFFB83BC-7359-4D10-8DDD-E07682D65E53}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FFFB83BC-7359-4D10-8DDD-E07682D65E53}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FFFB83BC-7359-4D10-8DDD-E07682D65E53}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E3771225-16DA-4A85-AF14-3125A196561E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E3771225-16DA-4A85-AF14-3125A196561E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E3771225-16DA-4A85-AF14-3125A196561E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E3771225-16DA-4A85-AF14-3125A196561E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
