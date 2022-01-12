@@ -40,8 +40,7 @@ namespace InternetPhotoAlbum.Tests
                 && x.Title == y.Title
                 && x.Description == y.Description
                 && x.AddedDate == y.AddedDate
-                && x.AlbumId == y.AlbumId
-                && x.UserId == y.UserId;
+                && x.AlbumId == y.AlbumId;
         }
 
         public int GetHashCode(ImageDTO obj)
@@ -83,6 +82,26 @@ namespace InternetPhotoAlbum.Tests
         }
 
         public int GetHashCode(LikeTypeDTO obj)
+        {
+            return obj.GetHashCode();
+        }
+    }
+
+    internal class RatingDTOEqualityComparer : IEqualityComparer<RatingDTO>
+    {
+        public bool Equals(RatingDTO x, RatingDTO y)
+        {
+            if (x == null && y == null)
+                return true;
+            if (x == null || y == null)
+                return false;
+
+            return x.ImageId == y.ImageId
+                && x.UserId == y.UserId
+                && x.LikeTypeId == y.LikeTypeId;
+        }
+
+        public int GetHashCode(RatingDTO obj)
         {
             return obj.GetHashCode();
         }

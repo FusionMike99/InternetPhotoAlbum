@@ -16,7 +16,7 @@ namespace InternetPhotoAlbum.Tests.BusinessTests
     public class LikeTypeServiceTests
     {
         [Test]
-        public void GenderService_FindAll_ReturnsGenderDTOs()
+        public void LikeTypeService_FindAll_ReturnsLikeTypeDTOs()
         {
             // Arrange
             var expected = GetTestLikeTypeDTOs().ToList();
@@ -34,7 +34,7 @@ namespace InternetPhotoAlbum.Tests.BusinessTests
         }
 
         [Test]
-        public async Task GenderService_FindByIdAsync_ReturnsGenderDTO()
+        public async Task LikeTypeService_FindByIdAsync_ReturnsLikeTypeDTO()
         {
             // Arrange
             var expected = GetTestLikeTypeDTOs().First();
@@ -43,17 +43,17 @@ namespace InternetPhotoAlbum.Tests.BusinessTests
                 .Setup(m => m.LikeTypesRepository.GetByIdAsync(It.IsAny<int>()))
                 .ReturnsAsync(GetTestLikeTypeEntities().First);
             ILikeTypeService service = new LikeTypeService(mockUnitOfWork.Object, UnitTestHelper.CreateMapperProfile());
-            var genderId = 1;
+            var likeTypeId = 1;
 
             // Act
-            var actual = await service.FindByIdAsync(genderId);
+            var actual = await service.FindByIdAsync(likeTypeId);
 
             // Assert
             Assert.That(actual, Is.EqualTo(expected).Using(new LikeTypeDTOEqualityComparer()));
         }
 
         [Test]
-        public void GenderService_FindByIdAsync_ThrowsInvalidOperationExceptionWithNullEntity()
+        public void LikeTypeService_FindByIdAsync_ThrowsInvalidOperationExceptionWithNullEntity()
         {
             // Arrange
             var expected = GetTestLikeTypeDTOs().First();
@@ -72,7 +72,7 @@ namespace InternetPhotoAlbum.Tests.BusinessTests
         }
 
         [Test]
-        public async Task GenderService_CreateAsync_AddsModel()
+        public async Task LikeTypeService_CreateAsync_AddsModel()
         {
             //Arrange
             var mockUnitOfWork = new Mock<IUnitOfWork>();
@@ -93,7 +93,7 @@ namespace InternetPhotoAlbum.Tests.BusinessTests
         }
 
         [Test]
-        public void GenderService_CreateAsync_ThrowsArgumentNullExceptionWithNullModel()
+        public void LikeTypeService_CreateAsync_ThrowsArgumentNullExceptionWithNullModel()
         {
             //Arrange
             var mockUnitOfWork = new Mock<IUnitOfWork>();
@@ -111,7 +111,7 @@ namespace InternetPhotoAlbum.Tests.BusinessTests
         [TestCase("")]
         [TestCase("ti")]
         [TestCase("tibfbnfgdndndfnhhtdhttrhth")]
-        public void GenderService_CreateAsync_ThrowsAggregateValidationExceptionWithInvalidModel(string name)
+        public void LikeTypeService_CreateAsync_ThrowsAggregateValidationExceptionWithInvalidModel(string name)
         {
             //Arrange
             var mockUnitOfWork = new Mock<IUnitOfWork>();
@@ -131,7 +131,7 @@ namespace InternetPhotoAlbum.Tests.BusinessTests
         }
 
         [Test]
-        public async Task GenderService_UpdateAsync_UpdatesModel()
+        public async Task LikeTypeService_UpdateAsync_UpdatesModel()
         {
             //Arrange
             var mockUnitOfWork = new Mock<IUnitOfWork>();
@@ -152,7 +152,7 @@ namespace InternetPhotoAlbum.Tests.BusinessTests
         }
 
         [Test]
-        public void GenderService_UpdateAsync_ThrowsArgumentNullExceptionWithNullModel()
+        public void LikeTypeService_UpdateAsync_ThrowsArgumentNullExceptionWithNullModel()
         {
             //Arrange
             var mockUnitOfWork = new Mock<IUnitOfWork>();
@@ -170,7 +170,7 @@ namespace InternetPhotoAlbum.Tests.BusinessTests
         [TestCase("")]
         [TestCase("ti")]
         [TestCase("tibfbnfgdndndfnhhtdhttrhth")]
-        public void GenderService_UpdateAsync_ThrowsAggregateValidationExceptionWithInvalidModel(string name)
+        public void LikeTypeService_UpdateAsync_ThrowsAggregateValidationExceptionWithInvalidModel(string name)
         {
             //Arrange
             var mockUnitOfWork = new Mock<IUnitOfWork>();
@@ -190,7 +190,7 @@ namespace InternetPhotoAlbum.Tests.BusinessTests
         }
 
         [Test]
-        public async Task GenderService_DeleteAsync_DeletesModel()
+        public async Task LikeTypeService_DeleteAsync_DeletesModel()
         {
             //Arrange
             var expected = GetTestLikeTypeDTOs().First();
@@ -212,7 +212,7 @@ namespace InternetPhotoAlbum.Tests.BusinessTests
         }
 
         [Test]
-        public void GenderService_DeleteAsync_ThrowsInvalidOperationExceptionWithNullEntity()
+        public void LikeTypeService_DeleteAsync_ThrowsInvalidOperationExceptionWithNullEntity()
         {
             // Arrange
             var expected = GetTestLikeTypeDTOs().First();

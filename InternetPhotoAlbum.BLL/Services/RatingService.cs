@@ -40,40 +40,6 @@ namespace InternetPhotoAlbum.BLL.Services
             return result;
         }
 
-        public async Task<RatingDTO> CreateAsync(RatingDTO model)
-        {
-            if (model != null)
-            {
-                var validationResults = new List<ValidationResult>();
-                var validationContext = new System.ComponentModel.DataAnnotations.ValidationContext(model);
-                if (!Validator.TryValidateObject(model, validationContext, validationResults, true))
-                {
-                    throw new AggregateValidationException("Some properties don't valid", validationResults);
-                }
-
-                var entity = _mapper.Map<Rating>(model);
-                entity = _unitOfWork.RatingsRepository.Create(entity);
-                await _unitOfWork.SaveAsync();
-                model = _mapper.Map<RatingDTO>(entity);
-                return model;
-            }
-            else
-            {
-                throw new ArgumentNullException("model");
-            }
-        }
-
-        public async Task<bool> DeleteAsync(int imageId, string userId)
-        {
-            var entity = await _unitOfWork.RatingsRepository.GetByIdAsync(imageId, userId);
-            if (entity == null)
-            {
-                throw new InvalidOperationException("Rating doesn't exist");
-            }
-            _unitOfWork.RatingsRepository.Remove(entity);
-            return await _unitOfWork.SaveAsync() != 0;
-        }
-
         public void Dispose()
         {
             _unitOfWork.Dispose();
@@ -97,41 +63,36 @@ namespace InternetPhotoAlbum.BLL.Services
             return model;
         }
 
-        public async Task RateImage(RatingDTO model)
+        public async Task<bool> RateImage(RatingDTO model)
         {
+            ValidateModel(model);
+
             var rating = await _unitOfWork.RatingsRepository.GetByIdAsync(model.ImageId, model.UserId);
             if (rating == null)
             {
-                await CreateAsync(model);
+                rating = _mapper.Map<Rating>(model);
+                _unitOfWork.RatingsRepository.Create(rating);
             }
             else if (rating.LikeTypeId != model.LikeTypeId)
             {
-                await UpdateAsync(model);
+                rating = _mapper.Map<Rating>(model);
+                _unitOfWork.RatingsRepository.Update(rating);
             }
             else if (rating.LikeTypeId == model.LikeTypeId)
             {
-                await DeleteAsync(model.ImageId, model.UserId);
+                _unitOfWork.RatingsRepository.Remove(rating);
             }
+
+            return await _unitOfWork.SaveAsync() != 0;
         }
 
-        public async Task<bool> UpdateAsync(RatingDTO model)
+        private void ValidateModel(RatingDTO model)
         {
-            if (model != null)
+            var validationResults = new List<ValidationResult>();
+            var validationContext = new System.ComponentModel.DataAnnotations.ValidationContext(model);
+            if (!Validator.TryValidateObject(model, validationContext, validationResults, true))
             {
-                var validationResults = new List<ValidationResult>();
-                var validationContext = new System.ComponentModel.DataAnnotations.ValidationContext(model);
-                if (!Validator.TryValidateObject(model, validationContext, validationResults, true))
-                {
-                    throw new AggregateValidationException("Some properties don't valid", validationResults);
-                }
-
-                var entity = _mapper.Map<Rating>(model);
-                _unitOfWork.RatingsRepository.Update(entity);
-                return await _unitOfWork.SaveAsync() != 0;
-            }
-            else
-            {
-                throw new ArgumentNullException("model");
+                throw new AggregateValidationException("Some properties don't valid", validationResults);
             }
         }
     }
