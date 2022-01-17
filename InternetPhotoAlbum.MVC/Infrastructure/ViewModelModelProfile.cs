@@ -21,20 +21,23 @@ namespace InternetPhotoAlbum.MVC.Infrastructure
                 .ReverseMap();
 
             CreateMap<ImageDTO, IndexImageViewModel>()
-                .ForMember(i => i.File, x => x.MapFrom(i => Convert.ToBase64String(i.File)));
+                .ForMember(i => i.File, opt => opt.MapFrom(i => Convert.ToBase64String(i.File)));
 
             CreateMap<CreateImageViewModel, ImageDTO>()
-                .ForMember(i => i.File, x => x.ConvertUsing(new ImageUploadFormatter(), src => src.File))
-                .ForMember(i => i.ContentType, x => x.MapFrom(i => i.File.ContentType));
+                .ForMember(i => i.File, opt => opt.ConvertUsing(new ImageUploadFormatter(), src => src.File))
+                .ForMember(i => i.ContentType, opt => opt.MapFrom(i => i.File.ContentType));
 
             CreateMap<ImageDTO, CreateImageViewModel>()
-                .ForMember(i => i.File, x => x.Ignore());
+                .ForMember(i => i.File, opt => opt.Ignore());
 
             CreateMap<ImageDTO, EditImageViewModel>()
                 .ReverseMap();
 
             CreateMap<UserDTO, IndexUserViewModel>()
-                .ForMember(g => g.Gender, x => x.MapFrom(g => g.GenderName));
+                .ForMember(g => g.Gender, opt => opt.MapFrom(g => g.GenderName));
+
+            CreateMap<RegisterModel, UserDTO>()
+                .ForMember(u => u.Role, opt => opt.Ignore());
         }
 
         private class ImageUploadFormatter : IValueConverter<HttpPostedFileBase, byte[]>

@@ -26,5 +26,15 @@ namespace InternetPhotoAlbum.MVC.Controllers
             Response.StatusCode = 403;
             return View();
         }
+
+        /// <summary>
+        /// Error with status code 400 (Bad request)
+        /// </summary>
+        /// <returns>Result of action</returns>
+        public ActionResult BadRequest()
+        {
+            Response.StatusCode = 400;
+            return View();
+        }
     }
 }

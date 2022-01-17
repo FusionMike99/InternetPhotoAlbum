@@ -41,10 +41,21 @@
                             @Html.ActionLink("My Albums", "UserAlbums", "Albums", new { area = "" }
                                 , new { @class = "nav-link" })
                         </li>
-                        if(User.IsInRole("admin"))
+                        if (User.IsInRole("admin"))
                         {
-                            <li class="nav-item">
-                                @Html.ActionLink("User Management", "Index", "Account", new { area = "" }, new { @class = "nav-link" })
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Administration</a>
+                                <ul class="dropdown-menu">
+                                    <li class="nav-item">
+                                        @Html.ActionLink("User Management", "Index", "Account", new { area = "" }, new { @class = "dropdown-item" })
+                                    </li>
+                                    <li class="nav-item">
+                                        @Html.ActionLink("Gender Management", "Index", "Genders", new { area = "" }, new { @class = "dropdown-item" })
+                                    </li>
+                                    <li class="nav-item">
+                                        @Html.ActionLink("Type of like Management", "Index", "LikeTypes", new { area = "" }, new { @class = "dropdown-item" })
+                                    </li>
+                                </ul>
                             </li>
                         }
                         <li class="nav-item">

@@ -1,0 +1,32 @@
+﻿@model InternetPhotoAlbum.BLL.Models.GenderDTO
+
+<div class="modal-content">
+
+    <div class="modal-header">
+        <h4 class="modal-title">Delete gender @Model.Name</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+    </div>
+
+    <div class="modal-body">
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Name)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Name)
+            </dd>
+        </dl>
+    </div>
+
+    <div class="modal-footer col-3 mx-auto">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <input type="submit" value="Delete" class="btn btn-info text-light" />
+        }
+    </div>
+
+</div>
+

@@ -1,8 +1,7 @@
 ﻿namespace InternetPhotoAlbum.DAL.Migrations
 {
-    using System;
     using System.Data.Entity.Migrations;
-    
+
     public partial class AddProcedureUpdateAlbumPeriods : DbMigration
     {
         public override void Up()
@@ -20,7 +19,7 @@
 		                PeriodEnd = @periodEnd WHERE Id = @albumId;
                 END;");
         }
-        
+
         public override void Down()
         {
             Sql("DROP PROCEDURE [dbo].[UpdateAlbumPeriods]");

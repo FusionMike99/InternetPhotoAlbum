@@ -9,7 +9,7 @@
 @if ((bool)ViewData["IsHavePermission"])
 {
     <p>
-        @Html.ActionLink("Create album", "Create", new { area = "" }, new { id = "createDialLink" })
+        @Html.ActionLink("Create album", "Create", new { area = "" }, new { id = "createDialLink", @class = "btn btn-success" })
     </p>
 
     <div id="modDialog" class="modal fade">
@@ -22,7 +22,7 @@
     @Html.AntiForgeryToken()
 
     <div class="input-group mb-3">
-        <input name="title" type="text" class="form-control" placeholder="Search">
+        <input name="title" type="text" class="form-control" placeholder="Search image">
         <button class="btn btn-success" type="submit">Go</button>
     </div>
 }
@@ -71,8 +71,8 @@
             @if ((bool)ViewData["IsHavePermission"])
             {
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "editDialLink" }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "deleteDialLink" })
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "editDialLink btn btn-warning" }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "deleteDialLink btn btn-danger" })
                 </td>
             }
         </tr>

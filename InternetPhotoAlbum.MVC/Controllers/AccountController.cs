@@ -12,6 +12,7 @@ using System.Net;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
+using System.Web.Configuration;
 using System.Web.Mvc;
 
 namespace InternetPhotoAlbum.MVC.Controllers
@@ -86,7 +87,7 @@ namespace InternetPhotoAlbum.MVC.Controllers
                         {
                             IsPersistent = true
                         }, claim);
-                        return RedirectToAction("UserAlbums", "Albums");
+                        return RedirectToAction("Index", "Albums");
                     }
                 }
                 catch (InvalidOperationException ex)
@@ -120,8 +121,11 @@ namespace InternetPhotoAlbum.MVC.Controllers
         public ActionResult Register()
         {
             var genders = new SelectList(_genderService.FindAll(), "Id", "Name");
-
             ViewData["Genders"] = genders;
+
+            var minusYears = GetMinUserAge() * (-1);
+            ViewData["MaxDateOfBirth"] = DateTime.Now.AddYears(minusYears).ToString("yyyy-MM-dd");
+
             return View();
         }
 
@@ -136,17 +140,8 @@ namespace InternetPhotoAlbum.MVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                UserDTO userDto = new UserDTO
-                {
-                    Login = model.Login,
-                    Email = model.Email,
-                    Password = model.Password,
-                    Name = model.Name,
-                    Surname = model.Surname,
-                    DateOfBirth = model.DateOfBirth,
-                    GenderId = model.GenderId,
-                    Role = "user"
-                };
+                var userDto = _mapper.Map<UserDTO>(model);
+                userDto.Role = "user";
 
                 try
                 {
@@ -173,6 +168,9 @@ namespace InternetPhotoAlbum.MVC.Controllers
 
             var genders = new SelectList(_genderService.FindAll(), "Id", "Name");
             ViewData["Genders"] = genders;
+
+            var minusYears = GetMinUserAge() * (-1);
+            ViewData["MaxDateOfBirth"] = DateTime.Now.AddYears(minusYears).ToString("yyyy-MM-dd");
 
             return View(model);
         }
@@ -456,6 +454,13 @@ namespace InternetPhotoAlbum.MVC.Controllers
                 _genderService.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        private int GetMinUserAge()
+        {
+            var settings = WebConfigurationManager.AppSettings;
+            var minUserAge = Convert.ToInt32(settings["minUserAge"]);
+            return minUserAge;
         }
     }
 }

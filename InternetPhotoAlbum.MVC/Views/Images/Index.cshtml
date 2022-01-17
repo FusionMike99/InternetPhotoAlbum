@@ -9,7 +9,8 @@
 @if ((bool)ViewData["IsHavePermission"])
 {
     <p>
-        @Html.ActionLink("Add image", "Create", new { area = "", albumId = (int)ViewData["AlbumId"] }, new { id = "createDialLink" })
+        @Html.ActionLink("Add image", "Create", new { area = "",
+            albumId = (int)ViewData["AlbumId"] }, new { id = "createDialLink", @class = "btn btn-success" })
     </p>
 
     <div id="modDialog" class="modal fade">

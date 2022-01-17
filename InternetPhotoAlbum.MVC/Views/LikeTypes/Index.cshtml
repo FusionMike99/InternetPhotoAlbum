@@ -1,10 +1,14 @@
-﻿@model IEnumerable<InternetPhotoAlbum.MVC.Models.IndexUserViewModel>
+﻿@model IEnumerable<InternetPhotoAlbum.BLL.Models.LikeTypeDTO>
 
 @{
-    ViewBag.Title = "Users";
+    ViewBag.Title = "Types of like";
 }
 
-<h2>Users</h2>
+<h2>Types of like</h2>
+
+<p>
+    @Html.ActionLink("Add type of like", "Create", new { area = "" }, new { id = "createDialLink", @class = "btn btn-success" })
+</p>
 
 <div id="modDialog" class="modal fade">
     <div id="dialogContent" class="modal-dialog"></div>
@@ -13,10 +17,7 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Login)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Email)
+            @Html.DisplayNameFor(model => model.Name)
         </th>
         <th></th>
     </tr>
@@ -25,18 +26,15 @@
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Login)
+                @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td>
-                @Html.ActionLink((item.IsLocked ? "Unlock" : "Lock") + " user", "LockUser",
-                    new { id = item.Id }, new { @class = "lockUserDialLink btn btn-warning" })
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "editDialLink btn btn-warning" })
                 @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "deleteDialLink btn btn-danger" })
             </td>
         </tr>
     }
+
 </table>
 
 @section scripts
@@ -48,8 +46,7 @@
 
         $(function () {
             $.ajaxSetup({ cache: false });
-
-            $(".deleteDialLink").click(function (e) {
+            $("#createDialLink").click(function (e) {
 
                 e.preventDefault();
                 $.get(this.href, function (data) {
@@ -58,7 +55,16 @@
                 });
             });
 
-            $(".lockUserDialLink").click(function (e) {
+            $(".editDialLink").click(function (e) {
+
+                e.preventDefault();
+                $.get(this.href, function (data) {
+                    $('#dialogContent').html(data);
+                    $('#modDialog').modal('show');
+                });
+            });
+
+            $(".deleteDialLink").click(function (e) {
 
                 e.preventDefault();
                 $.get(this.href, function (data) {

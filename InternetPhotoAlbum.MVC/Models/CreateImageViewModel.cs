@@ -1,5 +1,4 @@
 ﻿using InternetPhotoAlbum.MVC.Utils;
-using System;
 using System.ComponentModel.DataAnnotations;
 using System.Web;
 using System.Web.Mvc;

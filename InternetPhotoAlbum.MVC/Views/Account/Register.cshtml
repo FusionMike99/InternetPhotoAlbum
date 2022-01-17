@@ -55,7 +55,7 @@
     <div class="row">
         <div class="form-floating col mb-3 mt-3">
             @Html.EditorFor(model => model.DateOfBirth, new { htmlAttributes = new { @class = "form-control",
-           @placeholder = "Enter date of birth", @max = @DateTime.Now.AddYears(-14).ToString("yyyy-MM-dd") } })
+                @placeholder = "Enter date of birth", @max = @ViewData["MaxDateOfBirth"] } })
             @Html.LabelFor(model => model.DateOfBirth, htmlAttributes: new { @class = "ms-2" })
             @Html.ValidationMessageFor(model => model.DateOfBirth, "", new { @class = "text-danger" })
         </div>
@@ -72,6 +72,7 @@
                 }
             </select>
             @Html.LabelFor(m => m.GenderId, htmlAttributes: new { @class = "ms-2" })
+            @Html.ValidationMessageFor(model => model.GenderId, "", new { @class = "text-danger" })
         </div>
     </div>
 

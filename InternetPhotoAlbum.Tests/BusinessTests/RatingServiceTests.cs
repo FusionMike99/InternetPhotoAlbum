@@ -1,5 +1,4 @@
-﻿using InternetPhotoAlbum.BLL.Infrastructure;
-using InternetPhotoAlbum.BLL.Interfaces;
+﻿using InternetPhotoAlbum.BLL.Interfaces;
 using InternetPhotoAlbum.BLL.Models;
 using InternetPhotoAlbum.BLL.Services;
 using InternetPhotoAlbum.DAL.Entities;

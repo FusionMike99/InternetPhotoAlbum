@@ -183,7 +183,9 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AlbumsController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
+    <Compile Include="Controllers\GendersController.cs" />
     <Compile Include="Controllers\ImagesController.cs" />
+    <Compile Include="Controllers\LikeTypesController.cs" />
     <Compile Include="Controllers\RatingsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -1834,6 +1836,15 @@
     <Content Include="Views\Account\LockUser.cshtml" />
     <Content Include="Views\Error\NotFound.cshtml" />
     <Content Include="Views\Error\Forbidden.cshtml" />
+    <Content Include="Views\Genders\Index.cshtml" />
+    <Content Include="Views\Genders\Create.cshtml" />
+    <Content Include="Views\Genders\Edit.cshtml" />
+    <Content Include="Views\Genders\Delete.cshtml" />
+    <Content Include="Views\LikeTypes\Index.cshtml" />
+    <Content Include="Views\LikeTypes\Edit.cshtml" />
+    <Content Include="Views\LikeTypes\Delete.cshtml" />
+    <Content Include="Views\LikeTypes\Create.cshtml" />
+    <Content Include="Views\Error\BadRequest.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
