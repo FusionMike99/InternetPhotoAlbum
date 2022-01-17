@@ -36,13 +36,20 @@ namespace InternetPhotoAlbum.BLL.Services
             ApplicationUser user = await _unitOfWork.UserManager.FindAsync(model.Login, model.Password);
             if (user != null)
             {
-                var claim = await _unitOfWork.UserManager.CreateIdentityAsync(user,
-                                            DefaultAuthenticationTypes.ApplicationCookie);
-                return claim;
+                if(!user.LockoutEnabled)
+                {
+                    var claim = await _unitOfWork.UserManager.CreateIdentityAsync(user,
+                                                DefaultAuthenticationTypes.ApplicationCookie);
+                    return claim;
+                }
+                else
+                {
+                    throw new InvalidOperationException($"User {user.UserName} is locked");
+                }
             }
             else
             {
-                throw new InvalidOperationException($"Invalid login or password");
+                throw new InvalidOperationException("Invalid login or password");
             }
         }
 
@@ -154,6 +161,7 @@ namespace InternetPhotoAlbum.BLL.Services
         public async Task LockUser(string userId, bool isLocked)
         {
             var identityResult = await _unitOfWork.UserManager.SetLockoutEnabledAsync(userId, isLocked);
+            await _unitOfWork.UserManager.SetLockoutEndDateAsync(userId, DateTimeOffset.MaxValue);
             if (identityResult.Errors.Count() > 0)
             {
                 var validationResults = new List<ValidationResult>();
