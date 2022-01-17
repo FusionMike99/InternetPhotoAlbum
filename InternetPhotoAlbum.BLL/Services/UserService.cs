@@ -51,6 +51,16 @@ namespace InternetPhotoAlbum.BLL.Services
             var result = await _unitOfWork.UserManager
                 .ChangePasswordAsync(userId, oldPassword, newPassword);
 
+            if (result.Errors.Count() > 0)
+            {
+                var validationResults = new List<ValidationResult>();
+                foreach (var error in result.Errors)
+                {
+                    validationResults.Add(new ValidationResult(error));
+                }
+                throw new AggregateValidationException("Error with registration", validationResults);
+            }
+
             return result.Succeeded;
         }
 

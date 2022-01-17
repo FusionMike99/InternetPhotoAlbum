@@ -334,14 +334,20 @@ namespace InternetPhotoAlbum.MVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                var result = await UserService.ChangePassword(model.Id, model.OldPassword, model.NewPassword);
-
-                if (!result)
+                try
                 {
-                    ModelState.AddModelError("", "Failed to change password");
-                }
+                    var result = await UserService.ChangePassword(model.Id, model.OldPassword, model.NewPassword);
 
-                return Json(new { url = Url.Action("Details", new { id = model.Id }) });
+                    return Json(new { url = Url.Action("Details", new { id = model.Id }) });
+                }
+                catch (AggregateValidationException ex)
+                {
+                    List<ValidationResult> validationResults = ex.ValidationResults;
+                    foreach (var validationResult in validationResults)
+                    {
+                        ModelState.AddModelError("", validationResult.ErrorMessage);
+                    }
+                }
             }
 
             return PartialView(model);
