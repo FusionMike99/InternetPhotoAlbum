@@ -148,7 +148,14 @@ namespace InternetPhotoAlbum.MVC.Controllers
                 try
                 {
                     var album = await _albumService.FindByIdAsync(id.Value);
-                    return PartialView(album);
+                    if (CheckPermission(album.UserId))
+                    {
+                        return PartialView(album);
+                    }
+                    else
+                    {
+                        return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
+                    }
                 }
                 catch (InvalidOperationException ex)
                 {
@@ -217,7 +224,14 @@ namespace InternetPhotoAlbum.MVC.Controllers
                 try
                 {
                     var album = await _albumService.FindByIdAsync(id.Value);
-                    return PartialView(album);
+                    if (CheckPermission(album.UserId))
+                    {
+                        return PartialView(album);
+                    }
+                    else
+                    {
+                        return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
+                    }
                 }
                 catch (InvalidOperationException ex)
                 {
@@ -254,6 +268,12 @@ namespace InternetPhotoAlbum.MVC.Controllers
                 _albumService.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        private bool CheckPermission(string userId)
+        {
+            var authenticatedUserId = User.Identity.GetUserId();
+            return authenticatedUserId == userId;
         }
     }
 }

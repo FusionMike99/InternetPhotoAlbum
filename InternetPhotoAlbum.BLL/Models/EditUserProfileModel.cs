@@ -15,7 +15,7 @@ namespace InternetPhotoAlbum.BLL.Models
         public string Surname { get; set; }
         [DataType(DataType.Date)]
         public DateTime? DateOfBirth { get; set; }
-        [Required]
+        [Required, Range(1, int.MaxValue, ErrorMessage = "Need to choose gender")]
         public int GenderId { get; set; }
     }
 }

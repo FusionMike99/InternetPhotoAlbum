@@ -76,19 +76,12 @@ namespace InternetPhotoAlbum.MVC.Controllers
                 try
                 {
                     ClaimsIdentity claim = await UserService.AuthenticateAsync(model);
-                    if (claim == null)
+                    AuthenticationManager.SignOut();
+                    AuthenticationManager.SignIn(new AuthenticationProperties
                     {
-                        ModelState.AddModelError("Password", "Invalid password");
-                    }
-                    else
-                    {
-                        AuthenticationManager.SignOut();
-                        AuthenticationManager.SignIn(new AuthenticationProperties
-                        {
-                            IsPersistent = true
-                        }, claim);
-                        return RedirectToAction("Index", "Albums");
-                    }
+                        IsPersistent = true
+                    }, claim);
+                    return RedirectToAction("Index", "Albums");
                 }
                 catch (InvalidOperationException ex)
                 {
@@ -241,6 +234,9 @@ namespace InternetPhotoAlbum.MVC.Controllers
                     var genders = new SelectList(_genderService.FindAll(), "Id", "Name");
 
                     ViewData["Genders"] = genders;
+
+                    var minusYears = GetMinUserAge() * (-1);
+                    ViewData["MaxDateOfBirth"] = DateTime.Now.AddYears(minusYears).ToString("yyyy-MM-dd");
 
                     return PartialView(model);
                 }

@@ -153,15 +153,24 @@ namespace InternetPhotoAlbum.MVC.Controllers
         /// <returns>Result of action</returns>
         [HttpGet]
         [Authorize]
-        public ActionResult Create(int? albumId)
+        public async Task<ActionResult> Create(int? albumId)
         {
-            if (albumId == null)
+            if (albumId != null)
             {
-                return HttpNotFound();
+                var album = await _albumService.FindByIdAsync(albumId.Value);
+
+                if (CheckPermission(album.UserId))
+                {
+                    ViewData["AlbumId"] = albumId.Value;
+                    return PartialView();
+                }
+                else
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
+                }
             }
 
-            ViewData["AlbumId"] = albumId.Value;
-            return PartialView();
+            return HttpNotFound();
         }
 
         /// <summary>
@@ -218,9 +227,16 @@ namespace InternetPhotoAlbum.MVC.Controllers
                 try
                 {
                     var image = await _imageService.FindByIdAsync(id.Value);
-                    var model = _mapper.Map<EditImageViewModel>(image);
 
-                    return PartialView(model);
+                    if (CheckPermission(image.UserId))
+                    {
+                        var model = _mapper.Map<EditImageViewModel>(image);
+                        return PartialView(model);
+                    }
+                    else
+                    {
+                        return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
+                    }
                 }
                 catch (InvalidOperationException ex)
                 {
@@ -290,8 +306,16 @@ namespace InternetPhotoAlbum.MVC.Controllers
                 try
                 {
                     var image = await _imageService.FindByIdAsync(id.Value);
-                    var model = _mapper.Map<IndexImageViewModel>(image);
-                    return PartialView(model);
+
+                    if (CheckPermission(image.UserId))
+                    {
+                        var model = _mapper.Map<IndexImageViewModel>(image);
+                        return PartialView(model);
+                    }
+                    else
+                    {
+                        return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
+                    }
                 }
                 catch (InvalidOperationException ex)
                 {
@@ -329,6 +353,12 @@ namespace InternetPhotoAlbum.MVC.Controllers
                 _ratingService.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        private bool CheckPermission(string userId)
+        {
+            var authenticatedUserId = User.Identity.GetUserId();
+            return authenticatedUserId == userId;
         }
     }
 }

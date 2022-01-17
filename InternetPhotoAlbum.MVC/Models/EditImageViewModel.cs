@@ -10,6 +10,7 @@ namespace InternetPhotoAlbum.MVC.Models
         public string Title { get; set; }
         [StringLength(200, MinimumLength = 3), DataType(DataType.MultilineText)]
         public string Description { get; set; }
+        public string ContentType { get; set; }
         [Required, HiddenInput]
         public int AlbumId { get; set; }
     }

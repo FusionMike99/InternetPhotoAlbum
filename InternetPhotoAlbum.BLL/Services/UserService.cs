@@ -42,7 +42,7 @@ namespace InternetPhotoAlbum.BLL.Services
             }
             else
             {
-                throw new InvalidOperationException($"User {model.Login} doesn't exist");
+                throw new InvalidOperationException($"Invalid login or password");
             }
         }
 

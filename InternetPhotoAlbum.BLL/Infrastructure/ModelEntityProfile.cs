@@ -48,7 +48,8 @@ namespace InternetPhotoAlbum.BLL.Infrastructure
             CreateMap<Rating, RatingDTO>()
                 .ReverseMap();
 
-            CreateMap<Image, ImageDTO>();
+            CreateMap<Image, ImageDTO>()
+                .ForMember(i => i.UserId, opt => opt.MapFrom(i => i.Album.UserId));
 
             CreateMap<ImageDTO, Image>()
                 .ForMember(i => i.Album, opt => opt.Ignore());

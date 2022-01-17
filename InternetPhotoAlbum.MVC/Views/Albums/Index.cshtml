@@ -71,7 +71,7 @@
             @if ((bool)ViewData["IsHavePermission"])
             {
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "editDialLink btn btn-warning" }) |
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "editDialLink btn btn-warning" })
                     @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "deleteDialLink btn btn-danger" })
                 </td>
             }
