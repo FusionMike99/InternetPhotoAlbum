@@ -30,11 +30,6 @@
                     @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "ms-2" })
                     @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
                 </div>
-
-                <!--<div class="form-floating mb-3 mt-3">
-                    <input type="file" id="File" name="File" class="form-control" />
-                    <label for="File" class="ms-2">File</label>
-                </div>-->
             </div>
 
             @Html.HiddenFor(model => model.AlbumId)
