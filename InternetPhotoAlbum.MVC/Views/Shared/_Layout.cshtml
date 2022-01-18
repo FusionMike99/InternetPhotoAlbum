@@ -33,33 +33,39 @@
                     }
                     else
                     {
-                        <li class="nav-item">
-                            @Html.ActionLink("My Profile", "Details", "Account", new { area = "", id = User.Identity.GetUserId() }
-                                , new { @class = "nav-link" })
-                        </li>
-                        <li class="nav-item">
-                            @Html.ActionLink("My Albums", "UserAlbums", "Albums", new { area = "" }
-                                , new { @class = "nav-link" })
-                        </li>
+                        
                         if (User.IsInRole("admin"))
                         {
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Administration</a>
                                 <ul class="dropdown-menu">
-                                    <li class="nav-item">
+                                    <li>
                                         @Html.ActionLink("User Management", "Index", "Account", new { area = "" }, new { @class = "dropdown-item" })
                                     </li>
-                                    <li class="nav-item">
+                                    <li>
                                         @Html.ActionLink("Gender Management", "Index", "Genders", new { area = "" }, new { @class = "dropdown-item" })
                                     </li>
-                                    <li class="nav-item">
+                                    <li>
                                         @Html.ActionLink("Type of like Management", "Index", "LikeTypes", new { area = "" }, new { @class = "dropdown-item" })
                                     </li>
                                 </ul>
                             </li>
                         }
-                        <li class="nav-item">
-                            @Html.ActionLink("Log out", "Logout", "Account", new { area = "" }, new { @class = "nav-link" })
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Welcome, @User.Identity.Name</a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    @Html.ActionLink("My Profile", "Details", "Account", new { area = "", id = User.Identity.GetUserId() }
+                                        , new { @class = "dropdown-item" })
+                                </li>
+                                <li>
+                                    @Html.ActionLink("My Albums", "UserAlbums", "Albums", new { area = "" }
+                                        , new { @class = "dropdown-item" })
+                                </li>
+                                <li>
+                                    @Html.ActionLink("Log out", "Logout", "Account", new { area = "" }, new { @class = "dropdown-item" })
+                                </li>
+                            </ul>
                         </li>
                     }
                 </ul>
